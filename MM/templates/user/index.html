@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Dashboard">
+    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+
+
+    <title>DASHGUM - Bootstrap Admin Template</title>
+    {% load static %}
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'assets/css/bootstrap.css' %}" rel="stylesheet">
+    <!--external css-->
+    <link href="{% static 'assets/font-awesome/css/font-awesome.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/zabuto_calendar.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/js/gritter/css/jquery.gritter.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/lineicons/style.css' %}">    
+    
+    <!-- Custom styles for this template -->
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/style-responsive.css' %}" rel="stylesheet">
+
+    <script src="{% static 'assets/js/chart-master/Chart.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/fonts/icon1/iconfont.css' %}">
+
+  </head>
+
+  <body>
+
+  <!-- **********************************************************************************************************************************************************
+      MAIN CONTENT
+      *********************************************************************************************************************************************************** -->
+      <section id="container" >
+        <!-- **********************************************************************************************************************************************************
+        TOP BAR CONTENT & NOTIFICATIONS
+        *********************************************************************************************************************************************************** -->
+        <!--header start-->
+        <header class="header black-bg">
+          <div class="sidebar-toggle-box">
+              <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+          </div>
+        <!--logo start-->
+        <a href="index.html" class="logo"><b>MD集团物料管理系统</b></a>
+        <!--logo end-->
+        <div class="nav notify-row" id="top_menu">
+            <!--  notification start -->
+        
+    </header>
+  <!--header end-->
+  
+  <!-- **********************************************************************************************************************************************************
+  MAIN SIDEBAR MENU
+  *********************************************************************************************************************************************************** -->
+  <!--sidebar start-->
+  <aside>
+      <div id="sidebar"  class="nav-collapse ">
+          <!-- sidebar menu start-->
+          <ul class="sidebar-menu" id="nav-accordion">
+                  
+              <p class="centered"><img src="/static/assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
+              <h5 class="centered">物料管理</h5>
+                  
+            <li class="mt">
+                <a href="/mm/home/">
+                    <i class="fa fa-dashboard"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+  
+            <li class="sub-menu">
+                <a href="javascript:;" >
+                    <i class="fa fa-desktop"></i>
+                    <span>供应商管理</span>
+                </a>
+                <ul class="sub">
+                    <li><a  href="/mm/vendor/create/">创建新供应商</a></li>
+                    <li><a  href="/mm/vendor/search/">查看或修改供应商信息</a></li>
+                    <li><a  href="/mm/vendor/history/">供应商交易历史汇总</a></li>
+                </ul>
+            </li>
+  
+            <li class="sub-menu">
+                <a href="javascript:;" >
+                    <i class="fa fa-cogs"></i>
+                    <span>商品管理</span>
+                </a>
+                <ul class="sub">
+                    <li><a  href="/mm/material/item/create/">创建新商品</a></li>
+                    <li><a  href="/mm/material/search/">查看或修改商品信息</a></li>
+                    <li><a  href="/mm/material/item/stock/">查看商品库存</a></li>
+                </ul>
+            </li>
+            
+            <li class="sub-menu">
+                    <a href="javascript:;" >
+                        <i class="fa fa-th"></i>
+                        <span>采购订单管理</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="/mm/purchaserequisition/prmanage">采购申请</a ></li>
+                            <li><a  href="/mm/purchaserequisition/quoma">供应商评估管理</a ></li>
+                            <li><a  href="/mm/purchaserequisition/pomanage">采购订单</a ></li>
+        
+                    </ul>
+                </li>
+                
+                <li class="sub-menu">
+                    <a href="javascript:;" >
+                        <i class="fa fa-tasks"></i>
+                        <span>收货管理</span>
+                    </a>
+                    <ul class="sub">
+                        <li ><a  href="/mm/receipt/orders/search/">创建商品收据</a></li>
+                        <li ><a  href="/mm/receipt/search/">查看商品收据</a></li>
+                        <li ><a  href="/mm/invoice/orders/search/">创建发票收据</a></li>
+                        <li ><a  href="/mm/invoice/search/">查看发票收据</a></li>
+                        <li ><a  href="/mm/invoice/payment/">付款</a></li>
+                    </ul>
+                </li>
+            
+  
+        </ul>
+          
+          <!-- sidebar menu end-->
+      </div>
+  </aside>
+  </section> 
+      
+      <!-- **********************************************************************************************************************************************************
+      MAIN CONTENT
+      *********************************************************************************************************************************************************** -->
+      <!--main content start-->
+      <section id="main-content">
+          <section class="wrapper">
+
+
+            <div class="row mt">
+                <div class="col-lg-12" >
+                
+                    <div>
+                        <div style="display:flex">
+                        <h3 style="margin-left:30px;"><i class="fa fa-angle-right"></i> 供应商管理</h3>
+                         <h3 style="margin-left:460px;"><i class="fa fa-angle-right"></i> 商品管理</h3>
+                        </div>
+                    <div style="width:1050px;margin-left:30px;">
+                  <div class="col-md-2 col-sm-2 mb" >
+                    <a href="/mm/vendor/create/">
+                    <div class="darkblue-panel pn" style="height: 180px">
+                        <div class="darkblue-header">
+                        </div>
+                        <h1 class="mt"><span class="iconfont" style="font-size: 150%;">&#xe65e;</span></h1>
+                        <br>
+                      <footer>
+                          <div class="centered">
+                              <h4>创建新供应商</h4>
+                          </div>
+                      </footer>
+                    </div>
+                </a>
+                </div>
+                
+                  <div class="col-md-2 col-sm-2 mb" >
+                    <a href="/mm/vendor/search/">
+                    <div class="darkblue-panel pn" style="height: 180px;">
+                        <div class="darkblue-header">
+                        </div>
+                        <h1 class="mt"><span class="iconfont" style="font-size: 150%;">&#xe65e;</span></h1>
+                        <br>
+                      <footer>
+                          <div class="centered">
+                              <h4>查看或修改<br>供应商信息</h4>
+                          </div>
+                      </footer>
+                    </div>
+                </a>
+                </div>
+
+                     <div class="col-md-2 col-sm-2 mb" >
+                    <a href="/mm/vendor/history/">
+                    <div class="darkblue-panel pn" style="height: 180px;">
+                        <div class="darkblue-header">
+                        </div>
+                        <h1 class="mt"><span class="iconfont" style="font-size: 150%;">&#xe65e;</span></h1>
+                        <br>
+                      <footer>
+                          <div class="centered">
+                              <h4>供应商交易<br>历史汇总</h4>
+                          </div>
+                      </footer>
+                    </div>
+                </a>
+                </div>
+            </div>
+
+            <div style="width:1050px;margin-left:620px">
+                <div class="col-md-2 col-sm-2 mb" >
+                    <a href="/mm/material/item/create/">
+                    <div class="darkblue-panel pn" style="height: 180px;">
+                        <div class="darkblue-header">
+                        </div>
+                        <h1 class="mt"><span class="iconfont" style="font-size: 150%;">&#xe64b;</span></h1>
+                        <br>
+                      <footer>
+                          <div class="centered">
+                              <h4>创建新商品</h4>
+                          </div>
+                      </footer>
+                    </div>
+                </a>
+                </div>
+                <div class="col-md-2 col-sm-2 mb" >
+                    <a href="/mm/material/search/">
+                    <div class="darkblue-panel pn" style="height: 180px;">
+                        <div class="darkblue-header">
+                        </div>
+                        <h1 class="mt"><span class="iconfont" style="font-size: 150%;">&#xe64b;</span></h1>
+                        <br>
+                      <footer>
+                          <div class="centered">
+                              <h4>查看或修改<br>商品信息</h4>
+                          </div>
+                      </footer>
+                    </div>
+                </a>
+                </div>
+                <div class="col-md-2 col-sm-2 mb" >
+                    <a href="/mm/material/item/stock/">
+                    <div class="darkblue-panel pn" style="height: 180px;">
+                        <div class="darkblue-header">
+                        </div>
+                        <h1 class="mt"><span class="iconfont" style="font-size: 150%;">&#xe64b;</span></h1>
+                        <br>
+                      <footer>
+                          <div class="centered">
+                              <h4>查看商品库存</h4>
+                          </div>
+                      </footer>
+                    </div>
+                </a>
+                </div>
+  </div>
+</div>
+
+<div style="display:inline-block;margin-top:10px">
+
+    <div style="display:flex">
+        <h3 style="margin-left:30px;"><i class="fa fa-angle-right"></i> 采购管理</h3>
+         <h3 style="margin-left:480px;"><i class="fa fa-angle-right"></i> 收货管理</h3>
+        </div>
+
+  <div style="width:1050px;margin-left:30px">
+
+              <div class="col-md-2 col-sm-2 mb" >
+                <a href="/mm/purchaserequisition/prmanage">
+                <div class="darkblue-panel pn" style="height: 180px;">
+                    <div class="darkblue-header">
+                    </div>
+                    <h1 class="mt"><span class="iconfont" style="font-size: 150%;">&#xe8f2;</span></h1>
+                    <br>
+                  <footer>
+                      <div class="centered">
+                          <h4>采购申请</h4>
+                      </div>
+                  </footer>
+                </div>
+            </a>
+            </div>
+            
+              <div class="col-md-2 col-sm-2 mb" >
+                <a href="/mm/purchaserequisition/quoma">
+                <div class="darkblue-panel pn" style="height: 180px;">
+                    <div class="darkblue-header">
+                    </div>
+                    <h1 class="mt"><span class="iconfont" style="font-size: 150%;">&#xe8f2;</span></h1>
+                    <br>
+                  <footer>
+                      <div class="centered">
+                          <h4>供应商评估管理</h4>
+                      </div>
+                  </footer>
+                </div>
+            </a>
+            </div>
+
+                 <div class="col-md-2 col-sm-2 mb" >
+                <a href="/mm/purchaserequisition/pomanage">
+                <div class="darkblue-panel pn" style="height: 180px;">
+                    <div class="darkblue-header">
+                    </div>
+                    <h1 class="mt"><span class="iconfont" style="font-size: 150%;">&#xe8f2;</span></h1>
+                    <br>
+                  <footer>
+                      <div class="centered">
+                          <h4>采购订单</h4>
+                      </div>
+                  </footer>
+                </div>
+            </a>
+            </div>
+
+        </div>
+
+
+        <div style="width:1050px;margin-left:620px">
+
+            <div class="col-md-2 col-sm-2 mb" >
+                <a href="/mm/receipt/orders/search/">
+                <div class="darkblue-panel pn" style="height: 180px;">
+                    <div class="darkblue-header">
+                    </div>
+                    <h1 class="mt"><span class="iconfont" style="font-size: 150%;">&#xe62f;</span></h1>
+                    <br>
+                  <footer>
+                      <div class="centered">
+                          <h4>创建商品收据</h4>
+                      </div>
+                  </footer>
+                </div>
+            </a>
+            </div>
+            <div class="col-md-2 col-sm-2 mb" >
+                <a href="/mm/receipt/search/">
+                <div class="darkblue-panel pn" style="height: 180px;">
+                    <div class="darkblue-header">
+                    </div>
+                    <h1 class="mt"><span class="iconfont" style="font-size: 150%;">&#xe62f;</span></h1>
+                    <br>
+                  <footer>
+                      <div class="centered">
+                          <h4>查看商品收据</h4>
+                      </div>
+                  </footer>
+                </div>
+            </a>
+            </div>
+            <div class="col-md-2 col-sm-2 mb" >
+                <a href="/mm/invoice/orders/search/">
+                <div class="darkblue-panel pn" style="height: 180px;">
+                    <div class="darkblue-header">
+                    </div>
+                    <h1 class="mt"><span class="iconfont" style="font-size: 150%;">&#xe62f;</span></h1>
+                    <br>
+                  <footer>
+                      <div class="centered">
+                          <h4>创建发票收据</h4>
+                      </div>
+                  </footer>
+                </div>
+            </a>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div style="width:1050px;margin-left:620px">
+            <div class="col-md-2 col-sm-2 mb" >
+                <a href="/mm/invoice/search/">
+                <div class="darkblue-panel pn" style="height: 180px;">
+                    <div class="darkblue-header">
+                    </div>
+                    <h1 class="mt"><span class="iconfont" style="font-size: 150%;">&#xe62f;</span></h1>
+                    <br>
+                  <footer>
+                      <div class="centered">
+                          <h4>查看发票收据</h4>
+                      </div>
+                  </footer>
+                </div>
+            </a>
+            </div>
+            <div class="col-md-2 col-sm-2 mb" >
+                <a href="/mm/invoice/payment/">
+                <div class="darkblue-panel pn" style="height: 180px;">
+                    <div class="darkblue-header">
+                    </div>
+                    <h1 class="mt"><span class="iconfont" style="font-size: 150%;">&#xe62f;</span></h1>
+                    <br>
+                  <footer>
+                      <div class="centered">
+                          <h4>付款</h4>
+                      </div>
+                  </footer>
+                </div>
+            </a>
+            </div>
+        </div>
+
+      
+
+                  
+    
+
+                      
+                  </div><!-- /col-lg-3 -->
+              </div><! --/row -->
+          </section>
+      </section>
+
+      <!--main content end-->
+
+  </section>
+  <link href="{% static 'assets/css/bootstrap.css' %}" rel="stylesheet">
+   <!-- js placed at the end of the document so the pages load faster -->
+   <script src="{% static 'assets/js/jquery.js' %}"></script>
+   <script src="{% static 'assets/js/jquery-1.8.3.min.js' %}"></script>
+   <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+   <script class="include" type="text/javascript" src="{% static 'assets/js/jquery.dcjqaccordion.2.7.js' %}"></script>
+   <script src="{% static 'assets/js/jquery.scrollTo.min.js' %}"></script>
+   <script src="{% static 'assets/js/jquery.nicescroll.js' %}" type="text/javascript"></script>
+   <script src="{% static 'assets/js/jquery.sparkline.js' %}"></script>
+
+
+   <!--common script for all pages-->
+   <script src="{% static 'assets/js/common-scripts.js' %}"></script>
+   
+   <script type="text/javascript" src="{% static 'assets/js/gritter/js/jquery.gritter.js' %}"></script>
+   <script type="text/javascript" src="{% static 'assets/js/gritter-conf.js' %}"></script>
+
+   <!--script for this page-->
+   <script src="{% static 'assets/js/sparkline-chart.js' %}"></script>    
+   <script src="{% static 'assets/js/zabuto_calendar.js' %}"></script>	
+
+	
+	<script type="text/javascript">
+        $(document).ready(function () {
+        var unique_id = $.gritter.add({
+            // (string | mandatory) the heading of the notification
+            title: '欢迎！',
+            // (string | mandatory) the text inside the notification
+          text: '欢迎使用MD集团物料管理系统',
+            // (string | optional) the image to display on the left
+            image: "{% static 'assets/img/ui-sam.jpg' %}",
+            // (bool | optional) if you want it to fade out on its own or just sit there
+            sticky: true,
+            // (int | optional) the time you want it to be alive for before fading out
+            time: '',
+            // (string | optional) the class name you want to apply to that specific message
+            class_name: 'my-sticky-class'
+        });
+
+        return false;
+        });
+	</script>
+	
+	<script type="application/javascript">
+        $(document).ready(function () {
+            $("#date-popover").popover({html: true, trigger: "manual"});
+            $("#date-popover").hide();
+            $("#date-popover").click(function (e) {
+                $(this).hide();
+            });
+        
+            $("#my-calendar").zabuto_calendar({
+                action: function () {
+                    return myDateFunction(this.id, false);
+                },
+                action_nav: function () {
+                    return myNavFunction(this.id);
+                },
+                ajax: {
+                    url: "show_data.php?action=1",
+                    modal: true
+                },
+                legend: [
+                    {type: "text", label: "Special event", badge: "00"},
+                    {type: "block", label: "Regular event", }
+                ]
+            });
+        });
+        
+        
+        function myNavFunction(id) {
+            $("#date-popover").hide();
+            var nav = $("#" + id).data("navigation");
+            var to = $("#" + id).data("to");
+            console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
+        }
+    </script>
+  
+
+  </body>
+</html>

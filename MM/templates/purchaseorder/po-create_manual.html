@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html>
+    {% load static %}
+<!-- import CSS -->
+
+<!-- Bootstrap core CSS -->
+<link href="{% static 'assets/css/bootstrap.css' %}" rel="stylesheet">
+<!--external css-->
+<link href="{% static 'assets/font-awesome/css/font-awesome.css' %}" rel="stylesheet" />
+    
+<!-- Custom styles for this template -->
+<link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+<link href="{% static 'assets/css/style-responsive.css' %}" rel="stylesheet">
+<link href="{% static 'assets/css/the-datepicker.css' %}" rel="stylesheet">
+<!-- js placed at the end of the document so the pages load faster -->
+<script src="{% static 'assets/js/jquery.js' %}"></script>
+<script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+<script class="include" type="text/javascript" src="{% static 'assets/js/jquery.dcjqaccordion.2.7.js' %}"></script>
+<script src="{% static 'assets/js/jquery.scrollTo.min.js' %}"></script>
+<script src="{% static 'assets/js/jquery.nicescroll.js' %}" type="text/javascript"></script>
+
+<link rel="stylesheet" href="{% static 'assets/css/style-qr.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/notice.min.css' %}">
+<link rel="stylesheet"
+      href="{% static 'assets/css/default.min.css' %}">
+<!--common script for all pages-->
+<script src="{% static 'assets/js/common-scripts.js' %}"></script>
+
+<!--script for this page-->
+
+<!-- 引入刚刚下载的 ECharts 文件 -->
+<script src="{% static 'assets/js/echarts.js' %}"></script>
+<script src="{% static 'assets/js/highlight.min.js' %}"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+
+	<script src="{% static 'assets/js/form-component.js' %}"></script> 
+
+    <script src="{% static 'assets/js/highlight.min.js' %}"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+
+    <script src="{% static 'assets/js/notice.min.js' %}"></script>
+    <script>
+        const notice = new Notice();
+    </script>
+
+    <script src="{% static 'assets/js/main-qr.js' %}"></script>
+   
+    <script src="{% static 'assets/dist/notice.min.js' %}"></script>
+    <script>
+        const notice = new Notice();
+    </script>
+
+    <script src="{% static 'assets/js/main.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/dist/notice.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/default.min.css' %}">
+    <script src="{% static 'assets/js/the-datepicker.js' %}"></script>
+    <link href="{% static 'assets/css/purchase.css' %}" rel="stylesheet">
+
+
+
+  </head>
+
+  <body>
+
+    <section id="container" >
+        <!-- **********************************************************************************************************************************************************
+        TOP BAR CONTENT & NOTIFICATIONS
+        *********************************************************************************************************************************************************** -->
+        <!--header start-->
+        <header class="header black-bg">
+          <div class="sidebar-toggle-box">
+              <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+          </div>
+        <!--logo start-->
+        <a href="index.html" class="logo"><b>MD集团物料管理系统</b></a>
+        <!--logo end-->
+        <div class="nav notify-row" id="top_menu">
+            <!--  notification start -->
+        
+    </header>
+  <!--header end-->
+  
+  <!-- **********************************************************************************************************************************************************
+  MAIN SIDEBAR MENU
+  *********************************************************************************************************************************************************** -->
+  <!--sidebar start-->
+  <aside>
+      <div id="sidebar"  class="nav-collapse ">
+          <!-- sidebar menu start-->
+          <ul class="sidebar-menu" id="nav-accordion">
+                  
+              <p class="centered"><img src="/static/assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
+              <h5 class="centered">物料管理</h5>
+                  
+            <li class="mt">
+                <a href="/mm/home/">
+                    <i class="fa fa-dashboard"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+  
+            <li class="sub-menu">
+                <a href="javascript:;" >
+                    <i class="fa fa-desktop"></i>
+                    <span>供应商管理</span>
+                </a>
+                <ul class="sub">
+                    <li><a  href="/mm/vendor/create/">创建新供应商</a></li>
+                    <li><a  href="/mm/vendor/search/">查看或修改供应商信息</a></li>
+                    <li><a  href="/mm/vendor/history/">供应商交易历史汇总</a></li>
+                </ul>
+            </li>
+  
+            <li class="sub-menu">
+                <a href="javascript:;" >
+                    <i class="fa fa-cogs"></i>
+                    <span>商品管理</span>
+                </a>
+                <ul class="sub">
+                    <li><a  href="/mm/material/item/create/">创建新商品</a></li>
+                    <li><a  href="/mm/material/search/">查看或修改商品信息</a></li>
+                    <li><a  href="/mm/material/item/stock/">查看商品库存</a></li>
+                </ul>
+            </li>
+            
+            <li class="sub-menu">
+                    <a href="javascript:;" >
+                        <i class="fa fa-th"></i>
+                        <span>采购订单管理</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="/mm/purchaserequisition/prmanage">采购申请</a ></li>
+                            <li><a  href="/mm/purchaserequisition/quoma">供应商评估管理</a ></li>
+                            <li><a  href="/mm/purchaserequisition/pomanage">采购订单</a ></li>
+        
+                    </ul>
+                </li>
+                
+                <li class="sub-menu">
+                    <a href="javascript:;" >
+                        <i class="fa fa-tasks"></i>
+                        <span>收货管理</span>
+                    </a>
+                    <ul class="sub">
+                        <li ><a  href="/mm/receipt/orders/search/">创建商品收据</a></li>
+                        <li ><a  href="/mm/receipt/search/">查看商品收据</a></li>
+                        <li ><a  href="/mm/invoice/orders/search/">创建发票收据</a></li>
+                        <li ><a  href="/mm/invoice/search/">查看发票收据</a></li>
+                        <li ><a  href="/mm/invoice/payment/">付款</a></li>
+                    </ul>
+                </li>
+            
+  
+        </ul>
+          
+          <!-- sidebar menu end-->
+      </div>
+  </aside>
+  </section> 
+      
+      <!-- **********************************************************************************************************************************************************
+      MAIN CONTENT
+      *********************************************************************************************************************************************************** -->
+      <!--main content start-->
+      <section id="main-content">
+          <section class="wrapper">
+          	<h3><i class="fa fa-angle-right"></i> 创建采购订单</h3>
+          	
+
+
+              <div class="row mt" id="poc-wrap">
+                <div class="col-lg-12">
+                <div class="form-panel">
+                      <h4 class="mb"><i class="fa fa-angle-right"></i> 商品信息</h4>
+                    <form class="form-horizontal style-form" method="get">
+
+                      <div class="form-group">
+                          <label class="col-sm-2 col-sm-2 control-label">商品编码</label>
+                          <div class="col-sm-10">
+                              <input type="text" class="form-control" id="goodcode-pocm">
+                             <button type="button" class="btn btn-link " data-toggle="modal" data-target="#myModalgood">忘记编号？</button>
+                               
+                          </div>
+                      </div>
+                      
+                      <div class="form-group">
+                          <label class="col-sm-2 col-sm-2 control-label">商品名称</label> <!--自动显示-->
+                          <div class="col-sm-10">
+                              <input type="text" class="form-control" id="goodname-pocm">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-sm-2 col-sm-2 control-label">数量</label>
+                          <div class="col-sm-10">
+                              <input type="text"  class="form-control" id="number-pocm">
+                          </div>
+                      </div>
+                     
+                      <div class="form-group">
+                          <label class="col-sm-2 col-sm-2 control-label">单价</label>
+                          <div class="col-sm-10">
+                              <input type="text" class="form-control" id="danjia-pocm" onkeydown="sum(this)">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-sm-2 col-sm-2 control-label">总价</label>
+                          <div class="col-sm-10">
+                              <input type="text" class="form-control" id="zongjia-pocm">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">结算货币</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="danwei-pocm" onclick="currencyf()">
+                        </div>
+                    </div>
+                      <div class="form-group">
+                          <label class="col-sm-2 col-sm-2 control-label">工厂</label>
+                          <div class="col-sm-10">
+                              <select class="form-control" id="factory-pocm" name="plant"></select>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-sm-2 col-sm-2 control-label">存储位置</label>
+                          <div class="col-sm-10" >
+                              <select name="industrySector"  class="form-control" id="clocation-pocm">
+                                <option value=''>请选择存储位置</option>
+                                <option value='CN00'>TG00--贸易商品</option>
+                                <option value='AS00'>RM00--原材料</option>
+                                <option value='AF00'>SF00--半成品</option>
+                                <option value='SA00'>FG00--产成品</option>
+                                <option value='NA00'>MI00--混合产品</option>
+                                <option value='NA00'>RE00--退货产品</option>
+                            </select>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">送达时间</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="time-pocm" onclick="date(this)">
+                        </div>
+                    </div>
+                      <button type="button" class="btn btn-round btn-primary" id="btn-addgood" onclick="addgood()">添加商品</button>
+                        
+                    
+                    </form>
+                </div>
+                </div><!-- col-lg-12-->      	
+            </div><!-- /row -->
+                
+            <div class="col-md-12 mt">
+                <div class="content-panel">
+                    <table class="table table-hover" id="dd">
+                     <div id="table-pr-head"> <h4><i class="fa fa-angle-right"></i> 订单</h4>
+                        <button type="button" class="btn btn-round btn-default" onclick="cancel()" style="margin-left: 900px;">取消拆分</button> <button type="button" class="btn btn-round btn-primary" onclick="chai()">拆分订单</button>
+                    </div>  
+                        <thead>
+                        <tr>
+                            <th>条目编码</th>
+                            <th>商品编码</th>
+                            <th>商品名称</th>
+                            <th>数量</th>
+                            <th>单价</th>
+                            <th>总价</th>
+                            <th>结算货币</th>
+                            <th>工厂</th>
+                            <th>存储位置</th>
+                            <th>送达时间</th>
+                        </tr>
+                        </thead>
+                        <tbody id="podiv">
+                      
+                    </tbody>
+                    </table>
+                              	<!-- BASIC FORM ELELEMNTS -->
+
+          	<div class="row mt">
+                <div class="col-lg-12">
+                <div class="form-panel">
+                      <h5 class="mb"><i class="fa fa-angle-right"></i> 送货信息</h5>
+<form class="form-horizontal style-form">
+                      <div class="form-group">
+                          <label class="col-sm-2 col-sm-2 control-label">收货方电话</label>
+                          <div class="col-sm-10">
+                              <input type="text"name="telephone" class="form-control" id="telephone">
+                          </div>
+                      </div>
+                      
+                      <div class="form-group">
+                          <label class="col-sm-2 col-sm-2 control-label">收货方传真</label>
+                          <div class="col-sm-10">
+                              <input type="text"name="fax" class="form-control" id="fax">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-sm-2 col-sm-2 control-label">送货地址</label>
+                          <div class="col-sm-10">
+                              <input type="text"name="shippingAddress"  class="form-control" id="shippingAddress">
+                          </div>
+                      </div>
+                      <h5 class="mb"><i class="fa fa-angle-right"></i> 供应商信息</h5>
+                      <div class="form-group">
+                          <label class="col-sm-2 col-sm-2 control-label">供应商编码</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" name="ven" id="gyscode" placeholder="请输入">
+                            <button type="button" class="btn btn-link " data-toggle="modal" data-target="#myModalgys">忘记编号？</button>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-sm-2 col-sm-2 control-label">供应商名称</label><!--输入供应商编码后自动显示-->
+                          <div class="col-sm-10">
+                              <input type="text" class="form-control" id="vdname">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-sm-2 col-sm-2 control-label">城市</label><!--输入供应商编码后自动显示-->
+                          <div class="col-sm-10">
+                              <input type="text" class="form-control" id="vdcity">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-sm-2 col-sm-2 control-label">街区地址</label><!--输入供应商编码后自动显示-->
+                          <div class="col-sm-10">
+                              <input type="text"  class="form-control" id="vdadress">
+                          </div>
+                      </div>
+                      <h5 class="mb"><i class="fa fa-angle-right"></i> 采购方信息</h5>
+                      <div class="form-group">
+                          <label class="col-sm-2 col-sm-2 control-label">公司编码</label>
+                          <div class="col-sm-10" >
+                            <select class="form-control"  name="company" id="company"></select>
+                          </div>
+                      </div>
+                      
+                      <div class="form-group">
+                          <label class="col-sm-2 col-sm-2 control-label">采购组织</label>
+                          <div class="col-sm-10">
+                              <select name="industrySector"  class="form-control" id="porg"></select>
+                          </div>
+                          
+                      </div>
+                    
+                      <div class="form-group">
+                   
+                          <label class="col-sm-2 col-sm-2 control-label">采购组</label>
+                          <div class="col-sm-10">
+                            <select name="industrySector"  class="form-control" id="pgrp"></select>
+                          </div>
+                      </div>
+                    </form>
+                                 <div id="btn-pr-create">
+                <button  class="btn btn-primary btn-lg btn-block" onclick="create()">创建</button>
+        </div>
+        
+                </div>
+                </div><!-- col-lg-12-->      	
+            </div><!-- /row -->
+
+                  </div><! --/content-panel -->
+            </div><!-- /col-md-12 -->
+           
+                          
+
+
+    <!--搜索供应商编码modal-->
+    <div class="modal fade" id="myModalgys" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="myModalLabel">搜索供应商编号</h4>
+            </div>
+            <div class="modal-body">
+              <!-- Hi there, I am a Modal Example for Dashgum Admin Panel. -->
+              <!-- 搜索条件 -->
+              <form  id="material2" class="form-horizontal style-form">
+                <div class="form-group">
+                    <!-- <label class="col-sm-1 col-sm-1 control-label"></label> -->
+                    <label class="col-sm-4 col-sm-4 control-label">
+                        <div class="pull-right">供应商名称：</div>
+                        </label>
+                    <div class="col-sm-5">
+                        <input name="vname" id="vname" type="text" class="form-control">
+                    </div>
+                    
+                </div>
+                <div class="form-group">
+                    <!-- <label class="col-sm-1 col-sm-1 control-label"></label> -->
+                    <label class="col-sm-4 col-sm-4 control-label">
+                        <div class="pull-right">所在城市：</div>
+                        </label>
+                    <div class="col-sm-5">
+                        <input name="city" id="city" type="text" class="form-control">
+                    </div>
+                    
+                </div>
+                <div class="form-group">
+                    <!-- <label class="col-sm-1 col-sm-1 control-label"></label> -->
+                    <label class="col-sm-4 col-sm-4 control-label">
+                        <div class="pull-right">创建者编号：</div>
+                        </label>
+                    <div class="col-sm-5">
+                        <input name="uid" id="uid" type="text" class="form-control">
+                    </div>
+                    
+                </div>
+                <div class="form-group">
+                    <!-- <label class="col-sm-1 col-sm-1 control-label"></label> -->
+                    <label class="col-sm-4 col-sm-4 control-label">
+                        <div class="pull-right">国家：</div>
+                        </label>
+                    <div class="col-sm-5">
+                      <select class="form-control"  name="country" id="country"></select>
+                    </div>
+                    
+                </div>
+                <div class="form-group">
+                  <!-- <label class="col-sm-1 col-sm-1 control-label"></label> -->
+                  <label class="col-sm-4 col-sm-4 control-label">
+                      <div class="pull-right">公司编码：</div>
+                      </label>
+                  <div class="col-sm-5">
+                      <select class="form-control"  name="company1" id="company1"></select>
+                  </div>
+                  <div class="col-sm-2">
+                  <input type="submit"  class="btn btn-theme02">
+                  </div>
+              </div>
+    
+            </form>
+            <table  class="table table-bordered table-striped table-condensed" id="gystable">
+              *双击填入编号                                       
+              <thead>
+              <!-- 搜索编号返回的属性 style="width: 100px;"-->
+              <tr>
+                  <th> 供应商编号</th>
+                  <th> 供应商名称</th>
+                  <th> 所在城市</th>
+                  <th> 街区地址</th>
+              </tr>
+              </thead>
+              <tbody id="searchDiv"></tbody>
+          </table>
+            <script>
+    
+                $('#material2').on('submit', function(e) {
+                    e.preventDefault();
+                    $.ajax(
+                    {
+                        type: "POST",
+                        url: "{% url 'MM:ajax_search_vendor' %}",
+                        data:{
+                            dataType: "json",
+                            csrfmiddlewaretoken: '{{ csrf_token }}',
+                            vname: $("#vname").val(),
+                            city: $("#city").val(),
+                            country: $("#country").val(),
+                            companyCode: $("#company1").val(),
+                            uid: $("#uid").val(),
+                        },
+                        success: function(data) {
+                            $('#item_result').text(data);
+                            var dataObj = eval("("+data+")");
+                            var out = "";
+                            var i;
+                            for(i = 0; i < dataObj.length; i++) {
+                                fields = dataObj[i].fields
+                                out += '<tr><td>'+ dataObj[i].pk+ '</td><td>' + fields.vname+ '</td><td>' + fields.city+ '</td><td>' + fields.address+ '</td><tr>';
+                            }
+                            document.getElementById("searchDiv").innerHTML=out;
+                        },
+                        failure: function() {
+    
+                        }
+                    })
+                });
+     //双击行 信息进入“搜索商品条件”三个框
+     $("#gystable").on("dblclick","tr",function(e){
+        document.getElementById("gyscode").value=$(this).find('td').eq(0).text();
+        document.getElementById("vdname").value=$(this).find('td').eq(1).text();
+        document.getElementById("vdcity").value=$(this).find('td').eq(2).text();
+        document.getElementById("vdadress").value=$(this).find('td').eq(3).text();
+        $('#myModalgys').modal('hide');
+        $(".modal-backdrop").remove();
+    });
+            </script>
+    
+            </div>
+            
+            <div class="modal-footer">
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    <!--搜索供应商编码modal-->
+
+    
+
+<!--结算货币modal-->
+<div class="col-sm-12">
+    <div class="modal fade" id="myModalcurr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">货币</h4>
+            </div>
+            <div class="modal-body">
+            *双击填入货币
+            <table  class="table table-bordered table-striped table-condensed" id="currtable">
+                <thead>
+                    <!-- tr 指定表行标签-->
+                    <tr>
+                        <!-- th 设置表头内容，默认加粗-->
+                        <th style="width: 100px;">序号</th>
+                        <th style="width: 120px;">货币</th>
+                        <th>名称</th>
+                    </tr>
+                </thead>
+                <tbody id="currencyDiv">
+
+                </tbody>
+            </table>
+
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    <!--结算货币modal-->
+
+                                <!--搜索商品编码modal-->
+ <div class="modal fade" id="myModalgood" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel">搜索商品编号</h4>
+        </div>
+        <div class="modal-body">
+          <!-- Hi there, I am a Modal Example for Dashgum Admin Panel. -->
+          <!-- 搜索条件 -->
+          <form  id="material4" class="form-horizontal style-form">
+            <div class="form-group">
+                <label class="col-sm-4 col-sm-4 control-label">
+                  <div class="pull-right">商品名称： </div>
+                </label>
+                <div class="col-sm-5">
+                    <input class="form-control" type="text" name="mname" id="mname" >
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-sm-4 col-sm-4 control-label">
+                  <div class="pull-right">商品类型：</div>
+                </label>
+                <div class="col-sm-5">
+                    <select name="mType" id="mType" class="form-control" >
+                        <!-- 默认为未选 -->
+                        <option value=''>请选择商品类型</option>
+                        <option value='RM'>RM--原材料</option>
+                        <option value='HALB'>HALB--半成品</option>
+                        <option value='FERT'>SF00--成品</option>
+                        <option value='FREMD'>FG00--外部采购物料</option>
+                        <option value='PROC'>MI00--加工物料</option>
+                        <option value='HAWA'>RE00--贸易货物</option> 
+                        <option value='HIBE'>RE00--经营供应</option>
+                    </select>
+                   
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 col-sm-4 control-label">
+                  <div class="pull-right">工业部门：</div>
+                </label>
+                <div class="col-sm-5">
+                    <select class="form-control" name='industrySector' id='industrySector' >
+                        <option value=''>请选择工业部门</option>
+                        <option value='C'>化学工业</option>
+                        <option value='M'>机械工业</option>
+                        <option value='W'>药剂工业</option>
+                        <option value='F'>设备工程</option>
+                        <option value='R'>零售</option>
+                    </select>
+                    
+                </div>
+            </div>
+            
+
+            <div class="form-group">
+                <label class="col-sm-4 col-sm-4 control-label">
+                  <div class="pull-right">工厂：</div>
+                </label>
+                <div class="col-sm-5">
+                    <select class="form-control" name='plant' id='plant' ></select>
+                    
+                </div>
+            </div>
+            
+
+            <div class="form-group">
+                <label class="col-sm-4 col-sm-4 control-label">
+                  <div class="pull-right">存储位置：</div>
+                </label>
+                <div class="col-sm-5">
+                    <select class="form-control" name="sloc" id="sloc" >
+                        <option value=''>请选择存储位置</option>
+                        <option value='TG00'>TG00--贸易商品</option>
+                        <option value='RM00'>RM00--原材料</option>
+                        <option value='SF00'>SF00--半成品</option>
+                        <option value='FG00'>FG00--产成品</option>
+                        <option value='MI00'>MI00--混合产品</option>
+                        <option value='RE00'>RE00--退货产品</option> 
+                    </select>
+                    
+                </div>
+            </div>
+            <div class="form-group">
+                <!-- <label class="col-sm-1 col-sm-1 control-label"></label> -->
+                <label class="col-sm-4 col-sm-4 control-label">
+                    <div class="pull-right">创建者编号：</div>
+                    </label>
+                <div class="col-sm-5">
+                    <input name="uid" id="uid" type="text" class="form-control">
+                </div>
+                <div class="col-sm-2">
+                    <input type="submit"  class="btn btn-theme02">
+                    </div>
+            </div>
+            
+
+        </form>
+        {% comment %} <h4> 供应商</h4> {% endcomment %}
+        {% comment %} <hr> {% endcomment %}
+        <table  class="table table-bordered table-striped table-condensed" id="sptable">
+          *双击填入编号                                       
+          <thead>
+          <!-- 搜索编号返回的属性 style="width: 100px;"-->
+          <tr>
+              <th> 商品编号</th>
+              <th> 商品名称</th>
+              <th> 商品类型</th>
+              <th> 工业部门</th>
+              <th> 工厂</th>
+              <th> 存储位置</th>
+              <th> 创建者编号</th>
+          </tr>
+          </thead>
+          <tbody id="goodDiv"></tbody>
+      </table>
+      <script>
+        
+         //编号搜索 如果搜不到，返回提示：没有符合条件的商品（这个就不返回了，可以判断是否为空）
+    $('#material4').on('submit', function(e) {
+        e.preventDefault();
+        $.ajax(
+        {
+            type: "POST",
+            url: "{% url 'MM:ajax_search_item' %}",
+            data:{
+                dataType: "json",
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                mid: '',
+                mname: $("#mname").val(),
+                mType: $("#mType").val(),
+                industrySector: $("#industrySector").val(),
+                sloc: $("#sloc").val(),
+                plant: $("#plant").val(),
+                uid: $('#uid').val(),
+            },
+            success: function(data) {
+
+                $('#item_result').text(data);
+            
+                var dataObj = eval("("+data+")");
+                var out = "";
+                var i;
+                
+                for(i = 0; i < dataObj.length; i++) {
+                    //dataObj[i].fields.xx
+                    fields = dataObj[i].fields
+                    material = dataObj[i].material
+                    stock = dataObj[i].stock
+                    user = dataObj[i].user
+                    out += '<tr><td>'+ material.id+ '</td><td>' + material.mname+ '</td><td>' + material.mType+ '</td><td>' + material.industrySector+ '</td><td>'+ stock.name+ '</td><td>'+ fields.sloc+ '</td><td>'+ user.username + '</td><tr>';
+                }
+                document.getElementById("goodDiv").innerHTML=out;
+            },
+            failure: function() {
+
+            }
+        })
+    });
+
+    //双击行 信息进入“搜索商品条件”三个框
+    $("#sptable").on("dblclick","tr",function(e){
+        document.getElementById("goodcode-pocm").value=$(this).find('td').eq(0).text();
+        document.getElementById("goodname-pocm").value=$(this).find('td').eq(1).text()
+        $('#myModalgood').modal('hide');
+        $(".modal-backdrop").remove();
+    });
+
+
+      </script>
+        </div><div class="modal-footer"></div>
+    </div>
+      </div>
+    </div>
+  <!--搜索商品编码modal-->
+
+
+
+
+		</section><! --/wrapper -->
+      </section><!-- /MAIN CONTENT -->
+
+      <!--main content end-->
+
+      <!--footer end-->
+  </section>
+
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="{% static 'assets/js/jquery.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+    <script class="include" type="text/javascript" src="{% static 'assets/js/jquery.dcjqaccordion.2.7.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.scrollTo.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.nicescroll.js' %}" type="text/javascript"></script>
+    <!--common script for all pages-->
+    <script src="{% static 'assets/js/common-scripts.js' %}"></script>
+
+    <!--script for this page-->
+    <script src="{% static 'assets/js/jquery-ui-1.9.2.custom.min.js' %}"></script>
+
+
+      
+        <script>
+            function date(time){
+            var datepicker = new TheDatepicker.Datepicker(time);
+            datepicker.render();
+            }
+    </script>
+<script>
+    $(document).ready(function() {
+            
+        $.ajax(
+        {
+            type: "post",
+            url: "{% url 'MM:ajax_load_currency' %}",
+            data:{
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+            },
+            success: function(data) {
+                var dataObj = eval("("+data+")");
+                var out = "";
+                var i;
+                for(i = 0; i < dataObj.length; i++) {
+                    out += '<tr><td>'+ i + '</td><td>' +dataObj[i].Currency + '</td><td>' + dataObj[i].Name +'</td><tr>';
+                        //out += '<option value=' + +'>'+ dataObj[i].Currency + '--' + dataObj[i].Name + '</option>' ;
+                }
+                document.getElementById("currencyDiv").innerHTML=out;
+                
+            },
+            failure: function() {
+
+            }
+        })
+    });
+    
+    $("#currtable").on("dblclick","tr",function(e){
+        
+        document.getElementById("danwei-pocm").value=$(this).find('td').eq(1).text();
+        $('#myModalcurr').modal('hide')
+        $(".modal-backdrop").remove();
+        
+    });
+
+
+
+function currencyf() {
+    console.log(1);
+
+    //弹出模态框
+    
+    $("#myModalcurr").modal("show")
+}
+
+</script>
+        <script>  
+            $("#factory-pocm").change(function(){ 
+        
+                $.ajax({
+                    type: "post",
+                    url: "{% url 'MM:ajax_getStockByName' %}",
+                    data:{
+                        csrfmiddlewaretoken: '{{ csrf_token }}',
+                        //plant值
+                        name:$("#factory-pocm").val(),
+                    },
+                    success: function(data) {
+                        $('#test').text(data);
+                        //add：如果没有该工厂，回传回来一个message提示
+                        //[{'message': '暂无该工厂相关数据，请重新确认！', 'fields': init}]
+                        var dataObj = eval("("+data+")");
+                        //注意：plant选择空的时候，这三项也返回空
+                        const pk = dataObj[0].pk;
+                        sessionStorage.setItem('pk', pk)
+                        fields = dataObj[0].fields
+                        $("#pgrp").val(fields.pGrp);
+                        $("#porg").val(fields.pOrg);
+                        $("#company").val(fields.companyCode);
+                    },
+                    failure: function() {
+        
+                    }
+                });
+            
+            }); 
+        
+
+            $.ajax({
+                type: "post",
+                url: "{% url 'MM:ajax_load_pgrp' %}",
+                data:{
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                },
+                success: function(data) {
+                    var dataObj = eval("("+data+")");
+                    var out = "<option value='' >pgrp</option>";
+                    var i;
+                    for(i = 0; i < dataObj.length; i++) {
+                        out += '<option value=' + dataObj[i].Pgrp+'>'+ dataObj[i].Pgrp + '--' + dataObj[i].Name + '</option>' ;
+                    }
+                    document.getElementById("pgrp").innerHTML=out;
+                },
+                failure: function() {
+
+                }
+            });
+            $.ajax({
+                type: "post",
+                url: "{% url 'MM:ajax_load_plant' %}",
+                data:{
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                },
+                success: function(data) {
+                    var dataObj = eval("("+data+")");
+                    var out = "<option value='' >请选择工厂</option>";
+                    var i;
+                    for(i = 0; i < dataObj.length; i++) {
+                        out += '<option value=' + dataObj[i].Plant+'>'+ dataObj[i].Plant + '--' + dataObj[i].Name + '</option>' ;
+                    }
+                    document.getElementById("factory-pocm").innerHTML=out;
+                },
+                failure: function() {
+
+                }
+            });
+            $.ajax({
+                type: "post",
+                url: "{% url 'MM:ajax_load_porg' %}",
+                data:{
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                },
+                success: function(data) {
+                    var dataObj = eval("("+data+")");
+                    var out = "<option value='' >porg</option>";
+                    var i;
+                    for(i = 0; i < dataObj.length; i++) {
+                        out += '<option value=' + dataObj[i].Porg+'>'+ dataObj[i].Porg + '--' + dataObj[i].Name + '</option>' ;
+                    }
+                    document.getElementById("porg").innerHTML=out;
+                },
+                failure: function() {
+
+                }
+            });
+            $.ajax({
+                type: "post",
+                url: "{% url 'MM:ajax_load_company' %}",
+                data:{
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                },
+                success: function(data) {
+                    var dataObj = eval("("+data+")");
+                    var out = "<option value='' >company</option>";
+                    var i;
+                    for(i = 0; i < dataObj.length; i++) {
+                        out += '<option value=' + dataObj[i].CompanyCode+'>'+ dataObj[i].CompanyCode + '--' + dataObj[i].Name + '</option>' ;
+                    }
+                    document.getElementById("company").innerHTML=out;
+                },
+                failure: function() {
+
+                }
+            });
+
+            $.ajax({
+                type: "post",
+                url: "{% url 'MM:ajax_load_country' %}",
+                data:{
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                },
+                success: function(data) {
+                    var dataObj = eval("("+data+")");
+                    var out = "<option value='' >请选择国家</option>";
+                    var i;
+                    for(i = 0; i < dataObj.length; i++) {
+                        out += '<option value=' + dataObj[i].Country+'>'+ dataObj[i].ChineseName + '--' + dataObj[i].EnglishName + '</option>' ;
+                    }
+                    var items=document.getElementsByName("country");
+                    for(i = 0; i < items.length; i++) {
+                        items[i].innerHTML=out;
+                    }
+                        
+                    },
+                failure: function() {
+
+                }
+            });
+           
+
+      var i=10
+function addgood() { //商品
+   // if(){
+ 
+    var goodcode = document.getElementById("goodcode-pocm").value
+    var goodname = document.getElementById("goodname-pocm").value
+    var number = document.getElementById("number-pocm").value
+    var danjia = document.getElementById("danjia-pocm").value
+    var zongjia = document.getElementById("zongjia-pocm").value
+    var danwei = document.getElementById("danwei-pocm").value
+    var factory = document.getElementById("factory-pocm").value
+    var clocation = document.getElementById("clocation-pocm").value
+    var time = document.getElementById("time-pocm").value
+    var trStr = ''
+
+
+    trStr = '<tr><td id="tiaomucode-po">' + i + '</td><td id="goodcode-po">' + goodcode  + '</td><td id="goodname-po">' + goodname + '</td><td class="text-po-create"><input class="form-control po-create-td" id="number-po" value="'+ number + '"></td>' + '<td class="text-po-create"><input class="form-control po-create-td" id="danjia-po" value="'+danjia+'"></td> ' + '<td class="text-po-create"><input class="form-control po-create-td" id="sum-po" value="'+ zongjia +'"></td>' + '<td id="danwei-po">' + danwei  +  '</td><td id="factory-po">'+ factory + '</td><td id="clocation-po">'+clocation+ '</td><td class="text-po-create"><input class="form-control po-create-td" id="time-po" value="'+ time + '"></td></tr>'
+    document.getElementById("podiv").innerHTML += trStr;
+    document.getElementById("goodcode-pocm").value=''
+    document.getElementById("goodname-pocm").value=''
+    document.getElementById("number-pocm").value=''
+    document.getElementById("danjia-pocm").value=''
+    document.getElementById("zongjia-pocm").value=''
+    document.getElementById("danwei-pocm").value=''
+    document.getElementById("factory-pocm").value=''
+    document.getElementById("clocation-pocm").value=''
+    document.getElementById("time-pocm").value=''
+    showMessage({text: '添加成功！',type: 'success'})
+
+    $("#poc-wrap").hide()
+  //     }
+  // else
+  //  showMessage({text: '添加失败，商品不存在。',type: 'warning'})
+
+}
+
+
+function chai(){//拆分订单
+                i+=10
+    var goodcode = document.getElementById("goodcode-po").innerText
+    var goodname = document.getElementById("goodname-po").innerText
+    var danwei = document.getElementById("danwei-po").innerText
+    var factory = document.getElementById("factory-po").innerText
+    var clocation = document.getElementById("clocation-po").innerText
+    var trStr = ''
+    trStr = '<tr><td>' + i + '</td><td>' + goodcode  + '</td><td>' + goodname + '</td><td class="text-po-create"><input class="form-control po-create-td"></td> <td class="text-po-create"><input class="form-control po-create-td"></td> <td class="text-po-create"><input class="form-control po-create-td"></td><td>' + danwei + '</td><td>' + factory + '</td><td>' + clocation +  '</td><td class="text-po-create"><input class="form-control po-create-td" onclick="date(this)"></td>' + '</td></tr>'
+    document.getElementById("podiv").innerHTML += trStr;
+            }
+
+function cancel(){//取消拆分
+                $("#dd tr:last").remove();
+            }
+
+function create(){ //创建成功
+    var pk=sessionStorage.getItem('pk')
+    var tabLen = document.getElementById("podiv");
+    var telephone = $("#telephone").val()
+    var fax = $("#fax").val()
+    var shippingAddress = $("#shippingAddress").val()
+    var gyscode = $("#gyscode").val()
+    var jsonT = "[";
+    for (var i = 0; i < tabLen.rows.length; i++) {
+        var quantity = $("#podiv").children().eq(i).children().eq(3).children().val();
+        var dj = $("#podiv").children().eq(i).children().eq(4).children().val();
+        var sum = $("#podiv").children().eq(i).children().eq(5).children().val();
+        var deliveryDate = $("#podiv").children().eq(i).children().eq(9).children().val();
+        jsonT += '{"itemId":"' + tabLen.rows[i].cells[0].innerHTML + '","material_id":"' + tabLen.rows[i].cells[1].innerHTML + '","material_name":"' + tabLen.rows[i].cells[2].innerHTML + '","quantity":' + quantity + ',"price":' + dj + ',"sum":' + sum + ',"currency":"' + tabLen.rows[i].cells[6].innerHTML + '","plant":"' + pk + '","sloc":"' + tabLen.rows[i].cells[8].innerHTML+ '","deliveryDate":"' + deliveryDate + '"},'
+}
+    jsonT= jsonT.substr(0, jsonT.length - 1);
+    jsonT += "]";
+    console.log(jsonT);
+    
+    $.ajax({
+        type: 'post',
+        url: '/mm/purchaseorder/cremanujiekou/',
+        data:{
+            "json":jsonT,
+            "telephone": telephone,
+            "fax": fax,
+            "shippingAddress": shippingAddress,
+            "vid": gyscode
+    },
+        success: function (data) {
+           let a = JSON.parse(data)
+            if(a.content!=0)
+            showMessage({text: '创建成功！采购订单编号：'+a.content ,type: 'success',showClose: true, autoClose: false})
+            else
+            showMessage({text: '商品不存在!',type: 'warning'})
+        }
+        })
+}
+
+sum=function(e) { // 回车提交表单，自动生成总价
+    var theEvent = window.event || e;
+    var code = theEvent.keyCode || theEvent.which || theEvent.charCode;
+    if (code == 13) {  //回车事件
+    //  $(nowTr).parent().parent().remove();
+      var quantity = $("#number-pocm").val();
+      var dj = $("#danjia-pocm").val();
+      console.log(quantity*dj)
+      $("#zongjia-pocm").val(quantity * dj)
+
+    }
+    }
+
+        </script>
+
+    
+
+
+</body>
+</html>
