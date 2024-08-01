@@ -2,7 +2,7 @@
 
 ## 克隆项目 在pycharm里使用从vcs获取
 ```angular2html
-https://mm_erp:glpat-sARoaYD3K7wLnVeh4yNA@git.tongji.edu.cn/2151825/mm_erp.git
+https://mm_erp:glpat-imkh91v2yxkKp-4bWLVA@git.tongji.edu.cn/2151825/mm_erp.git
 ```
 ## 配置环境
 ```angular2html
