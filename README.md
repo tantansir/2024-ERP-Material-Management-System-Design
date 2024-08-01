@@ -14,8 +14,9 @@ https://mm_erp:glpat-sARoaYD3K7wLnVeh4yNA@git.tongji.edu.cn/2151825/mm_erp.git
 6. pip install pandas
 7. python manage.py runserver
 ```
-在浏览器中打开http://127.0.0.1:8000/mm/register/即可开始注册账号；<br>
-在浏览器中打开http://127.0.0.1:8000/mm/login/即可登录账号。<br>
+在浏览器中打开[http://127.0.0.1:8000/mm/register/](http://127.0.0.1:8000/mm/register/)即可开始注册账号；
+<br>
+在浏览器中打开[http://127.0.0.1:8000/mm/login/](http://127.0.0.1:8000/mm/login/)即可登录账号。<br>
 测试账号：admin@tongji.edu.cn
 <br>
 密码：Admin
