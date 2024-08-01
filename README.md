@@ -1,5 +1,5 @@
 # mm_erp
-测试
+
 ## 克隆项目 在pycharm里使用从vcs获取
 ```angular2html
 https://user:glpat-Va3mXhAb9QQCiPmn_NBH@git.tongji.edu.cn/mm_team/mm_erp.git
