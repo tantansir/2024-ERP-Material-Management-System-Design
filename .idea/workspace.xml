@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2d172b04-ded4-4401-a492-59ea729722fa" name="更改" comment="创建django项目">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    <list default="true" id="2d172b04-ded4-4401-a492-59ea729722fa" name="更改" comment="更改md文档">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +70,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1722497833422</updated>
-      <workItem from="1722497836100" duration="631000" />
+      <workItem from="1722497836100" duration="1887000" />
     </task>
     <task id="LOCAL-00001" summary="创建django项目">
       <option name="closed" value="true" />
@@ -80,7 +80,47 @@
       <option name="project" value="LOCAL" />
       <updated>1722497894272</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="更改md">
+      <option name="closed" value="true" />
+      <created>1722498484142</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1722498484142</updated>
+    </task>
+    <task id="LOCAL-00003" summary="进行项目上传">
+      <option name="closed" value="true" />
+      <created>1722498770988</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1722498770988</updated>
+    </task>
+    <task id="LOCAL-00004" summary="修正供应商创建">
+      <option name="closed" value="true" />
+      <created>1722499053504</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1722499053504</updated>
+    </task>
+    <task id="LOCAL-00005" summary="更改md文档">
+      <option name="closed" value="true" />
+      <created>1722499226901</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1722499226901</updated>
+    </task>
+    <task id="LOCAL-00006" summary="更改md文档">
+      <option name="closed" value="true" />
+      <created>1722499417499</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1722499417499</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -111,6 +151,10 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="创建django项目" />
-    <option name="LAST_COMMIT_MESSAGE" value="创建django项目" />
+    <MESSAGE value="更改md" />
+    <MESSAGE value="进行项目上传" />
+    <MESSAGE value="修正供应商创建" />
+    <MESSAGE value="更改md文档" />
+    <option name="LAST_COMMIT_MESSAGE" value="更改md文档" />
   </component>
 </project>
