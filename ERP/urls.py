@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.shortcuts import redirect
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('mm/', include('MM.urls')),
+    path('', lambda request: redirect('MM:login')),  # 默认重定向到登录页面
+    path('mm/', include('MM.urls')),  # 确保替换为你的app名称
 ]

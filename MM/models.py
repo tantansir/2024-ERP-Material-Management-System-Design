@@ -17,7 +17,7 @@ def validate_phone(string):
 def validate_digit(string):
     for s in string:
         if not s.isdigit(s):
-            raise ValidationError("There is a non-digit character.")
+            raise ValidationError("There is a non-digit character in fax.")
 
 class EUser(User):
     validate_phone = validate_phone
