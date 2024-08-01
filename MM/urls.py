@@ -1,18 +1,19 @@
-from django.urls import path
-
+from django.urls import path, include
+from django.contrib import admin
 from .views import user, test, vendor, material, receipt, invoice, purchaserequisition, purchasesearch, quotation, purchaseorder
 from .views.ajax import material_api, data_api, stock_api, vendor_api, user_api, receipt_api, invoice_api
+from django.shortcuts import redirect
 
 app_name = 'MM'
 urlpatterns = [
     # user
-    path('', test.test, name='test'),
     path('login/', user.login, name='login'),
     path('register/', user.register, name='register'),
     path('home/', user.home, name='home'),
     path('logout/', user.logout, name='logout'),
     # vendor
     path('vendor/create/', vendor.create, name='create_vendor'),
+    path('vendor/display/<int:pk>/', vendor.display, name='display_vendor'),
     path('vendor/search/', vendor.search, name='search_vendor'),
     path('vendor/history/', vendor.history, name='search_vendor_history'),
     # material
@@ -34,6 +35,7 @@ urlpatterns = [
     path('invoice/payment/', invoice.payment, name='pay_invoice'),
     path('invoice/order/display/<int:pk>/', invoice.display_purchase_order, name='display_order_invoice'),
     path('invoice/orders/search/', invoice.search_orders, name='search_orders_invoice'),
+
     # ajax
     ## user
     path('api/user/loadAll/', user_api.load_user, name='ajax_load_user'),

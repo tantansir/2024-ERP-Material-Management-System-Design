@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<head>
     {% load static %}
     <!-- import CSS -->
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
@@ -67,60 +68,43 @@
 
     <script>
         $(document).ready(function() {
-            console.log("Document is ready.");
-
+            // 加载语言选项
             $.ajax({
                 type: "get",
                 url: "{% url 'MM:ajax_load_language' %}",
-                data: {
-                    csrfmiddlewaretoken: '{{ csrf_token }}',
-                },
+                data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
                 success: function(data) {
                     var dataObj = JSON.parse(data);
                     var out = "<option value='' >请选择语言</option>";
                     for (var i = 0; i < dataObj.length; i++) {
                         out += '<option value=' + dataObj[i].Language + '>' + dataObj[i].Language + '--' + dataObj[i].Name + '</option>';
                     }
-                    var items = document.getElementsByName("language");
-                    for (i = 0; i < items.length; i++) {
-                        items[i].innerHTML = out;
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error("AJAX error: ", status, error);
-                    console.log("Response Text: ", xhr.responseText);
+                    $('#language2').html(out);
+                    $('#language2').val('{{ vendor.language }}'); // 设置现有值
                 }
             });
 
+            // 加载支付类型选项
             $.ajax({
                 type: "post",
                 url: "{% url 'MM:ajax_load_tptype' %}",
-                data: {
-                    csrfmiddlewaretoken: '{{ csrf_token }}',
-                },
+                data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
                 success: function(data) {
                     var dataObj = JSON.parse(data);
                     var out = "<option value='' >请选择支付类型</option>";
                     for (var i = 0; i < dataObj.length; i++) {
                         out += '<option value=' + dataObj[i].Tptype + '>' + dataObj[i].Tptype + '--' + dataObj[i].Description + '</option>';
                     }
-                    var items = document.getElementsByName("tpType");
-                    for (i = 0; i < items.length; i++) {
-                        items[i].innerHTML = out;
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error("AJAX error: ", status, error);
-                    console.log("Response Text: ", xhr.responseText);
+                    $('#tpType2').html(out);
+                    $('#tpType2').val('{{ vendor.tpType }}'); // 设置现有值
                 }
             });
 
+            // 加载国家选项
             $.ajax({
                 type: "post",
                 url: "{% url 'MM:ajax_load_country' %}",
-                data: {
-                    csrfmiddlewaretoken: '{{ csrf_token }}',
-                },
+                data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
                 success: function(data) {
                     var dataObj = eval("("+data+")");
                     var out = "<option value='' >请选择国家</option>";
@@ -128,187 +112,172 @@
                     for(i = 0; i < dataObj.length; i++) {
                         out += '<option value=' + dataObj[i].Country+'>'+ dataObj[i].ChineseName + '--' + dataObj[i].EnglishName + '</option>' ;
                     }
-                    var items=document.getElementsByName("country");
-                    for(i = 0; i < items.length; i++) {
-                        items[i].innerHTML=out;
-                    }
-
-                    },
-                failure: function() {
-
+                    $('#country2').html(out);
+                    $('#country2').val('{{ vendor.country }}'); // 设置现有值
                 }
             });
 
+            // 加载公司编码选项
             $.ajax({
                 type: "post",
                 url: "{% url 'MM:ajax_load_company' %}",
-                data: {
-                    csrfmiddlewaretoken: '{{ csrf_token }}',
-                },
+                data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
                 success: function(data) {
                     var dataObj = JSON.parse(data);
                     var out = "<option value='' >请选择公司编码</option>";
                     for (var i = 0; i < dataObj.length; i++) {
                         out += '<option value=' + dataObj[i].CompanyCode + '>' + dataObj[i].CompanyCode + '--' + dataObj[i].Name + '</option>';
                     }
-                    var items = document.getElementsByName("companyCode");
-                    for (i = 0; i < items.length; i++) {
-                        items[i].innerHTML = out;
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error("AJAX error: ", status, error);
-                    console.log("Response Text: ", xhr.responseText);
+                    $('#company2').html(out);
+                    $('#company2').val('{{ vendor.companyCode }}'); // 设置现有值
                 }
             });
 
+            // 加载采购组织选项
             $.ajax({
                 type: "post",
                 url: "{% url 'MM:ajax_load_porg' %}",
-                data: {
-                    csrfmiddlewaretoken: '{{ csrf_token }}',
-                },
+                data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
                 success: function(data) {
                     var dataObj = JSON.parse(data);
                     var out = "<option value='' >请选择采购组织</option>";
                     for (var i = 0; i < dataObj.length; i++) {
                         out += '<option value=' + dataObj[i].Porg + '>' + dataObj[i].Porg + '--' + dataObj[i].Name + '</option>';
                     }
-                    var items = document.getElementsByName("pOrg");
-                    for (i = 0; i < items.length; i++) {
-                        items[i].innerHTML = out;
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error("AJAX error: ", status, error);
-                    console.log("Response Text: ", xhr.responseText);
+                    $('#pOrg2').html(out);
+                    $('#pOrg2').val('{{ vendor.pOrg }}'); // 设置现有值
                 }
             });
 
-            // AJAX 请求获取货币数据
+            // 加载货币选项
             $.ajax({
                 type: "post",
                 url: "{% url 'MM:ajax_load_currency' %}",
-                data: {
-                    csrfmiddlewaretoken: '{{ csrf_token }}',
-                },
+                data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
                 success: function(data) {
-                    console.log("Data received: ", data);
                     var dataObj = JSON.parse(data);
                     var out = "";
                     for (var i = 0; i < dataObj.length; i++) {
                         out += '<tr><td>' + (i + 1) + '</td><td>' + dataObj[i].Currency + '</td><td>' + dataObj[i].Name + '</td></tr>';
                     }
-                    document.getElementById("currDiv").innerHTML = out;
+                    $("#currDiv").html(out);
                 },
                 error: function(xhr, status, error) {
                     console.error("AJAX error: ", status, error);
-                    console.log("Response Text: ", xhr.responseText);
                 }
+            });
+
+            // 显示货币选择模态框
+            $("#currency2").on("click", function() {
+                $("#myModalcurr").modal("show");
             });
 
             // 双击表格行填入货币
-            $("#currDiv").on("dblclick", "tr", function(e) {
+            $("#currDiv").on("dblclick", "tr", function() {
                 var currency = $(this).find('td').eq(1).text();
-                document.getElementById("currency2").value = currency;
+                $("#currency2").val(currency);
                 $('#myModalcurr').modal('hide');
             });
-        });
 
-            // 显示货币选择模态框
-            function currencyf() {
-                console.log("Currency input clicked.");
-                $("#myModalcurr").modal("show");
-            }
+            // 点击开始修改按钮
+            $(document).on('click', '#edit-btn', function() {
+                $("input, select").prop("disabled", false); // 使所有输入字段可编辑
+                $("#vname2").prop("disabled", true); // 确保供应商名称不可编辑
+                $(this).text("完成修改"); // 将按钮文本改为“完成修改”
+                $(this).attr("id", "submit-btn"); // 修改按钮的ID以触发提交动作
+            });
 
-        // 提交表单
-        $('#material3').on('submit', function(e) {
-            e.preventDefault();
-            let phone = $("#phone2").val();
-            let fax = $("#fax2").val();
-            let phoneError = validatePhoneNumber(phone);
-            let faxError = validateDigits(fax);
+            // 完成修改
+            $(document).on('click', '#submit-btn', function() {
+                $("#material3").submit(); // 提交表单
+            });
 
-            if (phoneError) {
-                alert(phoneError);
-                return;
-            }
-            if (faxError) {
-                alert(faxError);
-                return;
-            }
-            $.ajax({
-                type: "POST",
-                url: "{% url 'MM:ajax_create_vendor' %}",
-                data: {
-                    csrfmiddlewaretoken: '{{ csrf_token }}',
-                    vname: $("#vname2").val(),
-                    city: $("#city2").val(),
-                    address: $("#address2").val(),
-                    postcode: $("#postcode2").val(),
-                    country: $("#country2").val(),
-                    language: $("#language2").val(),
-                    glAcount: $("#glAcount2").val(),
-                    phone: phone,
-                    fax: fax,
-                    tpType: $("#tpType2").val(),
-                    companyCode: $("#company2").val(),
-                    pOrg: $("#pOrg2").val(),
-                    currency: $("#currency2").val()
-                },
-                success: function(data) {
-                    if (data.status == 1) {
-                        // 使用自定义提示框显示成功信息
-                        alert(data.message);
-                        // 修改成功后，将按钮恢复为“开始修改”，并将所有输入字段禁用
-                        $("input, select").prop("disabled", true);
-                        $("#submit-btn").text("开始修改");
-                        $("#submit-btn").attr("id", "edit-btn");
-                    } else {
-                        // 使用自定义提示框显示错误信息
-                        alert(data.message);
-                    }
-                },
-                error: function(xhr, status, error) {
-                    // 使用自定义提示框显示AJAX错误信息
-                    alert("AJAX error: " + xhr.responseText);
+            // 提交表单
+            $('#material3').on('submit', function(e) {
+                e.preventDefault();
+                let phone = $("#phone2").val();
+                let fax = $("#fax2").val();
+                let phoneError = validatePhoneNumber(phone);
+                let faxError = validateDigits(fax);
+
+                if (phoneError) {
+                    alert(phoneError);
+                    return;
                 }
+                if (faxError) {
+                    alert(faxError);
+                    return;
+                }
+                $.ajax({
+                    type: "POST",
+                    url: window.location.href, // 使用当前页面的 URL 进行提交
+                    data: {
+                        csrfmiddlewaretoken: '{{ csrf_token }}',
+                        vname: $("#vname2").val(),
+                        city: $("#city2").val(),
+                        address: $("#address2").val(),
+                        postcode: $("#postcode2").val(),
+                        country: $("#country2").val(),
+                        language: $("#language2").val(),
+                        glAcount: $("#glAcount2").val(),
+                        phone: phone,
+                        fax: fax,
+                        tpType: $("#tpType2").val(),
+                        companyCode: $("#company2").val(),
+                        pOrg: $("#pOrg2").val(),
+                        currency: $("#currency2").val()
+                    },
+                    success: function(data) {
+                        if (data.status == 1) {
+                            // 使用自定义提示框显示成功信息
+                            alert(data.message);
+                            // 修改成功后，将按钮恢复为“开始修改”，并将所有输入字段禁用
+                            $("input, select").prop("disabled", true);
+                            $("#submit-btn").text("开始修改");
+                            $("#submit-btn").attr("id", "edit-btn");
+                        } else {
+                            // 使用自定义提示框显示错误信息
+                            alert(data.message);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        // 使用自定义提示框显示AJAX错误信息
+                        alert("AJAX error: " + xhr.responseText);
+                    }
+                });
             });
         });
 
-        function validatePhoneNumber(phone) {
-            if (phone.length != 11) {
-                return "Enter a valid 11-digit phone number.";
-            }
-            if (phone[0] != '1') {
-                return "Enter a valid phone number beginning with '1'.";
-            }
-            for (let i = 0; i < phone.length; i++) {
-                if (!phone[i].match(/[0-9]/)) {
-                    return "There is a character in the phone number.";
-                }
-            }
-            return null;
+function validatePhoneNumber(phone) {
+    if (phone.length != 11) {
+        return "Enter a valid 11-digit phone number.";
+    }
+    if (phone[0] != '1') {
+        return "Enter a valid phone number beginning with '1'.";
+    }
+    for (let i = 0; i < phone.length; i++) {
+        if (!phone[i].match(/[0-9]/)) {
+            return "There is a character in the phone number.";
         }
+    }
+    return null;
+}
 
-        function validateDigits(string) {
-            for (let i = 0; i < string.length; i++) {
-                if (!string[i].match(/[0-9]/)) {
-                    return "There is a non-digit character in fax.";
-                }
-            }
-            return null;
+function validateDigits(string) {
+    for (let i = 0; i < string.length; i++) {
+        if (!string[i].match(/[0-9]/)) {
+            return "There is a non-digit character in fax.";
         }
+    }
+    return null;
+}
 
-        $(function() {
-            $('select.styled').customSelect();
-        });
+</script>
 
-    </script>
 </head>
 
 <body>
-    <!-- MAIN CONTENT -->
+<!-- MAIN CONTENT -->
     <section id="container">
         <!-- TOP BAR CONTENT & NOTIFICATIONS -->
         <header class="header black-bg">
@@ -379,10 +348,10 @@
                 </ul>
             </div>
         </aside>
-        <!-- MAIN CONTENT -->
+
         <section id="main-content">
             <section class="wrapper">
-                <h3><i class="fa fa-angle-right"></i> 创建新供应商</h3>
+                <h3><i class="fa fa-angle-right"></i> 查看供应商信息</h3>
                 <div class="row mt">
                     <div class="col-lg-12">
                         <div class="form-panel">
@@ -396,7 +365,7 @@
                                             <div class="pull-right">供应商名称： </div>
                                         </label>
                                         <div class="col-sm-7">
-                                            <input class="form-control" type="text" name="vname" id="vname2" required>
+                                            <input class="form-control" type="text" name="vname" id="vname2" value="{{ vendor.vname }}" required disabled>
                                         </div>
                                     </div>
                                     <h5 class='mb'><i class="fa fa-angle-right"></i>联系方式</h5>
@@ -405,7 +374,9 @@
                                             <div class="pull-right">语言：</div>
                                         </label>
                                         <div class="col-sm-7">
-                                            <select class="form-control" name="language" id='language2' required></select>
+                                            <select class="form-control" name="language" id='language2' required disabled>
+                                                <option value="{{ vendor.language }}" selected>{{ vendor.language }}</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -413,7 +384,7 @@
                                             <div class="pull-right">电话： </div>
                                         </label>
                                         <div class="col-sm-7">
-                                            <input class="form-control" type="text" id='phone2'>
+                                            <input class="form-control" type="text" id='phone2' value="{{ vendor.phone }}" disabled>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -421,7 +392,7 @@
                                             <div class="pull-right">传真：</div>
                                         </label>
                                         <div class="col-sm-7">
-                                            <input class="form-control" type="text" id='fax2'>
+                                            <input class="form-control" type="text" id='fax2' value="{{ vendor.fax }}" disabled>
                                         </div>
                                     </div>
                                     <h5 class='mb'><i class="fa fa-angle-right"></i>所在地</h5>
@@ -430,7 +401,9 @@
                                             <div class="pull-right">国家：</div>
                                         </label>
                                         <div class="col-sm-7">
-                                            <select class="form-control" name="country" id="country2" required></select>
+                                            <select class="form-control" name="country" id="country2" required disabled>
+                                                <option value="{{ vendor.country }}" selected>{{ vendor.country }}</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -438,7 +411,7 @@
                                             <div class="pull-right">所在城市：</div>
                                         </label>
                                         <div class="col-sm-7">
-                                            <input class="form-control" type="text" name="city" id="city2" required>
+                                            <input class="form-control" type="text" name="city" id="city2" value="{{ vendor.city }}" required disabled>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -446,7 +419,7 @@
                                             <div class="pull-right">街区地址：</div>
                                         </label>
                                         <div class="col-sm-7">
-                                            <input class="form-control" name="address" id="address2" type="text">
+                                            <input class="form-control" name="address" id="address2" type="text" value="{{ vendor.address }}" disabled>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -454,7 +427,7 @@
                                             <div class="pull-right">邮政编码：</div>
                                         </label>
                                         <div class="col-sm-7">
-                                            <input class="form-control" name="postcode" id="postcode2" type="text" required>
+                                            <input class="form-control" name="postcode" id="postcode2" type="text" value="{{ vendor.postcode }}" required disabled>
                                         </div>
                                     </div>
                                     <h5 class='mb'><i class="fa fa-angle-right"></i>交易</h5>
@@ -463,7 +436,9 @@
                                             <div class="pull-right">公司编码：</div>
                                         </label>
                                         <div class="col-sm-7">
-                                            <select class="form-control" name="companyCode" id="company2" required></select>
+                                            <select class="form-control" name="companyCode" id="company2" required disabled>
+                                                <option value="{{ vendor.companyCode }}" selected>{{ vendor.companyCode }}</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -471,7 +446,9 @@
                                             <div class="pull-right">采购组织：</div>
                                         </label>
                                         <div class="col-sm-7">
-                                            <select class="form-control" name="pOrg" id="pOrg2" required></select>
+                                            <select class="form-control" name="pOrg" id="pOrg2" required disabled>
+                                                <option value="{{ vendor.pOrg }}" selected>{{ vendor.pOrg }}</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -479,7 +456,9 @@
                                             <div class="pull-right">支付类型：</div>
                                         </label>
                                         <div class="col-sm-7">
-                                            <select class="form-control" name="tpType" id="tpType2"></select>
+                                            <select class="form-control" name="tpType" id="tpType2" disabled>
+                                                <option value="{{ vendor.tpType }}" selected>{{ vendor.tpType }}</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -487,7 +466,7 @@
                                             <div class="pull-right">交易货币：</div>
                                         </label>
                                         <div class="col-sm-7">
-                                            <input type="text" class="form-control po-text-modify" onclick="currencyf()" name="currency" id="currency2">
+                                            <input type="text" class="form-control po-text-modify" onclick="currencyf()" name="currency" id="currency2" value="{{ vendor.currency }}" disabled>
                                             <div class="col-sm-12">
                                                 <div class="modal fade" id="myModalcurr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
                                                     <div class="modal-dialog">
@@ -521,13 +500,15 @@
                                             <div class="pull-right">总账账户编码：</div>
                                         </label>
                                         <div class="col-sm-7">
-                                            <input class="form-control" name="glAcount" id="glAcount2" type="text" required>
+                                            <input class="form-control" name="glAcount" id="glAcount2" type="text" value="{{ vendor.glAcount }}" required disabled>
                                         </div>
                                     </div>
                                 </fieldset>
                                 <div class="col-sm-10"></div>
+                                <button type="button" class="btn btn-primary" id="edit-btn">开始修改</button>
                                 <button class="btn btn-theme04" type="reset">重置</button>
-                                <input type='submit' class="btn btn-theme" formmethod="post">
+                                <input type="submit" class="btn btn-theme" id="submit-btn" formmethod="post" style="display:none;">
+                                <a href="javascript:history.back()" class="btn btn-theme">返回上一页</a>
                             </form>
 
                         </div>
