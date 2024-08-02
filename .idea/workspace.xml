@@ -5,17 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2d172b04-ded4-4401-a492-59ea729722fa" name="更改" comment="更改md文档">
-      <change afterPath="$PROJECT_DIR$/MM/templates/vendor/display.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/mm_erp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/mm_erp.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ERP/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/ERP/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MM/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/MM/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/receipt/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/receipt/create.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/receipt/create2.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/receipt/create2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/receipt/display.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/receipt/display.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/receipt/order.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/receipt/order.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/receipt/orders.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/receipt/orders.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/receipt/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/receipt/search.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/user/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/user/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MM/templates/vendor/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/vendor/create.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MM/templates/vendor/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/vendor/search.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MM/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/MM/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MM/views/vendor.py" beforeDir="false" afterPath="$PROJECT_DIR$/MM/views/vendor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +30,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="SET_USER_NAME_GLOBALLY" value="false" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -41,20 +40,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/lterm/mmerp&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="ERP" type="Python.DjangoServer" factoryName="Django server">
       <module name="mm_erp" />
@@ -92,6 +92,8 @@
       <workItem from="1722497836100" duration="1887000" />
       <workItem from="1722503280164" duration="4000" />
       <workItem from="1722503447491" duration="305000" />
+      <workItem from="1722575003572" duration="3846000" />
+      <workItem from="1722579945127" duration="2726000" />
     </task>
     <task id="LOCAL-00001" summary="创建django项目">
       <option name="closed" value="true" />
