@@ -8,7 +8,8 @@ from django.contrib import auth, messages
 from django import forms
 from django.contrib.auth.decorators import login_required
 from django import forms
-import datetime
+from django.utils import timezone
+from datetime import timedelta
 
 from django.views.decorators.csrf import csrf_exempt
 
@@ -395,18 +396,11 @@ def getall(request):
         print(quoatations)
         return render(request, '../templates/quotation/RFQ.html',locals())
     if request.method == "POST":
-        id = request.POST.get("id")
-        euserid = request.POST.get("euserid")
-        vendorvid = request.POST.get("vendorvid")
-        riid = request.POST.get("riid")
-        collNo = request.POST.get("collNo")
-        quoatations = Quotation.objects.filter(id = id,
-                                             ri_id=riid,
-                                             vendor_id=vendorvid,
-                                             euser_id=euserid,
-                                             collNo=collNo
-                                             ).values()
-        print(quoatations)
+        queryDict={}
+        for i in request.POST.items():
+            if i[1] is not None and len(i[1])>0:
+                queryDict[i[0]]=i[1]
+        quoatations = Quotation.objects.filter(**queryDict).values()
         if quoatations:
             quoatations = list(quoatations)
             return render(request, '../templates/quotation/RFQ.html', locals())
@@ -465,6 +459,7 @@ def rfqinfo2(request: HttpRequest, pk):
                                                              "deadline","time","rej","vendor_id","collNo")
 
         quoatations = list(quoatations)
+        #print('***********\n',quoatations)
         riid = quoatations[0]['ri_id']
         viid = quoatations[0]['vendor_id']
         colno = quoatations[0]['collNo']
@@ -487,7 +482,9 @@ def rfqinfo2(request: HttpRequest, pk):
         while len(caigou)!=1:
             caigou.pop()
         print(caigou)
-        baojia = Quotation.objects.filter(id=pk).values("price","deadline","currency")
+        baojia = Quotation.objects.filter(id=pk).values("price","deadline","currency","quantity")
+        for i in baojia:
+            i['sum']=i['quantity']*i['price']
         baojia = list(baojia)
         return render(request, '../templates/quotation/RFQ-info.html', locals())
 
@@ -506,13 +503,15 @@ def searchquo(request):
         print(quoatations)
         return render(request, '../templates/quotation/vq-modify_search.html', locals())
     if request.method == "POST":
-        id = request.POST.get("id")
+        '''id = request.POST.get("id")
         euserid = request.POST.get("euserid")
         vendorid = request.POST.get("vendorid")
-        collno = request.POST.get("collNo")
-        quotation = Quotation.objects.filter(id=id,
-                                           euser_id=euserid,vendor_id=vendorid,collNo=collno
-                                             ).values()
+        collno = request.POST.get("collNo")'''
+        queryDict={}
+        for i in request.POST.items():
+            if i[1] is not None and len(i[1])>0 and i[0]!='time':
+                queryDict[i[0]]=i[1]
+        quotation = Quotation.objects.filter(**queryDict).values()
         print(quotation)
         quoatations = list(quotation)
         if quotation:

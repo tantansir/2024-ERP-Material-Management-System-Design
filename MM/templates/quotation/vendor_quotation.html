@@ -64,7 +64,8 @@
         <div class="nav notify-row" id="top_menu">
             <!--  notification start -->
         
-    </header>
+        </div>
+        </header>
   <!--header end-->
   
   <!-- **********************************************************************************************************************************************************
@@ -174,7 +175,7 @@
                                       供应商编码
                                   </div>
                                   <div class="col-sm-2" id="rfq-search3">
-                                      <input type="text" class="form-control"name="ven" id="gyscode"  placeholder="请输入" >
+                                      <input type="text" class="form-control"name="vendor_id" id="gyscode"  placeholder="请输入" >
                                       <button type="button" class="btn btn-link " data-toggle="modal" data-target="#myModalgys">忘记编号？</button>
       
                                   </div>
@@ -182,7 +183,7 @@
                                       商品编码
                                   </div>
                                   <div class="col-sm-2" id="rfq-search4">
-                                      <input type="text" class="form-control"name="mate" placeholder="请输入" id="spcode">
+                                      <input type="text" class="form-control"name="material_id" placeholder="请输入" id="spcode">
                                       <button type="button" class="btn btn-link " data-toggle="modal" data-target="#myModalgood">忘记编号？</button>
                                   </div>
                                   </div>
@@ -198,7 +199,7 @@
                                       创建者编码
                                   </div>
                                   <div class="col-sm-2" id="rfq-search5">
-                                      <input type="text" class="form-control" name="euser" placeholder="请输入" onclick="openInsertModal()" id="cjzcode">
+                                      <input type="text" class="form-control" name="euser_id" placeholder="请输入" onclick="openInsertModal()" id="cjzcode">
                                   </div>
 
                                       </div>
@@ -208,11 +209,10 @@
                                               创建时间
                                           </div>
                                           <div class="col-sm-2" id="rfq-search7">
-                                                  <select class="form-control">
+                                                  <select class="form-control" name="time">
                                                       <option>全部</option>
                                                       <option>近三月</option>
                                                       <option>近半年</option>
-                                                 
                                                     </select>
                                                   </div>
                                                   <div class="col-sm-1 col-sm-1 control-label" id="rfq-blank"></div>      
@@ -283,7 +283,9 @@
                     <div class="pull-right">国家：</div>
                     </label>
                 <div class="col-sm-5">
-                  <select class="form-control"  name="country" id="country"></select>
+                  <select class="form-control"  name="country" id="country">
+                    <option value="">请选择国家</option>
+                  </select>
                 </div>
                 
             </div>
@@ -293,14 +295,40 @@
                   <div class="pull-right">公司编码：</div>
                   </label>
               <div class="col-sm-5">
-                  <select class="form-control"  name="company" id="company"></select>
+                  <select class="form-control"  name="company" id="company">
+                    <option value="">请选择公司</option>
+                  </select>
+                  </select>
               </div>
               <div class="col-sm-2">
               <input type="submit"  class="btn btn-theme02">
               </div>
           </div>
+          <script>
+            $(document).ready(function() {
+            $.ajax({
+                url: '{% url "MM:get_countries_and_companies" %}',
+                method: 'GET',
+                success: function(data) {
+                    var countrySelect = $('#country');
+                    var companySelect = $('#company'); 
 
+                    data.countries.forEach(function(country) {
+                        countrySelect.append('<option value="' + country + '">' + country + '</option>');
+                    });
+
+                    data.companies.forEach(function(companyCode) {
+                        companySelect.append('<option value="' + companyCode + '">' + companyCode + '</option>');
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX请求失败：', status, error);
+                }
+            });
+        });
+        </script>
         </form>
+
         <table  class="table table-bordered table-striped table-condensed">
           *双击填入编号                                       
           <thead>
@@ -309,6 +337,7 @@
               <th> 供应商编号</th>
               <th> 供应商名称</th>
               <th> 所在城市</th>
+              <th> 国家</th>
               <th> 公司编码</th>
               <th> 创建者编号</th>
           </tr>
@@ -339,7 +368,7 @@
                         var i;
                         for(i = 0; i < dataObj.length; i++) {
                             fields = dataObj[i].fields
-                            out += '<tr><td>'+ dataObj[i].pk+ '</td><td>' + fields.vname+ '</td><td>' + fields.city+ '</td><td>' + fields.country+ '</td><td>'+ fields.euser+ '</td><tr>';
+                            out += '<tr><td>'+ dataObj[i].pk+ '</td><td>' + fields.vname+ '</td><td>' + fields.city+ '</td><td>' + fields.country+ '</td><td>'+ fields.companyCode+ '</td><td>'+ fields.euser+ '</td><tr>';
                         }
                         document.getElementById("searchDiv").innerHTML=out;
                     },
@@ -374,7 +403,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title" id="myModalLabel">搜索商品编号</h4>
+          <h4 class="modal-title" id="myModalLabel_1">搜索商品编号</h4>
         </div>
         <div class="modal-body">
           <!-- Hi there, I am a Modal Example for Dashgum Admin Panel. -->
@@ -461,7 +490,7 @@
                     <div class="pull-right">创建者编号：</div>
                     </label>
                 <div class="col-sm-5">
-                    <input name="uid" id="uid" type="text" class="form-control">
+                    <input name="uid" id="uid_1" type="text" class="form-control">
                 </div>
                 <div class="col-sm-2">
                     <input type="submit"  class="btn btn-theme02">
@@ -575,11 +604,11 @@
                             </tr>
                             </thead>
                             <tbody>
-                                {% for c in vendorid %}
+                                {% for c in quotations %}
                             <tr>
                                 <td>{{c.id}}</td>
                                 <td>{{c.euser_id}}</td>
-                                <td>{{c.ri__meterial__material_id}}</td>
+                                <td>{{c.ri__meterial_id}}</td>
                                 <td>{{c.vendor_id}}</td>
                                 <td>{{c.time}}</td>
                                 <td>

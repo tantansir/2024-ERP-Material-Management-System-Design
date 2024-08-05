@@ -44,6 +44,7 @@ urlpatterns = [
     path('api/vendor/search/', vendor_api.search_vendor, name='ajax_search_vendor'),
     path('api/vendor/create/', vendor_api.create_vendor, name='ajax_create_vendor'),
     path('api/vendor/score/', vendor_api.search_vendor_history, name='ajax_search_vendor_history'),
+    path('api/vendor/search_info/', vendor_api.get_countries_and_companies, name='get_countries_and_companies'),
     ## material
     path('api/material/item/search/', material_api.search_item, name='ajax_search_item'),
     path('api/material/item/update/', material_api.update_item, name='ajax_update_item'),

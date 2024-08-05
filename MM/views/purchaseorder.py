@@ -8,7 +8,8 @@ from django import forms
 from django.contrib.auth.decorators import login_required
 from django import forms
 from django.views.decorators.csrf import csrf_exempt
-
+from django.utils import timezone
+from datetime import timedelta
 from .auxiliary import getRegex
 
 
@@ -201,7 +202,8 @@ def modifyone(request: HttpRequest, pk):
 """
 重写方法
 """
-from datetime import date, datetime
+
+
 
 class ComplexEncoder(json.JSONEncoder):
     def default(self, obj):
@@ -683,6 +685,8 @@ def searchqo(request):
         vendorid = list(vendorid)
         return render(request, '../templates/quotation/vendor_quotation.html', locals())
     if request.method == "POST":
+        '''for i in request:
+            print(i)
         id = request.POST.get("id")
         print(id)
         ven = request.POST.get("ven")
@@ -692,12 +696,22 @@ def searchqo(request):
         eu = request.POST.get("euser")
         print(eu)
         collNo = request.POST.get("collNo")
-        print(collNo)
-        vendorid = Quotation.objects.filter(id=id,vendor_id=ven,
-                                                euser_id=eu,collNo=collNo
-                                                ).values("id","euser_id","ri__meterial__material_id","vendor_id","time")
-        print(vendorid)
-        vendorid = list(vendorid)
+        print(collNo)'''
+        queryDict={}
+        for i in request.POST.items():
+            if i[1] is not None and len(i[1])>0 and i[0]!='material_id' and i[0]!='time':
+                queryDict[i[0]]=i[1]
+        if len(request.POST.get('material_id'))>0:
+            queryDict['ri__meterial_id']=request.POST.get('material_id')
+        if request.POST.get('time')=='近三月':
+            queryDict['time__gte'] = timezone.now()-timedelta(days=90)
+        elif request.POST.get('time')=='近半年':
+            queryDict['time__gte'] = timezone.now() - timedelta(days=180)
+
+        print(queryDict)
+        quotations = Quotation.objects.filter(**queryDict).values("id", "euser_id", "ri__meterial_id", "vendor_id", "time")
+        quotations=list(quotations)
+        print(quotations)
         return render(request, '../templates/quotation/vendor_quotation.html', locals())
 
 
