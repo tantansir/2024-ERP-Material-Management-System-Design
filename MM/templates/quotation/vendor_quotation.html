@@ -64,7 +64,8 @@
         <div class="nav notify-row" id="top_menu">
             <!--  notification start -->
         
-    </header>
+        </div>
+        </header>
   <!--header end-->
   
   <!-- **********************************************************************************************************************************************************
@@ -174,7 +175,7 @@
                                       供应商编码
                                   </div>
                                   <div class="col-sm-2" id="rfq-search3">
-                                      <input type="text" class="form-control"name="ven" id="gyscode"  placeholder="请输入" >
+                                      <input type="text" class="form-control"name="vendor_id" id="gyscode"  placeholder="请输入" >
                                       <button type="button" class="btn btn-link " data-toggle="modal" data-target="#myModalgys">忘记编号？</button>
       
                                   </div>
@@ -182,7 +183,7 @@
                                       商品编码
                                   </div>
                                   <div class="col-sm-2" id="rfq-search4">
-                                      <input type="text" class="form-control"name="mate" placeholder="请输入" id="spcode">
+                                      <input type="text" class="form-control"name="material_id" placeholder="请输入" id="spcode">
                                       <button type="button" class="btn btn-link " data-toggle="modal" data-target="#myModalgood">忘记编号？</button>
                                   </div>
                                   </div>
@@ -198,7 +199,7 @@
                                       创建者编码
                                   </div>
                                   <div class="col-sm-2" id="rfq-search5">
-                                      <input type="text" class="form-control" name="euser" placeholder="请输入" onclick="openInsertModal()" id="cjzcode">
+                                      <input type="text" class="form-control" name="euser_id" placeholder="请输入" onclick="openInsertModal()" id="cjzcode">
                                   </div>
 
                                       </div>
@@ -212,7 +213,6 @@
                                                       <option>全部</option>
                                                       <option>近三月</option>
                                                       <option>近半年</option>
-                                                 
                                                     </select>
                                                   </div>
                                                   <div class="col-sm-1 col-sm-1 control-label" id="rfq-blank"></div>      
@@ -575,11 +575,11 @@
                             </tr>
                             </thead>
                             <tbody>
-                                {% for c in vendorid %}
+                                {% for c in quotations %}
                             <tr>
                                 <td>{{c.id}}</td>
                                 <td>{{c.euser_id}}</td>
-                                <td>{{c.ri__meterial__material_id}}</td>
+                                <td>{{c.ri__meterial_id}}</td>
                                 <td>{{c.vendor_id}}</td>
                                 <td>{{c.time}}</td>
                                 <td>

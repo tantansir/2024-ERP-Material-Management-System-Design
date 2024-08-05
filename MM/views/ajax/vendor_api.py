@@ -82,6 +82,7 @@ def search_vendor_history(request: HttpRequest):
 
 @login_required
 def search_vendor(request: HttpRequest):
+    print("search vendor")
     if request.method != 'POST':
         return HttpResponse(status=405)
     post = request.POST

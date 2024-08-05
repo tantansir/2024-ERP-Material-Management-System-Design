@@ -80,9 +80,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         # 'NAME': BASE_DIR / 'db.sqlite3',
         'NAME': 'erp_test',
-        'USER': 'MMTEAM',
-        'PASSWORD': 'mmteam',
-        'HOST': '121.37.157.250',
+        'USER': 'root',
+        'PASSWORD': 'zfc20021122',
+        'HOST': '127.0.0.1',
     }
 }
 

@@ -4,16 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2d172b04-ded4-4401-a492-59ea729722fa" name="更改" comment="更改md文档">
+    <list default="true" id="2d172b04-ded4-4401-a492-59ea729722fa" name="更改" comment="add .gitignore">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/mm_erp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/mm_erp.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MM/templates/receipt/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/receipt/create.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MM/templates/receipt/create2.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/receipt/create2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MM/templates/receipt/display.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/receipt/display.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MM/templates/receipt/order.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/receipt/order.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MM/templates/receipt/orders.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/receipt/orders.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MM/templates/receipt/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/receipt/search.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MM/templates/user/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/user/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MM/templates/vendor/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/vendor/create.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ERP/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/ERP/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/quotation/RFQ.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/quotation/RFQ.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/quotation/vendor_quotation.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/quotation/vendor_quotation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/views/ajax/vendor_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/MM/views/ajax/vendor_api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/views/purchaseorder.py" beforeDir="false" afterPath="$PROJECT_DIR$/MM/views/purchaseorder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/views/quotation.py" beforeDir="false" afterPath="$PROJECT_DIR$/MM/views/quotation.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +35,10 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: -1
+}</component>
   <component name="ProjectId" id="2k32FCtr5eAguiM42blLPCQkkw1" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -45,13 +49,14 @@
     &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
     &quot;last_opened_file_path&quot;: &quot;D:/lterm/mmerp&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>

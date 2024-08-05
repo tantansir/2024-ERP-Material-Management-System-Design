@@ -395,18 +395,11 @@ def getall(request):
         print(quoatations)
         return render(request, '../templates/quotation/RFQ.html',locals())
     if request.method == "POST":
-        id = request.POST.get("id")
-        euserid = request.POST.get("euserid")
-        vendorvid = request.POST.get("vendorvid")
-        riid = request.POST.get("riid")
-        collNo = request.POST.get("collNo")
-        quoatations = Quotation.objects.filter(id = id,
-                                             ri_id=riid,
-                                             vendor_id=vendorvid,
-                                             euser_id=euserid,
-                                             collNo=collNo
-                                             ).values()
-        print(quoatations)
+        queryDict={}
+        for i in request.POST.items():
+            if i[1] is not None and len(i[1])>0:
+                queryDict[i[0]]=i[1]
+        quoatations = Quotation.objects.filter(**queryDict).values()
         if quoatations:
             quoatations = list(quoatations)
             return render(request, '../templates/quotation/RFQ.html', locals())
