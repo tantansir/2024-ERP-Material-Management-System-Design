@@ -209,7 +209,7 @@
                                               创建时间
                                           </div>
                                           <div class="col-sm-2" id="rfq-search7">
-                                                  <select class="form-control">
+                                                  <select class="form-control" name="time">
                                                       <option>全部</option>
                                                       <option>近三月</option>
                                                       <option>近半年</option>
@@ -283,7 +283,9 @@
                     <div class="pull-right">国家：</div>
                     </label>
                 <div class="col-sm-5">
-                  <select class="form-control"  name="country" id="country"></select>
+                  <select class="form-control"  name="country" id="country">
+                    <option value="">请选择国家</option>
+                  </select>
                 </div>
                 
             </div>
@@ -293,14 +295,40 @@
                   <div class="pull-right">公司编码：</div>
                   </label>
               <div class="col-sm-5">
-                  <select class="form-control"  name="company" id="company"></select>
+                  <select class="form-control"  name="company" id="company">
+                    <option value="">请选择公司</option>
+                  </select>
+                  </select>
               </div>
               <div class="col-sm-2">
               <input type="submit"  class="btn btn-theme02">
               </div>
           </div>
+          <script>
+            $(document).ready(function() {
+            $.ajax({
+                url: '{% url "MM:get_countries_and_companies" %}',
+                method: 'GET',
+                success: function(data) {
+                    var countrySelect = $('#country');
+                    var companySelect = $('#company'); 
 
+                    data.countries.forEach(function(country) {
+                        countrySelect.append('<option value="' + country + '">' + country + '</option>');
+                    });
+
+                    data.companies.forEach(function(companyCode) {
+                        companySelect.append('<option value="' + companyCode + '">' + companyCode + '</option>');
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX请求失败：', status, error);
+                }
+            });
+        });
+        </script>
         </form>
+
         <table  class="table table-bordered table-striped table-condensed">
           *双击填入编号                                       
           <thead>
@@ -374,7 +402,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title" id="myModalLabel">搜索商品编号</h4>
+          <h4 class="modal-title" id="myModalLabel_1">搜索商品编号</h4>
         </div>
         <div class="modal-body">
           <!-- Hi there, I am a Modal Example for Dashgum Admin Panel. -->
@@ -461,7 +489,7 @@
                     <div class="pull-right">创建者编号：</div>
                     </label>
                 <div class="col-sm-5">
-                    <input name="uid" id="uid" type="text" class="form-control">
+                    <input name="uid" id="uid_1" type="text" class="form-control">
                 </div>
                 <div class="col-sm-2">
                     <input type="submit"  class="btn btn-theme02">

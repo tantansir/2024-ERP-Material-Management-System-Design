@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render
-from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.contrib import auth, messages
 from django import forms
@@ -145,3 +145,11 @@ def update_vendor(request: HttpRequest):
         return HttpResponse(json.dumps({'status':0, 'message':"表单填写错误！", 'fields':error_fields}))
     vendor.save()
     return HttpResponse(json.dumps({'status':1, 'message':"供应商信息已更新！"}))
+
+@login_required
+def get_countries_and_companies(request):
+    print('****************')
+    return JsonResponse({
+        'countries':list(Vendor.objects.values_list('country', flat=True).distinct()),
+        'companies':list(Vendor.objects.values_list('companyCode', flat=True).distinct())
+    })

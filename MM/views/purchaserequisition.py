@@ -557,11 +557,13 @@ def quomodify(request: HttpRequest, pk):
         zuoceinfo = list(zuoceinfo)
         caigou = RequisitionItem.objects.filter(id = riid).values("meterial__stock__id","meterial__stock__pOrg",
                                                                   "meterial__stock__pGrp","meterial__material__id",
-                                                                  "meterial__stock__name","meterial__sloc")
+                                                                  "meterial__stock__name","meterial__sloc","quantity")
 
 
         vendor = list(vendor)
-        baojia  =Quotation.objects.filter(id = pk).values("price","validTime")
+        baojia  =Quotation.objects.filter(id = pk).values("price","validTime","quantity")
+        for i in baojia:
+            i['sum']=i['quantity']*i['price']
         baojia = list(baojia)
         caigou = list(caigou)
         quotation = list(quotation)
@@ -617,16 +619,18 @@ def quomodify(request: HttpRequest, pk):
         zuoceinfo = list(zuoceinfo)
         caigou = RequisitionItem.objects.filter(id=riid).values("meterial__stock__id", "meterial__stock__pOrg",
                                                                 "meterial__stock__pGrp", "meterial__material__id",
-                                                                "meterial__stock__name", "meterial__sloc")
+                                                                "meterial__stock__name", "meterial__sloc",
+                                                                "quantity")
 
         vendor = list(vendor)
-        baojia = Quotation.objects.filter(id=pk).values("price", "validTime")
+        baojia = Quotation.objects.filter(id=pk).values("price", "validTime","quantity")
+        for i in baojia:
+            i['sum']=i['quantity'] * i['price']
         baojia = list(baojia)
         caigou = list(caigou)
         quotation = list(quotation)
         for i in requisitionItem:
             i['price'] = price
-            i['sum'] = i['quantity'] * i['price']
         requisitionItem = list(requisitionItem)
         quotation = list(quotation)
         print(caigou)
