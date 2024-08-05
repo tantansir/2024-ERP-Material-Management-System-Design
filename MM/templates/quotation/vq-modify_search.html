@@ -28,9 +28,6 @@
     </script>
 
     <script src="{% static 'assets/dist/notice.min.js' %}"></script>
-    <script>
-        const notice = new Notice();
-    </script>
     <script src="{% static 'assets/js/main.js' %}"></script>
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'assets/dist/notice.min.css' %}">
@@ -236,7 +233,7 @@
               </tbody>
           </table>
 
-          <script>   //不需要提交表单，点击input框加载modal直接列出创建者编码
+          <!--script>   //不需要提交表单，点击input框加载modal直接列出创建者编码
               $('').on('', function(e) {
                   e.preventDefault();
                   $.ajax(
@@ -266,7 +263,7 @@
                   
               })
               
-          </script>
+          </script-->
           
           </div>
           <div class="modal-footer">
@@ -439,6 +436,7 @@
               <th> 供应商编号</th>
               <th> 供应商名称</th>
               <th> 所在城市</th>
+              <th> 国家</th>
               <th> 公司编码</th>
               <th> 创建者编号</th>
           </tr>
@@ -469,7 +467,7 @@
                         var i;
                         for(i = 0; i < dataObj.length; i++) {
                             fields = dataObj[i].fields
-                            out += '<tr><td>'+ dataObj[i].pk+ '</td><td>' + fields.vname+ '</td><td>' + fields.city+ '</td><td>' + fields.country+ '</td><td>'+ fields.euser+ '</td><tr>';
+                            out += '<tr><td>'+ dataObj[i].pk+ '</td><td>' + fields.vname+ '</td><td>' + fields.city+ '</td><td>' + fields.country+ '</td><td>'+ fields.companyCode+ '</td><td>'+ fields.euser+ '</td><tr>';
                         }
                         document.getElementById("searchDiv").innerHTML=out;
                     },

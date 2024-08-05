@@ -260,6 +260,18 @@
             <div class="form-group">
                 <!-- <label class="col-sm-1 col-sm-1 control-label"></label> -->
                 <label class="col-sm-4 col-sm-4 control-label">
+                    <div class="pull-right">国家：</div>
+                    </label>
+                <div class="col-sm-5">
+                  <select class="form-control"  name="country" id="country">
+                    <option value="">请选择国家</option>
+                  </select>
+                </div>
+                
+            </div>
+            <div class="form-group">
+                <!-- <label class="col-sm-1 col-sm-1 control-label"></label> -->
+                <label class="col-sm-4 col-sm-4 control-label">
                     <div class="pull-right">公司编码：</div>
                     </label>
                 <div class="col-sm-5">
@@ -304,6 +316,7 @@
               <th> 供应商编号</th>
               <th> 供应商名称</th>
               <th> 所在城市</th>
+              <th> 国家</th>
               <th> 公司编码</th>
               <th> 创建者编号</th>
           </tr>
@@ -334,7 +347,7 @@
                         var i;
                         for(i = 0; i < dataObj.length; i++) {
                             fields = dataObj[i].fields
-                            out += '<tr><td>'+ dataObj[i].pk+ '</td><td>' + fields.vname+ '</td><td>' + fields.city+ '</td><td>' + fields.country+ '</td><td>'+ fields.euser+ '</td><tr>';
+                            out += '<tr><td>'+ dataObj[i].pk+ '</td><td>' + fields.vname+ '</td><td>' + fields.city+ '</td><td>' + fields.country+ '</td><td>'+ fields.companyCode+ '</td><td>'+ fields.euser+ '</td><tr>';
                         }
                         document.getElementById("searchDiv").innerHTML=out;
                     },

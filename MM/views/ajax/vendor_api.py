@@ -92,7 +92,8 @@ def search_vendor(request: HttpRequest):
         uid = getPk(post.get('uid'), 'U')
         city = getRegex(post.get('city'))
         country = getRegex(post.get('country'))
-        companyCode = getRegex(post.get('company'))
+        companyCode = getRegex(post.get('companyCode'))
+        print(companyCode)
         vendors = Vendor.objects.filter(
             vname__regex=vname, euser__uid__regex=uid, city__regex=city,
             country__regex=country, companyCode__regex=companyCode
@@ -148,7 +149,6 @@ def update_vendor(request: HttpRequest):
 
 @login_required
 def get_countries_and_companies(request):
-    print('****************')
     return JsonResponse({
         'countries':list(Vendor.objects.values_list('country', flat=True).distinct()),
         'companies':list(Vendor.objects.values_list('companyCode', flat=True).distinct())
