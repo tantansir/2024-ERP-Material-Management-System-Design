@@ -292,7 +292,7 @@
 
         {% comment %} <textarea id="item_result"></textarea> {% endcomment %}
 
-        <script>
+<script>
 $(document).ready(function () {
     // 编号搜索
     $('#material1').on('submit', function(e) {
@@ -349,15 +349,8 @@ $(document).ready(function () {
         document.getElementById("materialInput1").value = $(this).find('td').eq(0).text();
         $('#myModal1').modal('hide');
     });
-});
 
-
-    </script>
-
-<script>
-        $(document).ready(function() {
-
-            $.ajax({
+    $.ajax({
                 type: "post",
                 url: "{% url 'MM:ajax_load_country' %}",
                 data: {
@@ -404,20 +397,9 @@ $(document).ready(function () {
                 }
             });
 
+});
 
-        </script>
-
-        <!-- 确认提示 -->
-        <script>
-            function tip(){
-                if(confirm("您确认修改吗？")){
-                return true;
-                }
-                else{
-                return false;
-                }
-            } 
-        </script>
+</script>
 
 
     </body>

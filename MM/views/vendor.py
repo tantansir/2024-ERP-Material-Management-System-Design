@@ -5,6 +5,7 @@ from django.contrib import auth, messages
 from django import forms
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from django.core.exceptions import ValidationError
 
 from ..models import EUser, Vendor
 from .auxiliary import *
@@ -17,7 +18,6 @@ def create(request: HttpRequest):
             template_name='../templates/vendor/create.html',
         )
     elif request.method == 'POST':
-        # 获取POST数据
         vname = request.POST.get('vname')
         city = request.POST.get('city')
         address = request.POST.get('address')
@@ -31,6 +31,10 @@ def create(request: HttpRequest):
         companyCode = request.POST.get('companyCode')
         pOrg = request.POST.get('pOrg')
         currency = request.POST.get('currency')
+
+        # 检查供应商名称是否重复
+        if Vendor.objects.filter(vname=vname).exists():
+            return JsonResponse({"status": 0, "message": "供应商名称已存在，请更换名称"}, status=400)
 
         # 数据验证
         missing_fields = []
@@ -47,10 +51,7 @@ def create(request: HttpRequest):
             return JsonResponse({"status": 0, "message": f"缺少必要字段: {', '.join(missing_fields)}"}, status=400)
 
         try:
-            # 获取当前登录用户的EUser实例
             euser = EUser.objects.get(pk=request.user.pk)
-
-            # 创建供应商对象
             vendor = Vendor.objects.create(
                 euser=euser,
                 vname=vname,
@@ -68,20 +69,16 @@ def create(request: HttpRequest):
                 currency=currency
             )
             vendor.save()
-            messages.success(request, "Successfully created!")
-            return redirect('MM:display_vendor', pk=vendor.pk)
+            return JsonResponse({"status": 1, "message": "Successfully created!", "vendor_id": vendor.pk, "from_create": True})
         except EUser.DoesNotExist:
-            messages.error(request, "当前用户没有关联的EUser实例")
-            return render(request, 'vendor/create.html', {
-                'form': request.POST,
-            })
+            return JsonResponse({"status": 0, "message": "当前用户没有关联的EUser实例"}, status=400)
+        except ValidationError as e:
+            return JsonResponse({"status": 0, "message": f"创建供应商时出错: {str(e)}"}, status=400)
         except Exception as e:
-            messages.error(request, f"创建供应商时出错: {str(e)}")
-            return render(request, 'vendor/create.html', {
-                'form': request.POST,
-            })
+            return JsonResponse({"status": 0, "message": f"创建供应商时出错: {str(e)}"}, status=400)
     else:
-        return HttpResponse(status=405)
+        return JsonResponse({"status": 0, "message": "请求方法不允许"}, status=405)
+
 
 @login_required
 def search(request: HttpRequest):
@@ -142,29 +139,31 @@ def search(request: HttpRequest):
 @login_required
 def display(request, pk):
     vendor = get_object_or_404(Vendor, pk=pk)
+    from_create = request.GET.get('from_create', 'false').lower() == 'true'
     if request.method == 'GET':
-        return render(request, '../templates/vendor/display.html', {'vendor': vendor})
+        return render(request, '../templates/vendor/display.html', {'vendor': vendor, 'from_create': from_create})
     elif request.method == 'POST':
         try:
             vendor.vname = request.POST.get('vname')
             vendor.city = request.POST.get('city')
-            vendor.address = request.POST.get('address')
+            vendor.address = request.POST.get('address') or None
             vendor.postcode = request.POST.get('postcode')
             vendor.country = request.POST.get('country')
             vendor.language = request.POST.get('language')
             vendor.glAcount = request.POST.get('glAcount')
-            vendor.phone = request.POST.get('phone')
-            vendor.fax = request.POST.get('fax')
-            vendor.tpType = request.POST.get('tpType')
+            vendor.phone = request.POST.get('phone') or None
+            vendor.fax = request.POST.get('fax') or None
+            vendor.tpType = request.POST.get('tpType') or None
             vendor.companyCode = request.POST.get('companyCode')
             vendor.pOrg = request.POST.get('pOrg')
-            vendor.currency = request.POST.get('currency')
+            vendor.currency = request.POST.get('currency') or None
             vendor.save()
             return JsonResponse({'status': 1, 'message': "Successfully updated!"})
         except Exception as e:
             return JsonResponse({'status': 0, 'message': f"Error: {str(e)}"})
     else:
         return HttpResponse(status=405)
+
 
 @login_required
 def history(request: HttpRequest):

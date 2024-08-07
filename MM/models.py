@@ -11,12 +11,12 @@ def validate_phone(string):
     if string[0] != '1':
         raise ValidationError("Enter a valid phone number beginning with '1'.")
     for s in string:
-        if not s.isdigit(s):
+        if not s.isdigit():
             raise ValidationError("There is a character in the phone number.")
 
 def validate_digit(string):
     for s in string:
-        if not s.isdigit(s):
+        if not s.isdigit():
             raise ValidationError("There is a non-digit character in fax.")
 
 class EUser(User):

@@ -129,7 +129,7 @@
                                             <div class="pull-right">电话： </div>
                                         </label>
                                         <div class="col-sm-7">
-                                            <input class="form-control" type="text" id='phone2'>
+                                            <input class="form-control" type="text" name="phone" id='phone2'>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -137,7 +137,7 @@
                                             <div class="pull-right">传真：</div>
                                         </label>
                                         <div class="col-sm-7">
-                                            <input class="form-control" type="text" id='fax2'>
+                                            <input class="form-control" type="text" name="fax" id='fax2'>
                                         </div>
                                     </div>
                                     <h5 class='mb'><i class="fa fa-angle-right"></i>所在地</h5>
@@ -444,65 +444,69 @@
             }
 
         // 提交表单
-        $('#material3').on('submit', function(e) {
-            e.preventDefault();
-            let phone = $("#phone2").val();
-            let fax = $("#fax2").val();
-            let phoneError = validatePhoneNumber(phone);
-            let faxError = validateDigits(fax);
+    $('#material3').on('submit', function(e) {
+        e.preventDefault();
 
-            if (phoneError) {
-                alert(phoneError);
-                return;
-            }
-            if (faxError) {
-                alert(faxError);
-                return;
-            }
-            $.ajax({
-                type: "POST",
-                url: "{% url 'MM:ajax_create_vendor' %}",
-                data: {
-                    csrfmiddlewaretoken: '{{ csrf_token }}',
-                    vname: $("#vname2").val(),
-                    city: $("#city2").val(),
-                    address: $("#address2").val(),
-                    postcode: $("#postcode2").val(),
-                    country: $("#country2").val(),
-                    language: $("#language2").val(),
-                    glAcount: $("#glAcount2").val(),
-                    phone: phone,
-                    fax: fax,
-                    tpType: $("#tpType2").val(),
-                    companyCode: $("#company2").val(),
-                    pOrg: $("#pOrg2").val(),
-                    currency: $("#currency2").val()
-                },
-                success: function(data) {
-                    if (data.status == 1) {
-                        // 使用自定义提示框显示成功信息
-                        alert(data.message);
-                        // 修改成功后，将按钮恢复为“开始修改”，并将所有输入字段禁用
-                        $("input, select").prop("disabled", true);
-                        $("#submit-btn").text("开始修改");
-                        $("#submit-btn").attr("id", "edit-btn");
-                    } else {
-                        // 使用自定义提示框显示错误信息
-                        alert(data.message);
-                    }
-                },
-                error: function(xhr, status, error) {
-                    // 使用自定义提示框显示AJAX错误信息
+        let phone = $("#phone2").val();
+        let fax = $("#fax2").val();
+        let phoneError = validatePhoneNumber(phone);
+        let faxError = validateDigits(fax);
+
+        if (phoneError) {
+            alert(phoneError);
+            return;
+        }
+        if (faxError) {
+            alert(faxError);
+            return;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "{% url 'MM:create_vendor' %}",
+            data: {
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                vname: $("#vname2").val(),
+                city: $("#city2").val(),
+                address: $("#address2").val(),
+                postcode: $("#postcode2").val(),
+                country: $("#country2").val(),
+                language: $("#language2").val(),
+                glAcount: $("#glAcount2").val(),
+                phone: phone,
+                fax: fax,
+                tpType: $("#tpType2").val(),
+                companyCode: $("#company2").val(),
+                pOrg: $("#pOrg2").val(),
+                currency: $("#currency2").val()
+            },
+            success: function(data) {
+                if (data.status === 1) {
+                    alert(data.message);
+                    window.location.href = `/mm/vendor/display/${data.vendor_id}/?from_create=true`;
+                } else {
+                    alert(data.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                try {
+                    let response = JSON.parse(xhr.responseText);
+                    alert("AJAX error: " + response.message);
+                } catch (e) {
                     alert("AJAX error: " + xhr.responseText);
                 }
-            });
+            }
         });
+    });
 
-        function validatePhoneNumber(phone) {
-            if (phone.length != 11) {
+    function validatePhoneNumber(phone) {
+        if (!phone) {
+                return null; // Allow empty phone
+            }
+            if (phone.length !== 11) {
                 return "Enter a valid 11-digit phone number.";
             }
-            if (phone[0] != '1') {
+            if (phone[0] !== '1') {
                 return "Enter a valid phone number beginning with '1'.";
             }
             for (let i = 0; i < phone.length; i++) {
@@ -510,17 +514,17 @@
                     return "There is a character in the phone number.";
                 }
             }
-            return null;
-        }
+        return null;
+    }
 
-        function validateDigits(string) {
-            for (let i = 0; i < string.length; i++) {
-                if (!string[i].match(/[0-9]/)) {
-                    return "There is a non-digit character in fax.";
-                }
+    function validateDigits(string) {
+        for (let i = 0; i < string.length; i++) {
+            if (!string[i].match(/[0-9]/)) {
+                return "There is a non-digit character in fax.";
             }
-            return null;
         }
+        return null;
+    }
 
         $(function() {
             $('select.styled').customSelect();
