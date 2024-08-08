@@ -417,30 +417,16 @@
         </script>
     <body>
         <section id="container" >
-            <!-- **********************************************************************************************************************************************************
-            TOP BAR CONTENT & NOTIFICATIONS
-            *********************************************************************************************************************************************************** -->
-            <!--header start-->
             <header class="header black-bg">
               <div class="sidebar-toggle-box">
                   <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
               </div>
-            <!--logo start-->
             <a href="index.html" class="logo"><b>MD集团物料管理系统</b></a>
-            <!--logo end-->
-            <div class="nav notify-row" id="top_menu">
-                <!--  notification start -->
             
         </header>
-      <!--header end-->
-      
-      <!-- **********************************************************************************************************************************************************
-      MAIN SIDEBAR MENU
-      *********************************************************************************************************************************************************** -->
-      <!--sidebar start-->
+
       <aside>
           <div id="sidebar"  class="nav-collapse ">
-              <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
                       
                   <p class="centered"><img src="/static/assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
@@ -837,15 +823,15 @@
                         
                         
                     },
-                    failure: function() {
-
+                    error: function(xhr, status, error) {
+                        console.error("AJAX error: ", status, error);
+                        alert("AJAX error: " + xhr.responseText);
                     }
                 })
             });
     
             $("table").on("dblclick","tr",function(e){
                 document.getElementById("materialInput1").value=$(this).find('td').eq(0).text();
-                
                 $('#myModal1').modal('hide');
             });
 
@@ -890,7 +876,9 @@
                         }
                         
                     },
-                    failure: function() {
+                    error: function(xhr, status, error) {
+                        console.error("AJAX error: ", status, error);
+                        alert("AJAX error: " + xhr.responseText);
 
                     }
                 })

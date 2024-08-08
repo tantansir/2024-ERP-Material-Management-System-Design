@@ -6,6 +6,7 @@ from django import forms
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.core.exceptions import ValidationError
+from django.db.models import Sum, Count, Avg
 
 from ..models import EUser, Vendor
 from .auxiliary import *
@@ -172,5 +173,35 @@ def history(request: HttpRequest):
             request=request,
             template_name='../templates/vendor/history.html'
         )
-    else:
-        return HttpResponse(status=405)
+    elif request.method == 'POST':
+        mid = request.POST.get('mid')
+        range_value = int(request.POST.get('range', 0))
+        w1 = int(request.POST.get('w1', 25))
+        w2 = int(request.POST.get('w2', 25))
+        w3 = int(request.POST.get('w3', 25))
+        w4 = int(request.POST.get('w4', 25))
+
+        # 处理时间范围
+        from datetime import datetime, timedelta
+        end_date = datetime.now()
+        if range_value == 1:
+            start_date = end_date - timedelta(days=180)  # 近半年
+        elif range_value == 2:
+            start_date = end_date - timedelta(days=90)  # 近三月
+        else:
+            start_date = datetime.min  # 全部
+
+        # 查询供应商的交易历史
+        vendor_history = Vendor.objects.filter(
+            purchaseorder__orderitem__goodreceipt__time__range=[start_date, end_date]
+        ).annotate(
+            total_amount=Sum('purchaseorder__orderitem__quantity'),
+            total_transactions=Count('purchaseorder__orderitem'),
+            average_score=Avg('purchaseorder__orderitem__qualityScore')
+        ).values('vid', 'vname', 'total_amount', 'total_transactions', 'average_score')
+
+        result = list(vendor_history)
+
+        return JsonResponse(result, safe=False)
+
+    return render(request, 'vendor/history.html')

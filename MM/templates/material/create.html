@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -77,7 +75,7 @@
                 },
                 
                 success: function(data) {
-                    $('#test2').text(data);
+                    $('#test1').text(data);
                     //add：如果没有该工厂，回传回来一个message提示
                     var dataObj = eval("("+data+")");
                     //注意：plant选择空的时候，这三项也返回空
@@ -265,27 +263,14 @@ function re(){
 </script>
   <body>
     <section id="container" >
-        <!-- **********************************************************************************************************************************************************
-        TOP BAR CONTENT & NOTIFICATIONS
-        *********************************************************************************************************************************************************** -->
-        <!--header start-->
         <header class="header black-bg">
           <div class="sidebar-toggle-box">
               <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
           </div>
-        <!--logo start-->
+
         <a href="index.html" class="logo"><b>MD集团物料管理系统</b></a>
-        <!--logo end-->
-        <div class="nav notify-row" id="top_menu">
-            <!--  notification start -->
-        
     </header>
-  <!--header end-->
-  
-  <!-- **********************************************************************************************************************************************************
-  MAIN SIDEBAR MENU
-  *********************************************************************************************************************************************************** -->
-  <!--sidebar start-->
+
   <aside>
       <div id="sidebar"  class="nav-collapse ">
           <!-- sidebar menu start-->
@@ -358,15 +343,7 @@ function re(){
       </div>
   </aside>
   </section> 
-      <!-- **********************************************************************************************************************************************************
-      MAIN CONTENT
-      *********************************************************************************************************************************************************** -->
-      
-        
-        <!-- **********************************************************************************************************************************************************
-        MAIN CONTENT
-        *********************************************************************************************************************************************************** -->
-        <!--main content start-->
+
         <section id="main-content">
             
             <section class="wrapper">
@@ -607,9 +584,9 @@ function re(){
                            
                             <div class="col-sm-10"></div>
                             <button class="btn btn-theme04" type="reset">重置</button>
-                            <button class="btn btn-primary" type="submit" formmethod="post" onclick="return tip()">提交</button>
-                            
-        {% comment %} <textarea id="test"></textarea> {% endcomment %}                          
+                            <button class="btn btn-primary" type="submit" formmethod="post">提交</button>
+
+                              {% comment %} <textarea id="test1"></textarea> {% endcomment %}
                         </form>
                     </div>
                     </div><!-- col-lg-12-->      	
@@ -848,9 +825,9 @@ function re(){
                                
                                 <div class="col-sm-10"></div>
                                 <button class="btn btn-theme04" onclick='re()'>返回</button>
-                                <button class="btn btn-primary" type="submit" formmethod="post" onclick="return tip()">提交</button>
+                                <button class="btn btn-primary" type="submit" formmethod="post">提交</button>
                                 
-            {% comment %} <textarea id="test"></textarea> {% endcomment %}    
+            {% comment %} <textarea id="test2"></textarea> {% endcomment %}
                             </form>               
                         </div>
                         </div><!-- col-lg-12-->      	
@@ -860,9 +837,7 @@ function re(){
                 </div><!-- /row -->          
           </section>
         
-        
-          
-        
+
            
       </section><!-- /MAIN CONTENT -->
         
@@ -874,7 +849,7 @@ function re(){
               <h4 class="modal-title" id="myModalLabel">搜索商品</h4>
             </div>
             <div class="modal-body">
-              <!-- Hi there, I am a Modal Example for Dashgum Admin Panel. -->
+
               <!-- 搜索条件 -->
               <form  id="material2" class="form-horizontal style-form">
                 <div class="form-group">
@@ -997,10 +972,7 @@ function re(){
         </div>
       </div>
     </div>
-        <!--main content end-->
-        <!--footer start-->
-       
-        <!--footer end-->
+
     </section>
       
     <script>
@@ -1201,25 +1173,6 @@ function re(){
 
     </script>
 
-    <!-- 确认提示 -->
-    <script>
-        function tip(){
-            if(confirm("您确认修改吗？")){
-            return true;
-            }
-            else{
-            return false;
-            }
-        } ;
-        
-
-    </script>
-
-    <!-- 下拉框ajax -->
-    
-
-    
-  
   </body>
 </html>
 
