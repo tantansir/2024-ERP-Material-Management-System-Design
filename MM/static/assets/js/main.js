@@ -10,6 +10,7 @@ const showLoading = (options) => {
     },3000)
 }
 
-const showMessage = (options) => {
-    notice.showToast(options);
-}
+//const showMessage = (options) => {
+
+  //  notice.showToast(options);
+//}

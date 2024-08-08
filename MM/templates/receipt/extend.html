@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MM</title>
+    <title>收货管理</title>
     {% load static %}
     <!-- CSS -->
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
@@ -41,12 +40,10 @@
     <script class="include" type="text/javascript" src="{% static 'assets/js/jquery.dcjqaccordion.2.7.js' %}"></script>
     <!-- 通知插件 -->
     <script src="{% static 'assets/js/notice.min.js' %}"></script>
-
     <!-- 图表与可视化库 -->
     <script src="{% static 'assets/js/chart-master/Chart.js' %}"></script>
     <script src="{% static 'assets/js/echarts.js' %}"></script>
     <script src="{% static 'assets/js/sparkline-chart.js' %}"></script>
-
     <!-- 代码高亮 -->
     <script src="{% static 'assets/js/highlight.min.js' %}"></script>
 
@@ -151,20 +148,24 @@
 
 {% endblock %}
 <script>
+    hljs.highlightAll();
+</script>
+
+<!--通知窗口-->
+<script>
         const showMessage = (options) => {
         notice=new Notice();
         notice.showToast(options);
         }
 </script>
 
+
 <!-- 项目自定义脚本 -->
 <script src="{% static 'assets/js/main.js' %}"></script>
 <script src="{% static 'assets/js/common-scripts.js' %}"></script>
 
 <!-- Custom scripts -->
-<script>
-    hljs.highlightAll();
-</script>
+
 
 
 {% block js %}
