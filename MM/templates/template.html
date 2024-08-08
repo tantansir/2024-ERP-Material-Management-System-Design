@@ -15,14 +15,12 @@
     <link rel="stylesheet" type="text/css" href="{% static 'assets/lineicons/style.css' %}">
     <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
     <link href="{% static 'assets/css/style-responsive.css' %}" rel="stylesheet">
-    <link href="{% static 'assets/dist/notice.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/notice.min.css' %}" rel="stylesheet">
     <link href="{% static 'assets/css/default.min.css' %}" rel="stylesheet">
     <link href="{% static 'assets/css/the-datepicker.css' %}" rel="stylesheet">
     <link href="{% static 'assets/css/purchase.css' %}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'assets/fonts/icon1/iconfont.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/js/bootstrap-datepicker/css/datepicker.css' %}"/>
-    <link rel="stylesheet" type="text/css"
-          href="{% static 'assets/js/bootstrap-daterangepicker/daterangepicker.css' %}"/>
+
 
     <!-- JS -->
     <!-- 基础库 -->
@@ -42,7 +40,7 @@
     <script src="{% static 'assets/js/the-datepicker.js' %}"></script>
     <script class="include" type="text/javascript" src="{% static 'assets/js/jquery.dcjqaccordion.2.7.js' %}"></script>
     <!-- 通知插件 -->
-    <script src="{% static 'assets/dist/notice.min.js' %}"></script>
+    <script src="{% static 'assets/js/notice.min.js' %}"></script>
 
     <!-- 图表与可视化库 -->
     <script src="{% static 'assets/js/chart-master/Chart.js' %}"></script>
@@ -152,7 +150,12 @@
 {% block main_content %}
 
 {% endblock %}
-
+<script>
+        const showMessage = (options) => {
+        notice=new Notice();
+        notice.showToast(options);
+        }
+</script>
 
 <!-- 项目自定义脚本 -->
 <script src="{% static 'assets/js/main.js' %}"></script>
@@ -162,9 +165,7 @@
 <script>
     hljs.highlightAll();
 </script>
-<script>
-    const notice = new Notice();
-</script>
+
 
 {% block js %}
 {% endblock %}
