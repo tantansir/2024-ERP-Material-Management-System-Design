@@ -4,14 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2d172b04-ded4-4401-a492-59ea729722fa" name="更改" comment="add .gitignore">
+    <list default="true" id="2d172b04-ded4-4401-a492-59ea729722fa" name="更改" comment="更改md文档">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/mm_erp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/mm_erp.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ERP/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/ERP/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/purchaserequisition/create-new.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/purchaserequisition/create-new.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/purchaserequisition/pr-info.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/purchaserequisition/pr-info.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/purchaserequisition/pr-modify copy.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/purchaserequisition/pr-modify copy.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/purchaserequisition/pr-modify(1).html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/purchaserequisition/pr-modify(1).html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/purchaserequisition/pr-modify-deleted.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/purchaserequisition/pr-modify-deleted.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/purchaserequisition/pr_manage.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/purchaserequisition/pr_manage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/purchaserequisition/purchase_request.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/purchaserequisition/purchase_request.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/views/purchaserequisition.py" beforeDir="false" afterPath="$PROJECT_DIR$/MM/views/purchaserequisition.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -37,22 +50,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "D:/lterm/mmerp",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/mm_erp&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="ERP" type="Python.DjangoServer" factoryName="Django server">
       <module name="mm_erp" />
@@ -61,10 +74,9 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="D:\anaconda\envs\djangoProject\python.exe" />
-      <option name="SDK_NAME" value="Python 3.10 (djangoProject)" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="launchJavascriptDebuger" value="false" />
@@ -92,6 +104,13 @@
       <workItem from="1722503447491" duration="305000" />
       <workItem from="1722575003572" duration="3846000" />
       <workItem from="1722579945127" duration="2726000" />
+      <workItem from="1722951533212" duration="2128000" />
+      <workItem from="1722953744021" duration="148000" />
+      <workItem from="1722953907976" duration="86000" />
+      <workItem from="1722954473710" duration="1747000" />
+      <workItem from="1723019690711" duration="2960000" />
+      <workItem from="1723102123718" duration="16704000" />
+      <workItem from="1723175200521" duration="5454000" />
     </task>
     <task id="LOCAL-00001" summary="创建django项目">
       <option name="closed" value="true" />
