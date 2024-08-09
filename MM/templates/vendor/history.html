@@ -18,7 +18,7 @@
 <link href="{% static 'assets/css/bootstrap.css' %}" rel="stylesheet">
 <!--external css-->
 <link href="{% static 'assets/font-awesome/css/font-awesome.css' %}" rel="stylesheet" />
-    
+
 <!-- Custom styles for this template -->
 <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
 <link href="{% static 'assets/css/style-responsive.css' %}" rel="stylesheet">
@@ -57,8 +57,8 @@
     <script>
         //plant改变
         $(document).ready(function() {
-            $("#plant2").change(function(){ 
-                
+            $("#plant2").change(function(){
+
                 $.ajax({
                     type: "POST",
                     url: "{% url 'MM:ajax_getStockByName' %}",
@@ -67,7 +67,7 @@
                         //plant值
                         name:$("#plant2").val(),
                     },
-                    
+
                     success: function(data) {
                         $('#test2').text(data);
                         //add：如果没有该工厂，回传回来一个message提示
@@ -79,13 +79,13 @@
                         $("#company2").val(fields.companyCode);
                     },
                     failure: function() {
-    
+
                     }
                 });
-            
-            }); 
-            $("#plant3").change(function(){ 
-                
+
+            });
+            $("#plant3").change(function(){
+
                 $.ajax({
                     type: "POST",
                     url: "{% url 'MM:ajax_getStockByName' %}",
@@ -94,7 +94,7 @@
                         //plant值
                         name:$("#plant3").val(),
                     },
-                    
+
                     success: function(data) {
                         $('#test2').text(data);
                         //add：如果没有该工厂，回传回来一个message提示
@@ -106,11 +106,11 @@
                         $("#company3").val(fields.companyCode);
                     },
                     failure: function() {
-    
+
                     }
                 });
-            
-            }); 
+
+            });
             $.ajax({
                 type: "POST",
                 url: "{% url 'MM:ajax_load_sorg' %}",
@@ -127,10 +127,10 @@
                     var items=document.getElementsByName("sorg");
                     for(i = 0; i < items.length; i++) {
                         items[i].innerHTML=out;
-                    } 
+                    }
                 },
                 failure: function() {
-    
+
                 }
             });
             $.ajax({
@@ -146,7 +146,7 @@
                     for(i = 0; i < dataObj.length; i++) {
                         out += '<option value=' + dataObj[i].Meaunit+'>'+ dataObj[i].Meaunit + '--' + dataObj[i].Name + '</option>' ;
                     }
-                    
+
                     var items=document.getElementsByName("meaunit");
                     console.log(items);
                     for(i = 0; i < items.length; i++) {
@@ -154,10 +154,10 @@
                     }
                 },
                 failure: function() {
-    
+
                 }
             });
-            
+
             $.ajax({
                 type: "post",
                 url: "{% url 'MM:ajax_load_plant' %}",
@@ -179,7 +179,7 @@
                     }
                 },
                 failure: function() {
-    
+
                 }
             });
             $.ajax({
@@ -198,10 +198,10 @@
                     var items=document.getElementsByName("porg");
                     for(i = 0; i < items.length; i++) {
                         items[i].innerHTML=out;
-                    } 
+                    }
                 },
                 failure: function() {
-    
+
                 }
             });
             $.ajax({
@@ -220,10 +220,10 @@
                     var items=document.getElementsByName("company");
                     for(i = 0; i < items.length; i++) {
                         items[i].innerHTML=out;
-                    } 
+                    }
                 },
                 failure: function() {
-    
+
                 }
             });
             $.ajax({
@@ -242,13 +242,13 @@
                     var items=document.getElementsByName("pgrp");
                     for(i = 0; i < items.length; i++) {
                         items[i].innerHTML=out;
-                    }  
+                    }
                 },
                 failure: function() {
-    
+
                 }
             });
-            
+
         });
     function re(){
         document.getElementById("fu").style.display="none";
@@ -257,33 +257,33 @@
     </script>
     <script>
         $(function() {
-           
+
             $( "#slider1" ).slider({
-                
+
                 value: 25,
                 // 获取滑动条的值并且打印
-    
+
                 slide: function( event, ui ) {
                     $('#mem_num1').html($("#slider1").slider("value"));
                     $('#mem_num2').html($("#slider2").slider("value"));
                     $('#mem_num3').html($("#slider3").slider("value"));
                     $('#mem_num4').html($("#slider4").slider("value"));
-                    
+
                     var four=100-$("#slider1").slider("value")-$("#slider2").slider("value")-$("#slider3").slider("value");
                     var three=100-$("#slider1").slider("value")-$("#slider2").slider("value");
                     var two=100-$("#slider1").slider("value");
                     if(four>=0){
                         $("#slider4").slider("value", four);
-                        
+
                     }else if(three>=0){
                         $("#slider4").slider("value", 0);
                         $("#slider3").slider("value", three);
-                        
+
                     }else{
                         $("#slider4").slider("value", 0);
                         $("#slider3").slider("value", 0);
                         $("#slider2").slider("value", two);
-                        
+
                     }
                     $('#mem_num1').html($("#slider1").slider("value"));
                     $('#mem_num2').html($("#slider2").slider("value"));
@@ -294,11 +294,11 @@
 				 console.log("2:"+$("#slider2").slider("value"));
                  console.log("1:"+$("#slider1").slider("value"));
                 }
-                
+
             });
-            
+
             $( "#slider2" ).slider({
-                
+
                 value: 25,
                 slide: function( event, ui ) {
                     $('#mem_num1').html($("#slider1").slider("value"));
@@ -333,12 +333,12 @@
                     // console.log("4:"+four);
                     // console.log("3:"+three);
                     // console.log("2:"+one);
-                    
+
                 }
-                
+
             });
             $( "#slider3" ).slider({
-                
+
                 value: 25,
                 slide: function( event, ui ) {
                     $('#mem_num1').html($("#slider1").slider("value"));
@@ -370,14 +370,14 @@
                     $('#mem_num3').html($("#slider3").slider("value"));
                     $('#mem_num4').html($("#slider4").slider("value"));
                     }
-                    
+
                 }
-    
+
             });
             $( "#slider4" ).slider({
-                
+
                 value: 25,
-    
+
                 slide: function( event, ui ) {
                     $('#mem_num1').html($("#slider1").slider("value"));
                     $('#mem_num2').html($("#slider2").slider("value"));
@@ -408,11 +408,11 @@
                     $('#mem_num3').html($("#slider3").slider("value"));
                     $('#mem_num4').html($("#slider4").slider("value"));
                     }
-                    
+
                 }
-                
+
             });
-        
+
         });
         </script>
     <body>
@@ -422,23 +422,23 @@
                   <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
               </div>
             <a href="index.html" class="logo"><b>MD集团物料管理系统</b></a>
-            
+
         </header>
 
       <aside>
           <div id="sidebar"  class="nav-collapse ">
               <ul class="sidebar-menu" id="nav-accordion">
-                      
+
                   <p class="centered"><img src="/static/assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
                   <h5 class="centered">物料管理</h5>
-                      
+
                 <li class="mt">
                     <a href="/mm/home/">
                         <i class="fa fa-dashboard"></i>
                         <span>主页</span>
                     </a>
                 </li>
-      
+
                 <li class="sub-menu">
                     <a href="javascript:;" >
                         <i class="fa fa-desktop"></i>
@@ -450,7 +450,7 @@
                         <li><a  href="/mm/vendor/history/">供应商交易历史汇总</a></li>
                     </ul>
                 </li>
-      
+
                 <li class="sub-menu">
                     <a href="javascript:;" >
                         <i class="fa fa-cogs"></i>
@@ -462,7 +462,7 @@
                         <li><a  href="/mm/material/item/stock/">查看商品库存</a></li>
                     </ul>
                 </li>
-                
+
                 <li class="sub-menu">
                     <a href="javascript:;" >
                         <i class="fa fa-th"></i>
@@ -474,7 +474,7 @@
                         <li><a  href="/mm/purchaseorder/searchpo/">采购订单</a></li>
                     </ul>
                 </li>
-                
+
                 <li class="sub-menu">
                     <a href="javascript:;" >
                         <i class="fa fa-tasks"></i>
@@ -488,50 +488,50 @@
                         <li ><a  href="/mm/invoice/payment/">付款</a></li>
                     </ul>
                 </li>
-                
-      
+
+
             </ul>
-              
+
               <!-- sidebar menu end-->
           </div>
       </aside>
-      </section> 
+      </section>
         <section id="main-content">
             <section class="wrapper">
                 <h3><i class="fa fa-angle-right"></i> 供应商交易历史汇总
                 </h3>
                 <div class="row mt">
                   <div class="col-lg-12">
-                    
+
                   <div class="form-panel3">
-                        
+
                       <form id='material1' class="form-horizontal style-form" method="get">
                         <label class="col-sm-1 col-sm-2 control-label">
                             <div class="pull-right">商品编号</div>
                         </label>
                         <div class="col-sm-3">
-                           
+
                                 <input class="form-control" id="materialInput1" type="text"  placeholder="请输入商品编号" required>
-                          
+
                         </div>
                         <label class="col-sm-2 col-sm-2 control-label">
                             <div class="pull-right">时间</div>
                         </label>
                         <div class="col-sm-3">
-                               
+
                                     <select id="materialInput2" class="form-control">
                                         <option value='0'>全部</option>
                                         <option value='2'>近三月</option>
                                         <option value='1'>近半年</option>
-                                        
+
                                       </select>
-                     
+
                               </div>
-                              
-                            
+
+
                               <button type="submit" formmethod="post" class="btn btn-success "><i class="fa fa-search"></i></button>
                             </form>
-                              
+
                             <div class="col-sm-12">
                                 <button type="button" class="btn btn-link " data-toggle="modal" data-target="#myModal1">忘记编号？</button>
                                         <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
@@ -539,7 +539,7 @@
                                               <div class="modal-content">
                                                 <div class="modal-header">
                                                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                  <h4 class="modal-title" id="myModalLabel">搜索商品编号</h4>
+                                                  <h4 class="modal-title" id="myModalLabel1">搜索商品编号</h4>
                                                 </div>
                                                 <div class="modal-body">
                                                   <!-- Hi there, I am a Modal Example for Dashgum Admin Panel. -->
@@ -553,8 +553,8 @@
                                                             <input class="form-control" type="text" name="mname" id="mname" >
                                                         </div>
                                                     </div>
-                                    
-                                    
+
+
                                                     <div class="form-group">
                                                         <label class="col-sm-4 col-sm-4 control-label">
                                                           <div class="pull-right">商品类型：</div>
@@ -568,10 +568,10 @@
                                                                 <option value='FERT'>SF00--成品</option>
                                                                 <option value='FREMD'>FG00--外部采购物料</option>
                                                                 <option value='PROC'>MI00--加工物料</option>
-                                                                <option value='HAWA'>RE00--贸易货物</option> 
+                                                                <option value='HAWA'>RE00--贸易货物</option>
                                                                 <option value='HIBE'>RE00--经营供应</option>
                                                             </select>
-                                                           
+
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
@@ -587,22 +587,22 @@
                                                                 <option value='F'>设备工程</option>
                                                                 <option value='R'>零售</option>
                                                             </select>
-                                                            
+
                                                         </div>
                                                     </div>
-                                                    
-                                    
+
+
                                                     <div class="form-group">
                                                         <label class="col-sm-4 col-sm-4 control-label">
                                                           <div class="pull-right">工厂：</div>
                                                         </label>
                                                         <div class="col-sm-5">
                                                             <select class="form-control" name='plant' id='plant' ></select>
-                                                            
+
                                                         </div>
                                                     </div>
-                                                    
-                                    
+
+
                                                     <div class="form-group">
                                                         <label class="col-sm-4 col-sm-4 control-label">
                                                           <div class="pull-right">存储位置：</div>
@@ -615,9 +615,9 @@
                                                                 <option value='SF00'>SF00--半成品</option>
                                                                 <option value='FG00'>FG00--产成品</option>
                                                                 <option value='MI00'>MI00--混合产品</option>
-                                                                <option value='RE00'>RE00--退货产品</option> 
+                                                                <option value='RE00'>RE00--退货产品</option>
                                                             </select>
-                                                            
+
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
@@ -626,19 +626,19 @@
                                                             <div class="pull-right">创建者编号：</div>
                                                             </label>
                                                         <div class="col-sm-5">
-                                                            <input name="uid" id="uid" type="text" class="form-control">
+                                                            <input name="uid1" id="uid1" type="text" class="form-control">
                                                         </div>
                                                         <div class="col-sm-2">
                                                             <input type="submit"  class="btn btn-theme02">
                                                             </div>
                                                     </div>
-                                                    
-                                    
+
+
                                                 </form>
                                                 {% comment %} <h4> 供应商</h4> {% endcomment %}
                                                 {% comment %} <hr> {% endcomment %}
                                                 <table  class="table table-bordered table-striped table-condensed">
-                                                  *双击填入编号                                       
+                                                  *双击填入编号
                                                   <thead>
                                                   <!-- 搜索编号返回的属性 style="width: 100px;"-->
                                                   <tr>
@@ -653,21 +653,21 @@
                                                   </thead>
                                                   <tbody id="searchDiv"></tbody>
                                               </table>
-                                                
-                                    
+
+
                                                 </div>
-                                                
+
                                                 <div class="modal-footer">
-                                                  
+
                                                 </div>
                                               </div>
                                             </div>
                                           </div>
                                         </div>
                         <!--创建者编码modal-->
-                        
+
               {% comment %} style="display: none;" {% endcomment %}
-              <div  id='details'>  
+              <div  id='details'>
                 <div class="row mt">
                     <div class="col-md-12">
                       <div class="col-md-12">
@@ -679,12 +679,12 @@
                               <div class="modal-content">
                                 <div class="modal-header">
                                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                  <h4 class="modal-title" id="myModalLabel">自定义评分权重</h4>
+                                  <h4 class="modal-title" id="myModalLabel2">自定义评分权重</h4>
                                 </div>
                                 <div class="modal-body">
-                                 
+
                                   <form class="form-horizontal style-form" method="get">
-                                   
+
                                             <div  class="form-group">
                                                 <label class="col-sm-2 col-sm-2 control-label">
                                                     <div class="pull-right">质量</div>
@@ -693,7 +693,7 @@
                                                             <div  id="slider1"></div>
                                                 </div>
                                                 <div class="col-sm-2 control-label">
-                                                  <p id="mem_num1">25</p>        
+                                                  <p id="mem_num1">25</p>
                                                 </div>
                                             </div>
 
@@ -705,7 +705,7 @@
                                                         <div  id="slider2"></div>
                                             </div>
                                             <div class="col-sm-2 control-label">
-                                              <p id="mem_num2">25</p>        
+                                              <p id="mem_num2">25</p>
                                             </div>
                                             </div>
 
@@ -717,7 +717,7 @@
                                                         <div  id="slider3"></div>
                                             </div>
                                             <div class="col-sm-2 control-label">
-                                              <p id="mem_num3">25</p>        
+                                              <p id="mem_num3">25</p>
                                             </div>
                                             </div>
 
@@ -729,7 +729,7 @@
                                                         <div  id="slider4"></div>
                                             </div>
                                             <div class="col-sm-2 control-label">
-                                              <p id="mem_num4">25</p>        
+                                              <p id="mem_num4">25</p>
                                             </div>
                                             </div>
 
@@ -746,7 +746,7 @@
 
                       <div class="content-panel">
                           <!-- <div class="form-panel2"> -->
-                          
+
                           <table class="table table-striped table-advance table-hover">
                                   <h4><i class="fa fa-angle-right"></i> 供应商交易历史</h4>
                                   <hr>
@@ -757,25 +757,23 @@
                                     <th> 交易历史总额</th>
                                     <th> 交易次数</th>
                                     <th> 评分</th>
-                                    
+
                                 </tr>
                               </thead>
                               <tbody id="searchDiv2"></tbody>
                           </table>
                       </div>
                       </div>
-                       
+
                         </div>
-                    </div><!-- /col-md-12 -->
-                </div><!-- /row -->
-  
+                    </div>
+                </div>
+
+                  </div>
+                  </div>
+                </div>
           </section>
-        </section><!-- /MAIN CONTENT -->
-  
-        <!--main content end-->
-        <!--footer start-->
-        
-        <!--footer end-->
+        </section>
     </section>
 
         {% comment %} <textarea id="item_result"></textarea> {% endcomment %}
@@ -800,13 +798,13 @@
                         w4: $("#slider4").slider("value"),
                     },
                     success: function(data) {
-                       
+
                         $('#item_result').text(data);
                         var dataObj = eval("("+data+")");
                         console.log(dataObj);
-                        
+
                         //console.log(dataObj.gr[0].pk);
-                        
+
                         if(dataObj.length==0){
                             showMessage({text: '无符合条件的商品！' ,type: 'error'});
                         }else{
@@ -814,14 +812,14 @@
                             for(i = 0; i < dataObj.length; i++) {
                                 //content2 =dataObj.gr[i].fields
                                 //": 10, "sType": "1", "time": "2022-08-18T10:05:04.605Z", "postTime": "2022-08-18T10:03:52Z", "orderItem": 1, "euser": 1}, "user": {"id": 2,
-                                
+
                                  out += '<tr><td>'+ dataObj[0].vendor.vid+ '</td><td>' + dataObj[0].vendor.vname + '</td><td >' + dataObj[0].quan+ '</td><td>' + dataObj[0].num+ '</td><td>'+ dataObj[0].score+ '</td></tr>';
                              }
                              document.getElementById("searchDiv2").innerHTML=out;
                             showMessage({text: '搜索成功！' ,type: 'success'});
                         }
-                        
-                        
+
+
                     },
                     error: function(xhr, status, error) {
                         console.error("AJAX error: ", status, error);
@@ -829,7 +827,7 @@
                     }
                 })
             });
-    
+
             $("table").on("dblclick","tr",function(e){
                 document.getElementById("materialInput1").value=$(this).find('td').eq(0).text();
                 $('#myModal1').modal('hide');
@@ -851,30 +849,30 @@
                         industrySector: $("#industrySector").val(),
                         sloc: $("#sloc").val(),
                         plant: $("#plant").val(),
-                        uid: $('#uid').val(),
+                        uid1: $('#uid1').val(),
                     },
                     success: function(data) {
 
                         $('#item_result').text(data);
-                    
+
                         var dataObj = eval("("+data+")");
                         if(dataObj==''){
                             showMessage({text: '没有符合条件的商品' ,type: 'error'});
                         }else{
                             var out = "";
                         var i;
-                        
+
                         for(i = 0; i < dataObj.length; i++) {
                             //dataObj[i].fields.xx
                             fields = dataObj[i].fields
                             material = dataObj[i].material
                             stock = dataObj[i].stock
                             user = dataObj[i].user
-                            out += '<tr><td>'+ material.id+ '</td><td>' + material.mname+ '</td><td>' + material.mType+ '</td><td>' + material.industrySector+ '</td><td>'+ stock.name+ '</td><td>'+ fields.sloc+ '</td><td>'+ user.username + '</td><tr>';
+                            out += '<tr><td>'+ material.id+ '</td><td>' + material.mname+ '</td><td>' + material.mType+ '</td><td>' + material.industrySector+ '</td><td>'+ stock.name+ '</td><td>'+ fields.sloc+ '</td><td>'+ user.id + '</td><tr>';
                         }
                         document.getElementById("searchDiv").innerHTML=out;
                         }
-                        
+
                     },
                     error: function(xhr, status, error) {
                         console.error("AJAX error: ", status, error);
@@ -885,18 +883,6 @@
             });
                 </script>
 
-
-        <!-- 确认提示 -->
-        <script>
-            function tip(){
-                if(confirm("您确认修改吗？")){
-                return true;
-                }
-                else{
-                return false;
-                }
-            } 
-        </script>
 
     </body>
 </html>
