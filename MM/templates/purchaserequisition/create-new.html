@@ -87,7 +87,7 @@
         <!--logo end-->
         <div class="nav notify-row" id="top_menu">
             <!--  notification start -->
-        
+         </div>
     </header>
   <!--header end-->
   
@@ -100,7 +100,7 @@
           <!-- sidebar menu start-->
           <ul class="sidebar-menu" id="nav-accordion">
                   
-              <p class="centered"><img src="/static/assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
+              <p class="centered"><img src="/static/assets/img/ui-sam.jpg" class="img-circle" width="60"></p>
               <h5 class="centered">物料管理</h5>
                   
             <li class="mt">
@@ -442,7 +442,7 @@
                     material = dataObj[i].material
                     stock = dataObj[i].stock
                     user = dataObj[i].user
-                    out += '<tr><td>'+ material.id+ '</td><td>' + material.mname+ '</td><td>' + material.mType+ '</td><td>' + material.industrySector+ '</td><td>'+ stock.name+ '</td><td>'+ fields.sloc+ '</td><td>'+ user.username + '</td><tr>';
+                    out += '<tr><td>'+ material.id+ '</td><td>' + material.mname+ '</td><td>' + material.mType+ '</td><td>' + material.industrySector+ '</td><td>'+ stock.name+ '</td><td>'+ fields.sloc+ '</td><td>'+ user.username.id + '</td><tr>';
                 }
                 document.getElementById("goodDiv").innerHTML=out;
             },
@@ -712,8 +712,8 @@ function addgood() {
 }
 function create(){ //提交表格，创建成功
     var tabLen = document.getElementById("gooddiv");
-    var beizhu = $("#beizhu").val()
-    var pk=sessionStorage.getItem('pk')
+    var beizhu = $("#beizhu").val();
+    var pk=sessionStorage.getItem('pk');
         var jsonT = "[";
         for (var i = 0; i < tabLen.rows.length; i++) {
                 jsonT += '{"itemId":"' + tabLen.rows[i].cells[0].innerHTML + '","material_id":' + tabLen.rows[i].cells[1].innerHTML + ',"plant":"' + tabLen.rows[i].cells[2].innerHTML + '","estimatedPrice":' + tabLen.rows[i].cells[3].innerHTML + ',"currency":"' + tabLen.rows[i].cells[4].innerHTML + '","quantity":' + tabLen.rows[i].cells[5].innerHTML + ',"deliveryDate":"' + tabLen.rows[i].cells[6].innerHTML + '"},'
@@ -722,14 +722,18 @@ function create(){ //提交表格，创建成功
         jsonT= jsonT.substr(0, jsonT.length - 1);
         jsonT += "]";
         console.log(jsonT);
-        console.log(beizhu)
+        console.log(beizhu);
         $.ajax({
             type: 'post',
             url: '/mm/purchaserequisition/newinsertreque/',
             data:{"json":jsonT,"beizhu":beizhu},
             success: function (data) {
                 let a = JSON.parse(data)
-                showMessage({text: '创建成功！采购申请编号：'+a.content ,type: 'success',showClose: true, autoClose: false})
+                showMessage({text: '创建成功！采购申请编号：'+a.content ,type: 'success'})
+                this.$message({
+                     message: '恭喜你，上传成功!',
+                    type: 'success'
+                });
             }
         });     
 
