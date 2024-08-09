@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.core.exceptions import ValidationError
 from django.db.models import Sum, Count, Avg
+import json
 
 from ..models import EUser, Vendor
 from .auxiliary import *
@@ -52,7 +53,9 @@ def create(request: HttpRequest):
             return JsonResponse({"status": 0, "message": f"缺少必要字段: {', '.join(missing_fields)}"}, status=400)
 
         try:
-            euser = EUser.objects.get(pk=request.user.pk)
+            user = request.user
+            euser = EUser.objects.get(pk=user.pk)
+
             vendor = Vendor.objects.create(
                 euser=euser,
                 vname=vname,
@@ -69,12 +72,11 @@ def create(request: HttpRequest):
                 pOrg=pOrg,
                 currency=currency
             )
+
             vendor.save()
-            return JsonResponse({"status": 1, "message": "Successfully created!", "vendor_id": vendor.pk, "from_create": True})
+            return JsonResponse({"status": 1, "message": "供应商创建成功！供应商编号为"+str(vendor.vid)+"。", "vendor_id": vendor.pk, "from_create": True})
         except EUser.DoesNotExist:
             return JsonResponse({"status": 0, "message": "当前用户没有关联的EUser实例"}, status=400)
-        except ValidationError as e:
-            return JsonResponse({"status": 0, "message": f"创建供应商时出错: {str(e)}"}, status=400)
         except Exception as e:
             return JsonResponse({"status": 0, "message": f"创建供应商时出错: {str(e)}"}, status=400)
     else:
