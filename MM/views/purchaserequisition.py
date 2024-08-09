@@ -160,21 +160,22 @@ def getpq(request):
 def getpqinfo(request: HttpRequest, pk):
     if request.method == "GET":
         purchaseRequisition = PurchaseRequisition.objects.filter(id = pk).values()
-        purchase_requisition = PurchaseRequisition.objects.get(id=pk)
-        reuqe = RequisitionItem.objects.filter(pr = purchase_requisition).values()
-        print(purchaseRequisition)
-        print(reuqe)
+        reuqe = RequisitionItem.objects.filter(pr_id=pk).values("itemId", "estimatedPrice", "currency",
+                                                            "deliveryDate","quantity",
+                                                            "meterial__id", "pr_id", "status","meterial__sloc","meterial__material__mname"
+                                                            ,"meterial__stock__id","meterial__stock__name")
+        reuqe = list(reuqe)
         for i in reuqe:
             if i['status']=='0':
-                i['status'] = "已创建采购申请"'[;'
+                i['status'] = "已创建采购申请"
             if i['status']=='1':
                 i['status'] = "已创建采购订单"
-        reuqe=list(reuqe)
         purchaseRequisition = list(purchaseRequisition)
+        print(reuqe)
         return render(
             request=request,
             template_name='../templates/purchaserequisition/pr-info.html',
-            context={'reuqe': reuqe, 'purchaseRequisition':purchaseRequisition}
+            context={'reuqe': reuqe,'purchaseRequisition':purchaseRequisition}
         )
 
 
@@ -364,16 +365,13 @@ def newrequeinsert(request):
         print("type:",type(data))
         now_time = datetime.datetime.now()
         requision = PurchaseRequisition.objects.create(time=now_time, euser_id=euserid, text=text)
-        print("success")
-
         prid= requision.id
         data1 = eval(data)
         for i in data1:
             print(i['deliveryDate'])
             str = getDate2(i['deliveryDate'])
-            material1 = MaterialItem.objects.get(id=i['material_id'])
-            requisitionitem = RequisitionItem.objects.create(pr = requision,
-                                                             meterial = material1,
+            requisitionitem = RequisitionItem.objects.create(pr_id = prid,
+                                                             meterial_id = i['material_id'] ,
                                                              estimatedPrice=i['estimatedPrice'],
                                                              currency=i['currency'],
                                                              quantity=i['quantity'],
@@ -387,7 +385,6 @@ def newrequeinsert(request):
             "message":"创建成功",
             "content": content
         }
-        print("创建成功")
         return HttpResponse(json.dumps(datalist))
 
 
