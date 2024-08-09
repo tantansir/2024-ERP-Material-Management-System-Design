@@ -249,10 +249,13 @@
         });
 
 function validatePhoneNumber(phone) {
-    if (phone.length != 11) {
+    if (!phone) {
+        return null; // Allow empty phone
+    }
+    if (phone.length !== 11) {
         return "Enter a valid 11-digit phone number.";
     }
-    if (phone[0] != '1') {
+    if (phone[0] !== '1') {
         return "Enter a valid phone number beginning with '1'.";
     }
     for (let i = 0; i < phone.length; i++) {
@@ -271,6 +274,21 @@ function validateDigits(string) {
     }
     return null;
 }
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const fromCreate = "{{ from_create }}";
+        const backButton = document.getElementById('back-button');
+
+        if (fromCreate === "True" || fromCreate === "true") {
+            backButton.href = "{% url 'MM:create_vendor' %}";
+            backButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.querySelectorAll('input').forEach(input => input.value = '');
+                document.querySelectorAll('select').forEach(select => select.selectedIndex = 0);
+                window.location.href = "{% url 'MM:create_vendor' %}";
+            });
+        }
+    });
 
 </script>
 
@@ -384,7 +402,7 @@ function validateDigits(string) {
                                             <div class="pull-right">电话： </div>
                                         </label>
                                         <div class="col-sm-7">
-                                            <input class="form-control" type="text" id='phone2' value="{{ vendor.phone }}" disabled>
+                                            <input class="form-control" type="text" name="phone" id='phone2' value="{{ vendor.phone|default_if_none:'' }}" disabled>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -392,7 +410,7 @@ function validateDigits(string) {
                                             <div class="pull-right">传真：</div>
                                         </label>
                                         <div class="col-sm-7">
-                                            <input class="form-control" type="text" id='fax2' value="{{ vendor.fax }}" disabled>
+                                            <input class="form-control" type="text" name="fax" id='fax2' value="{{ vendor.fax|default_if_none:'' }}" disabled>
                                         </div>
                                     </div>
                                     <h5 class='mb'><i class="fa fa-angle-right"></i>所在地</h5>
@@ -419,7 +437,7 @@ function validateDigits(string) {
                                             <div class="pull-right">街区地址：</div>
                                         </label>
                                         <div class="col-sm-7">
-                                            <input class="form-control" name="address" id="address2" type="text" value="{{ vendor.address }}" disabled>
+                                            <input class="form-control" name="address" id="address2" type="text" value="{{ vendor.address|default_if_none:'' }}" disabled>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -457,7 +475,7 @@ function validateDigits(string) {
                                         </label>
                                         <div class="col-sm-7">
                                             <select class="form-control" name="tpType" id="tpType2" disabled>
-                                                <option value="{{ vendor.tpType }}" selected>{{ vendor.tpType }}</option>
+                                                <option value="" {% if not vendor.tpType %}selected{% endif %}>请选择支付类型</option>
                                             </select>
                                         </div>
                                     </div>
@@ -466,7 +484,7 @@ function validateDigits(string) {
                                             <div class="pull-right">交易货币：</div>
                                         </label>
                                         <div class="col-sm-7">
-                                            <input type="text" class="form-control po-text-modify" onclick="currencyf()" name="currency" id="currency2" value="{{ vendor.currency }}" disabled>
+                                            <input type="text" class="form-control po-text-modify" onclick="currencyf()" name="currency" id="currency2" value="{{ vendor.currency|default_if_none:'' }}" disabled>
                                             <div class="col-sm-12">
                                                 <div class="modal fade" id="myModalcurr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
                                                     <div class="modal-dialog">
@@ -506,9 +524,8 @@ function validateDigits(string) {
                                 </fieldset>
                                 <div class="col-sm-10"></div>
                                 <button type="button" class="btn btn-primary" id="edit-btn">开始修改</button>
-                                <button class="btn btn-theme04" type="reset">重置</button>
                                 <input type="submit" class="btn btn-theme" id="submit-btn" formmethod="post" style="display:none;">
-                                <a href="javascript:history.back()" class="btn btn-theme">返回上一页</a>
+                                <a href="javascript:history.back()" id="back-button" class="btn btn-theme">返回上一页</a>
                             </form>
 
                         </div>
