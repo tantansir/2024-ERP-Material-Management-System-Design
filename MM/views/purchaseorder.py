@@ -753,12 +753,14 @@ def searchpo(request):
         ven = request.POST.get("ven")
         mate = request.POST.get("mate")
         eu = request.POST.get("euser")
-        vendorid = OrderItem.objects.filter(po_id=id,po__vendor=ven,
+        print(id)
+
+        vendorid = OrderItem.objects.filter(po_id=id, po__vendor=ven,
                                                 meterialItem__id=mate,
                                                 po__euser=eu,
                                                 ).values("po_id","itemId","currency",
                                                          "po__time","meterialItem__id","quantity","price","po__vendor","po__euser","status")
-        print(vendorid)
+        print("test", vendorid)
         for i in vendorid:
             if i['quantity'] == None:
                 i['quantity'] = 0
