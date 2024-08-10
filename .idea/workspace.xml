@@ -6,15 +6,27 @@
   <component name="ChangeListManager">
     <list default="true" id="2d172b04-ded4-4401-a492-59ea729722fa" name="更改" comment="修正requisition的部分问题">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ERP/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/ERP/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/data/porg.csv" beforeDir="false" afterPath="$PROJECT_DIR$/MM/data/porg.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/material/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/material/create.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/material/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/material/search.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/material/stock.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/material/stock.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MM/templates/purchaserequisition/create-new.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/purchaserequisition/create-new.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MM/templates/purchaserequisition/pr-info.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/purchaserequisition/pr-info.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MM/templates/purchaserequisition/pr-modify(1).html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/purchaserequisition/pr-modify(1).html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MM/templates/quotation/RFQ-create.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/quotation/RFQ-create.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MM/templates/quotation/RFQ-create_info.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/quotation/RFQ-create_info.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MM/templates/quotation/RFQ-create_search.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/quotation/RFQ-create_search.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MM/templates/quotation/makebyrq.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/quotation/makebyrq.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MM/views/purchaserequisition.py" beforeDir="false" afterPath="$PROJECT_DIR$/MM/views/purchaserequisition.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/quotation/RFQ.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/quotation/RFQ.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/quotation/quo_manage.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/quotation/quo_manage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/quotation/vendor_quotation.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/quotation/vendor_quotation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/quotation/vq-create.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/quotation/vq-create.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/quotation/vq-modify.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/quotation/vq-modify.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/quotation/vq-modify_search.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/quotation/vq-modify_search.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/template.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/template.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/vendor/history.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/vendor/history.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/views/ajax/material_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/MM/views/ajax/material_api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/views/ajax/vendor_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/MM/views/ajax/vendor_api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/views/material.py" beforeDir="false" afterPath="$PROJECT_DIR$/MM/views/material.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,6 +122,7 @@
       <workItem from="1723175200521" duration="6417000" />
       <workItem from="1723189782090" duration="2921000" />
       <workItem from="1723193704031" duration="11704000" />
+      <workItem from="1723269148362" duration="425000" />
     </task>
     <task id="LOCAL-00001" summary="创建django项目">
       <option name="closed" value="true" />
