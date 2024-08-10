@@ -46,7 +46,8 @@ def create_vendor(request: HttpRequest):
         error_fields = list(e.error_dict.keys())
         return HttpResponse(json.dumps({'status':0, 'message':"表单填写错误！", 'fields':error_fields}))
     new_vendor.save()
-    return HttpResponse(json.dumps({'status':1, 'message':"供应商创建成功！供应商编号为"+str(new_vendor.vid)+"。", 'vendor':model_to_dict(new_vendor)}))
+    return JsonResponse({"status": 1, "message": "供应商创建成功！供应商编号为"+str(new_vendor.vid)+"。", "vendor_id": new_vendor.pk, "from_create": True})
+
 
 @login_required
 def search_vendor_history(request: HttpRequest):
@@ -78,6 +79,7 @@ def search_vendor_history(request: HttpRequest):
             'vendor':model_to_dict(vendor), 'quan':vendor_list[i][1],
             'num':vendor_list[i][2], 'score':vendor_list[i][3],
         }
+
     return HttpResponse(json.dumps(vendor_list, default=str))
 
 @login_required
@@ -89,13 +91,13 @@ def search_vendor(request: HttpRequest):
     pk = post.get('pk')
     if pk == '' or pk is None:
         vname = getRegex(post.get('vname'))
-        uid = getPk(post.get('uid'), 'U')
+        uid1 = getPk(post.get('uid1'), 'U')
         city = getRegex(post.get('city'))
         country = getRegex(post.get('country'))
         companyCode = getRegex(post.get('companyCode'))
         print(companyCode)
         vendors = Vendor.objects.filter(
-            vname__regex=vname, euser__uid__regex=uid, city__regex=city,
+            vname__regex=vname, euser__uid__regex=uid1, city__regex=city,
             country__regex=country, companyCode__regex=companyCode
         )
         vendor_list = json.loads(serializers.serialize('json', list(vendors)))
@@ -117,7 +119,7 @@ def update_vendor(request: HttpRequest):
         return HttpResponse(status=405)
     post = request.POST
     vid = post.get('vid')
-    uid = post.get('uid')
+    uid1 = post.get('uid1')
     vendors = Vendor.objects.filter(vid__exact=vid)
     if len(vendors) != 1:
         return HttpResponse(json.dumps({'status':0, 'message':"物料相关信息错误！"}))

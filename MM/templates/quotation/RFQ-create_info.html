@@ -1,9 +1,9 @@
-{% extends 'receipt/extend.html' %}
+{% extends 'template.html' %}
 {% load static %}
-{% block extra_css %}
-
-{% endblock %}
 {% block main_content %}
+
+      <!--sidebar end-->
+      
       <!-- **********************************************************************************************************************************************************
       MAIN CONTENT
       *********************************************************************************************************************************************************** -->
@@ -100,9 +100,6 @@
     
       <!--footer end-->
   </section>
-{% endblock %}
-
-{% block js %}
 
      <!-- js placed at the end of the document so the pages load faster -->
      <script src="{% static 'assets/js/jquery.js' %}"></script>
@@ -141,4 +138,7 @@
         }
        } 
 </script>
+
+</body>
+</html>
 {% endblock %}

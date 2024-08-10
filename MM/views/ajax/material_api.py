@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render
-from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.contrib import auth, messages
 from django import forms
@@ -11,6 +11,7 @@ from django.db.models import QuerySet, Sum
 from django.utils import timezone
 import json
 import datetime
+from django.db import transaction
 
 from ...models import EUser, Material, MaterialItem, Stock, StockHistory
 from ..auxiliary import *
@@ -27,11 +28,11 @@ def search_item(request: HttpRequest):
         industrySector = getRegex(post.get('industrySector'))
         stock_name = getRegex(post.get('plant'))
         sloc = getRegex(post.get('sloc'))
-        uid = getPk(post.get('uid'), 'U')
+        uid2 = getPk(post.get('uid2'), 'U')
         items = MaterialItem.objects.filter(
             material__mname__regex=mname, material__mType__regex=mType, 
             material__industrySector__regex=industrySector, stock__name__regex=stock_name,
-            sloc__regex=sloc, material__euser__id__regex=uid
+            sloc__regex=sloc, material__euser__id__regex=uid2
         )
     else:
         mid = getPkExact(mid, 'M')
@@ -49,6 +50,8 @@ def search_item(request: HttpRequest):
         items_list[i]['stock'] = model_to_dict(stock)
         items_list[i]['user'] = model_to_dict(user)
     return HttpResponse(json.dumps(items_list, default=str))
+
+
 
 @login_required
 def update_item(request: HttpRequest):
@@ -100,73 +103,98 @@ def update_item(request: HttpRequest):
     material.save()
     return HttpResponse(json.dumps({'status':1, 'message':"商品信息已更新！"}))
 
+
 @login_required
 def create_item(request: HttpRequest):
     if request.method != 'POST':
         return HttpResponse(status=405)
+
     post = request.POST
-    # material_id = getPkExact(post.get('material_id'), 'M')
-    mname = post.get('mname')
-    mType = post.get('mType')
-    meaunit = post.get('meaunit')
-    netWeight = post.get('netWeight')
-    if netWeight == '': netWeight = 0
-    weightUnit = post.get('weightUnit')
-    transGrp = post.get('transGrp')
-    loadingGrp = post.get('loadingGrp')
-    if transGrp is None: transGrp = ''
-    if loadingGrp is None: loadingGrp = ''
-    industrySector = post.get('industrySector')
-    mGroup = post.get('mGroup')
-    sloc = post.get('sloc')
-    sOrg = post.get('sOrg')
-    distrChannel = post.get('distrChannel')
-    companyCode = post.get('companyCode')
-    pOrg = post.get('pOrg')
-    pGrp = post.get('pGrp')
-    stock_name = post.get('name')
-    shortText = post.get('shortText')
-    materials: QuerySet = Material.objects.filter(mname__exact=mname)
-    msg=''
-    if len(materials) == 0:
-        new_material = Material(
-            mname=mname, mType=mType, mGroup=mGroup, meaunit=meaunit,
-            netWeight=netWeight, weightUnit=weightUnit, transGrp=transGrp,
-            loadingGrp=loadingGrp, industrySector=industrySector, shortText=shortText
-        )
-        user = request.user
-        euser = EUser.objects.get(pk=user.pk)
-        new_material.euser = euser
-        try:
-            new_material.full_clean()
-        except ValidationError as e:
-            error_fields = list(e.error_dict.keys())
-            return HttpResponse(json.dumps({'status':0, 'message':"表单填写错误！", 'fields':error_fields}))
-        new_material.save()
-        msg = "商品和"
-        material: Material = new_material
-    else:
-        material = materials.first()
-    items: QuerySet = MaterialItem.objects.filter(
-        material__id__exact=material.id, stock__name__exact=stock_name
-    )
-    stocks = Stock.objects.filter(
-        companyCode__regex=companyCode, pOrg__regex=pOrg, pGrp__regex=pGrp
-    )
-    if len(items) == 0:
-        new_item = MaterialItem(
-            sloc=sloc, sOrg=sOrg, distrChannel=distrChannel, material=material, stock=stocks.first()
-        )
-        try:
-            new_item.full_clean()
-        except ValidationError as e:
-            error_fields = list(e.error_dict.keys())
-            return HttpResponse(json.dumps({'status':0, 'message':"表单填写错误！", 'fields':error_fields}))
-        new_item.save()
-        msg += "商品条目"
-        return HttpResponse(json.dumps({'status':1, 'message':msg+"创建成功！商品编号为"+str(material.id)+"，商品条目编号为"+str(new_item.id)+"。"}))
-    else:
-        return HttpResponse(json.dumps({'status':0, 'message':"该商品在当前工厂已存在！"}))
+
+    try:
+        with transaction.atomic():  # 使用事务确保原子性
+            mname = post.get('mname')
+            mType = post.get('mType')
+            meaunit = post.get('meaunit')
+            netWeight = post.get('netWeight')
+            weightUnit = post.get('weightUnit')
+            transGrp = post.get('transGrp', '')
+            loadingGrp = post.get('loadingGrp', '')
+            industrySector = post.get('industrySector')
+            mGroup = post.get('mGroup')
+            sloc = post.get('sloc')
+            sOrg = post.get('sOrg')
+            distrChannel = post.get('distrChannel')
+            companyCode = post.get('companyCode')
+            pOrg = post.get('pOrg')
+            pGrp = post.get('pGrp')
+            stock_name = post.get('name')
+            shortText = post.get('shortText')
+
+            # 检查净重字段
+            if not netWeight or netWeight.strip() == '':
+                netWeight = 0
+            else:
+                try:
+                    netWeight = int(netWeight)
+                except ValueError:
+                    return JsonResponse({'status': 0, 'message': "净重必须是一个数字"}, status=400)
+
+            # 检查 Material 是否存在
+            material, created = Material.objects.get_or_create(
+                mname=mname,
+                defaults={
+                    'mType': mType, 'mGroup': mGroup, 'meaunit': meaunit,
+                    'netWeight': netWeight, 'weightUnit': weightUnit,
+                    'transGrp': transGrp, 'loadingGrp': loadingGrp,
+                    'industrySector': industrySector, 'shortText': shortText,
+                    'euser': EUser.objects.get(pk=request.user.pk)
+                }
+            )
+
+            if created:
+                try:
+                    material.full_clean()  # 在保存前验证数据
+                    material.save()
+                except ValidationError as ve:
+                    return JsonResponse({'status': 0, 'message': f"Validation Error: {ve.message_dict}"}, status=400)
+                msg = "商品创建成功！"
+            else:
+                msg = "商品已存在，"
+
+            # 检查 Stock 是否存在
+            stock = Stock.objects.filter(
+                companyCode__regex=companyCode, pOrg__regex=pOrg, pGrp__regex=pGrp
+            ).first()
+
+            if not stock:
+                return JsonResponse({'status': 0, 'message': "关联的库存数据未找到！"}, status=400)
+
+            # 检查 MaterialItem 是否存在
+            item, item_created = MaterialItem.objects.get_or_create(
+                material=material,
+                stock=stock,
+                defaults={
+                    'sloc': sloc,
+                    'sOrg': sOrg,
+                    'distrChannel': distrChannel,
+                }
+            )
+
+            if item_created:
+                msg += f"创建成功！商品编号为 {material.id}，商品条目编号为 {item.id}。"
+                return JsonResponse({'status': 1, 'message': msg})
+            else:
+                return JsonResponse({'status': 0, 'message': "该商品条目在当前工厂已存在！"})
+
+    except ValidationError as ve:
+        print(f"Validation Error: {ve}")
+        return JsonResponse({'status': 0, 'message': f"Validation Error: {ve.message_dict}"}, status=400)
+
+    except Exception as e:
+        print(f"Unexpected error: {str(e)}")
+        return JsonResponse({'status': 0, 'message': f"Unexpected error: {str(e)}"}, status=500)
+
 
 @login_required
 def search_stock(request: HttpRequest):
