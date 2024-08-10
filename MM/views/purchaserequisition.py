@@ -352,7 +352,6 @@ def newrequeinsert(request):
     if request.method == "GET":
         return render(request, '../templates/purchaserequisition/create-new.html', locals())
     if request.method == "POST":
-        print("11111")
         euser = request.user
         euserid = euser.pk
         mid = request.POST.get("mid")
@@ -365,15 +364,14 @@ def newrequeinsert(request):
         now_time = datetime.datetime.now()
         requision = PurchaseRequisition.objects.create(time=now_time, euser_id=euserid, text=text)
         print("success")
-
         prid= requision.id
         data1 = eval(data)
         for i in data1:
             print(i['deliveryDate'])
             str = getDate2(i['deliveryDate'])
-            material1 = MaterialItem.objects.get(id=i['material_id'])
-            requisitionitem = RequisitionItem.objects.create(pr = requision,
-                                                             meterial = material1,
+            # material1 = MaterialItem.objects.get(id=i['material_id'])
+            requisitionitem = RequisitionItem.objects.create(pr_id = prid,
+                                                             meterial_id = i['material_id'],
                                                              estimatedPrice=i['estimatedPrice'],
                                                              currency=i['currency'],
                                                              quantity=i['quantity'],
