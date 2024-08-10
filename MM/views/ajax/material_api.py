@@ -104,6 +104,9 @@ def update_item(request: HttpRequest):
     return HttpResponse(json.dumps({'status':1, 'message':"商品信息已更新！"}))
 
 
+import json
+from django.http import JsonResponse
+
 @login_required
 def create_item(request: HttpRequest):
     if request.method != 'POST':
@@ -138,7 +141,13 @@ def create_item(request: HttpRequest):
                 try:
                     netWeight = int(netWeight)
                 except ValueError:
-                    return JsonResponse({'status': 0, 'message': "净重必须是一个数字"}, status=400)
+                    return JsonResponse({'status': 0, 'message': "净重必须是一个数字"}, status=400, json_dumps_params={'ensure_ascii': False})
+
+            # 获取当前用户的 EUser 实例
+            try:
+                euser = EUser.objects.get(username=request.user.username)
+            except EUser.DoesNotExist:
+                return JsonResponse({'status': 0, 'message': "当前用户没有关联的EUser实例，请先完成注册。"}, status=400, json_dumps_params={'ensure_ascii': False})
 
             # 检查 Material 是否存在
             material, created = Material.objects.get_or_create(
@@ -148,7 +157,7 @@ def create_item(request: HttpRequest):
                     'netWeight': netWeight, 'weightUnit': weightUnit,
                     'transGrp': transGrp, 'loadingGrp': loadingGrp,
                     'industrySector': industrySector, 'shortText': shortText,
-                    'euser': EUser.objects.get(pk=request.user.pk)
+                    'euser': euser
                 }
             )
 
@@ -157,7 +166,7 @@ def create_item(request: HttpRequest):
                     material.full_clean()  # 在保存前验证数据
                     material.save()
                 except ValidationError as ve:
-                    return JsonResponse({'status': 0, 'message': f"Validation Error: {ve.message_dict}"}, status=400)
+                    return JsonResponse({'status': 0, 'message': f"Validation Error: {ve.message_dict}"}, status=400, json_dumps_params={'ensure_ascii': False})
                 msg = "商品创建成功！"
             else:
                 msg = "商品已存在，"
@@ -168,7 +177,7 @@ def create_item(request: HttpRequest):
             ).first()
 
             if not stock:
-                return JsonResponse({'status': 0, 'message': "关联的库存数据未找到！"}, status=400)
+                return JsonResponse({'status': 0, 'message': "关联的库存数据未找到！"}, status=400, json_dumps_params={'ensure_ascii': False})
 
             # 检查 MaterialItem 是否存在
             item, item_created = MaterialItem.objects.get_or_create(
@@ -183,17 +192,18 @@ def create_item(request: HttpRequest):
 
             if item_created:
                 msg += f"创建成功！商品编号为 {material.id}，商品条目编号为 {item.id}。"
-                return JsonResponse({'status': 1, 'message': msg})
+                return JsonResponse({'status': 1, 'message': msg}, json_dumps_params={'ensure_ascii': False})
             else:
-                return JsonResponse({'status': 0, 'message': "该商品条目在当前工厂已存在！"})
+                return JsonResponse({'status': 0, 'message': "该商品条目在当前工厂已存在！"}, json_dumps_params={'ensure_ascii': False})
 
     except ValidationError as ve:
         print(f"Validation Error: {ve}")
-        return JsonResponse({'status': 0, 'message': f"Validation Error: {ve.message_dict}"}, status=400)
+        return JsonResponse({'status': 0, 'message': f"Validation Error: {ve.message_dict}"}, status=400, json_dumps_params={'ensure_ascii': False})
 
     except Exception as e:
         print(f"Unexpected error: {str(e)}")
-        return JsonResponse({'status': 0, 'message': f"Unexpected error: {str(e)}"}, status=500)
+        return JsonResponse({'status': 0, 'message': f"Unexpected error: {str(e)}"}, status=500, json_dumps_params={'ensure_ascii': False})
+
 
 
 @login_required
@@ -210,36 +220,49 @@ def search_stock(request: HttpRequest):
     )
     return HttpResponse(serializers.serialize('json', list(stocks)))
 
+
 @login_required
 def search_stock_history(request: HttpRequest):
     if request.method != 'POST':
         return HttpResponse(status=405)
+
     MONTH_NUM = 6
     post = request.POST
     material_id = getPkExact(post.get('material_id'), 'M')
     stock_name = post.get('plant')
     sloc = post.get('sloc')
-    items: QuerySet = MaterialItem.objects.filter(
-        material__id__exact=material_id, stock__name__exact=stock_name, sloc__exact=sloc
+
+    items = MaterialItem.objects.filter(
+        material__id=material_id, stock__name=stock_name, sloc=sloc
     )
-    if len(items) != 1:
-        return HttpResponse(json.dumps({'status':0, 'message':"商品条目相关信息错误！"}))
-    item: MaterialItem = items.first()
+
+    if not items.exists():
+        return HttpResponse(json.dumps({'status': 0, 'message': "商品条目相关信息错误！"}),
+                            content_type='application/json')
+
+    item = items.first()
     init_ununrestrictUse = item.unrestrictUse
     init_qltyInspection = item.qltyInspection
     init_blocked = item.blocked
     now = timezone.now()
+
     history = StockHistory.objects.filter(
-        item__id=item.id, time__range=[now+datetime.timedelta(days=-40*MONTH_NUM), now]
+        item=item, time__range=[now - datetime.timedelta(days=40 * MONTH_NUM), now]
     ).values_list(
         'time__year', 'time__month'
-    ).annotate(Sum('unrestrictUse'), Sum('qltyInspection'), Sum('blocked'))
+    ).annotate(
+        Sum('unrestrictUse'), Sum('qltyInspection'), Sum('blocked')
+    )
+
     history_list = list(history)
-    history_list.sort(key=lambda x:x[0]*100+x[1], reverse=True)
+    history_list.sort(key=lambda x: x[0] * 100 + x[1], reverse=True)
     history_list = history_list[:MONTH_NUM]
+
     result = [[now.year, now.month, init_ununrestrictUse, init_qltyInspection, init_blocked, item.transit]]
     for his in history_list:
         temp_date1 = datetime.date(year=his[0], month=his[1], day=1)
         temp_date2 = temp_date1 + datetime.timedelta(days=-1)
-        result.append([temp_date2.year, temp_date2.month, result[-1][2] - his[2], result[-1][3] - his[3], result[-1][4] - his[4]])
-    return HttpResponse(json.dumps({'status':1, 'message':result}, default=str))
+        result.append(
+            [temp_date2.year, temp_date2.month, result[-1][2] - his[2], result[-1][3] - his[3], result[-1][4] - his[4]])
+
+    return HttpResponse(json.dumps({'status': 1, 'message': result}, default=str), content_type='application/json')

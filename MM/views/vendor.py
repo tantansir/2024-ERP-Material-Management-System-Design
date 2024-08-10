@@ -54,7 +54,7 @@ def create(request: HttpRequest):
 
         try:
             user = request.user
-            euser = EUser.objects.get(pk=user.pk)
+            euser = EUser.objects.get(username=user.username)
 
             vendor = Vendor.objects.create(
                 euser=euser,

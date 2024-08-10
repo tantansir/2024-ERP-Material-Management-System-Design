@@ -43,14 +43,17 @@
         hljs.highlightAll();
     </script>
 
-    <script src="{% static 'assets/dist/notice.min.js' %}"></script>
+    <script src="{% static 'assets/js/notice.min.js' %}"></script>
     <script>
-        const notice = new Notice();
+        const showMessage = (options) => {
+        notice=new Notice();
+        notice.showToast(options);
+        }
     </script>
 
     <script src="{% static 'assets/js/main.js' %}"></script>
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/dist/notice.min.css' %}">
+    <link href="{% static 'assets/css/notice.min.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'assets/css/default.min.css' %}">
     <link href="{% static 'assets/css/the-datepicker.css' %}" rel="stylesheet">
 
@@ -414,7 +417,7 @@
             });
 
         });
-        </script>
+    </script>
     <body>
         <section id="container" >
             <header class="header black-bg">
@@ -806,16 +809,15 @@
                         //console.log(dataObj.gr[0].pk);
 
                         if(dataObj.length==0){
-                            showMessage({text: '无符合条件的商品！' ,type: 'error'});
+                            var out='';
+                            document.getElementById("searchDiv2").innerHTML=out;
+                            showMessage({text: '该商品编号无交易历史记录！' ,type: 'error'});
                         }else{
                             var out='';
                             for(i = 0; i < dataObj.length; i++) {
-                                //content2 =dataObj.gr[i].fields
-                                //": 10, "sType": "1", "time": "2022-08-18T10:05:04.605Z", "postTime": "2022-08-18T10:03:52Z", "orderItem": 1, "euser": 1}, "user": {"id": 2,
-
                                  out += '<tr><td>'+ dataObj[0].vendor.vid+ '</td><td>' + dataObj[0].vendor.vname + '</td><td >' + dataObj[0].quan+ '</td><td>' + dataObj[0].num+ '</td><td>'+ dataObj[0].score+ '</td></tr>';
-                             }
-                             document.getElementById("searchDiv2").innerHTML=out;
+                            }
+                            document.getElementById("searchDiv2").innerHTML=out;
                             showMessage({text: '搜索成功！' ,type: 'success'});
                         }
 
@@ -857,20 +859,20 @@
 
                         var dataObj = eval("("+data+")");
                         if(dataObj==''){
+                            var out = "";
+                            document.getElementById("searchDiv").innerHTML=out;
                             showMessage({text: '没有符合条件的商品' ,type: 'error'});
                         }else{
                             var out = "";
-                        var i;
-
-                        for(i = 0; i < dataObj.length; i++) {
-                            //dataObj[i].fields.xx
-                            fields = dataObj[i].fields
-                            material = dataObj[i].material
-                            stock = dataObj[i].stock
-                            user = dataObj[i].user
-                            out += '<tr><td>'+ material.id+ '</td><td>' + material.mname+ '</td><td>' + material.mType+ '</td><td>' + material.industrySector+ '</td><td>'+ stock.name+ '</td><td>'+ fields.sloc+ '</td><td>'+ user.id + '</td><tr>';
-                        }
-                        document.getElementById("searchDiv").innerHTML=out;
+                            var i;
+                            for(i = 0; i < dataObj.length; i++) {
+                                fields = dataObj[i].fields
+                                material = dataObj[i].material
+                                stock = dataObj[i].stock
+                                user = dataObj[i].user
+                                out += '<tr><td>'+ material.id+ '</td><td>' + material.mname+ '</td><td>' + material.mType+ '</td><td>' + material.industrySector+ '</td><td>'+ stock.name+ '</td><td>'+ fields.sloc+ '</td><td>'+ user.id + '</td><tr>';
+                            }
+                            document.getElementById("searchDiv").innerHTML=out;
                         }
 
                     },
@@ -881,7 +883,7 @@
                     }
                 })
             });
-                </script>
+        </script>
 
 
     </body>

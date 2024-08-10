@@ -832,20 +832,21 @@
 
                         var dataObj = eval("("+data+")");
                         if(dataObj==''){
+                            var out = "";
+                            document.getElementById("searchDiv").innerHTML=out;
                             showMessage({text: '没有符合条件的商品' ,type: 'error'});
                         }else{
                             var out = "";
-                        var i;
-
-                        for(i = 0; i < dataObj.length; i++) {
-                            //dataObj[i].fields.xx
-                            fields = dataObj[i].fields
-                            material = dataObj[i].material
-                            stock = dataObj[i].stock
-                            user = dataObj[i].user
-                            out += '<tr><td>'+ material.id+ '</td><td>' + material.mname+ '</td><td>' + material.mType+ '</td><td>' + material.industrySector+ '</td><td>'+ stock.name+ '</td><td>'+ fields.sloc+ '</td><td>'+ user.id + '</td><tr>';
-                        }
-                        document.getElementById("searchDiv").innerHTML=out;
+                            var i;
+                            for(i = 0; i < dataObj.length; i++) {
+                                //dataObj[i].fields.xx
+                                fields = dataObj[i].fields
+                                material = dataObj[i].material
+                                stock = dataObj[i].stock
+                                user = dataObj[i].user
+                                out += '<tr><td>'+ material.id+ '</td><td>' + material.mname+ '</td><td>' + material.mType+ '</td><td>' + material.industrySector+ '</td><td>'+ stock.name+ '</td><td>'+ fields.sloc+ '</td><td>'+ user.id + '</td><tr>';
+                            }
+                            document.getElementById("searchDiv").innerHTML=out;
                         }
 
                     },
