@@ -172,6 +172,7 @@ def create_receipt(request: HttpRequest):
     # 验证库存历史数据
     try:
         new_stockHistory.full_clean()
+        new_stockHistory.save()
     except ValidationError as e:
         error_fields = list(e.error_dict.keys())
         return HttpResponse(json.dumps({'status':0, 'message':"表单填写错误！", 'fields':error_fields}))

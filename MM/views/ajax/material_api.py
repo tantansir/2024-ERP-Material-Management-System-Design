@@ -256,7 +256,7 @@ def search_stock_history(request: HttpRequest):
     )
 
     history_list = list(history)
-    history_list.sort(key=lambda x: x[0] * 100 + x[1], reverse=True)
+    history_list.sort(key=lambda x: x[0] * 100 + x[1])
     history_list = history_list[:MONTH_NUM]
 
     result = [[now.year, now.month, init_ununrestrictUse, init_qltyInspection, init_blocked, item.transit]]
@@ -264,6 +264,8 @@ def search_stock_history(request: HttpRequest):
         temp_date1 = datetime.date(year=his[0], month=his[1], day=1)
         temp_date2 = temp_date1 + datetime.timedelta(days=-1)
         result.append(
-            [temp_date2.year, temp_date2.month, result[-1][2] - his[2], result[-1][3] - his[3], result[-1][4] - his[4]])
+            [temp_date2.year, temp_date2.month, his[2], his[3], his[4]])
 
     return HttpResponse(json.dumps({'status': 1, 'message': result}, default=str), content_type='application/json')
+
+

@@ -111,7 +111,7 @@ class StockHistory(models.Model):
     item = models.ForeignKey(MaterialItem, on_delete=models.CASCADE)
     time = models.DateTimeField(auto_now_add=False, auto_now=False)
     def __str__(self) -> str:
-        return str(self.time) + ' ' + self.material.mname
+        return str(self.time) + ' ' + self.item.material.mname
 
 class PurchaseRequisition(models.Model):
     id = models.AutoField(primary_key=True)

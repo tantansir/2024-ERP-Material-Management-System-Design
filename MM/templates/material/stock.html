@@ -657,7 +657,7 @@
                             var option = {
                                 xAxis: {
                                     type: 'category',
-                                    data: xAxisData
+                                    data: xAxisData.reverse()  // 反转时间轴，使其按顺序显示
                                 },
                                 yAxis: {
                                     type: 'value'
@@ -668,19 +668,19 @@
                                 series: [
                                     {
                                         name: "无限制库存",
-                                        data: unrestrictedData,
+                                        data: unrestrictedData.reverse(),  // 反转数据以匹配时间轴
                                         type: 'line',
                                         itemStyle: { normal: {label: {show: true}}}
                                     },
                                     {
                                         name: "冻结库存",
-                                        data: frozenData,
+                                        data: frozenData.reverse(),  // 反转数据以匹配时间轴
                                         type: 'line',
                                         itemStyle: { normal: {label: {show: true}}}
                                     },
                                     {
                                         name: "质量检验库存",
-                                        data: qualityData,
+                                        data: qualityData.reverse(),  // 反转数据以匹配时间轴
                                         type: 'line',
                                         itemStyle: { normal: {label: {show: true}}}
                                     }
