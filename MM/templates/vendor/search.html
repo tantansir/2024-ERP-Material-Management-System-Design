@@ -334,7 +334,7 @@ $(document).ready(function () {
             success: function(data) {
                 var out = "";
                 for (var i = 0; i < data.length; i++) {
-                    out += '<tr><td>'+ data[i].pk+ '</td><td>' + data[i].vname+ '</td><td>' + data[i].city+ '</td><td>' + data[i].country+ '</td><td>'+ data[i]['euser__uid']+ '</td></tr>';
+                    out += '<tr><td>'+ data[i].pk+ '</td><td>' + data[i].vname+ '</td><td>' + data[i].city+ '</td><td>' + data[i].companyCode+ '</td><td>'+ data[i]['euser__uid']+ '</td></tr>';
                 }
                 document.getElementById("searchDiv").innerHTML = out;
             },

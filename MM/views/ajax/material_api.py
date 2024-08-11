@@ -145,7 +145,8 @@ def create_item(request: HttpRequest):
 
             # 获取当前用户的 EUser 实例
             try:
-                euser = EUser.objects.get(username=request.user.username)
+                user = request.user
+                euser = EUser.objects.get(username=user.username)
             except EUser.DoesNotExist:
                 return JsonResponse({'status': 0, 'message': "当前用户没有关联的EUser实例，请先完成注册。"}, status=400, json_dumps_params={'ensure_ascii': False})
 
