@@ -4,9 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2d172b04-ded4-4401-a492-59ea729722fa" name="更改" comment="修正requisition的部分问题">
+    <list default="true" id="2d172b04-ded4-4401-a492-59ea729722fa" name="更改" comment="修正采购订单生成与供应商评估管理">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MM/templates/purchaseorder/po-create_choose.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/purchaseorder/po-create_choose.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/purchaseorder/po-create_search.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/purchaseorder/po-create_search.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/purchaseorder/po-create_system.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/purchaseorder/po-create_system.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/purchaseorder/po-info.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/purchaseorder/po-info.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/purchaseorder/po-modify.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/purchaseorder/po-modify.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/purchaseorder/po_manage.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/purchaseorder/po_manage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/purchaseorder/purchase_order.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/purchaseorder/purchase_order.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/quotation/vq-value.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/quotation/vq-value.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MM/views/purchaseorder.py" beforeDir="false" afterPath="$PROJECT_DIR$/MM/views/purchaseorder.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -104,7 +111,10 @@
       <workItem from="1723189782090" duration="2921000" />
       <workItem from="1723193704031" duration="11704000" />
       <workItem from="1723269148362" duration="425000" />
-      <workItem from="1723275515363" duration="8358000" />
+      <workItem from="1723275515363" duration="8813000" />
+      <workItem from="1723289777157" duration="230000" />
+      <workItem from="1723297539465" duration="4000" />
+      <workItem from="1723466225177" duration="11271000" />
     </task>
     <task id="LOCAL-00001" summary="创建django项目">
       <option name="closed" value="true" />
@@ -177,7 +187,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723190101144</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="修正采购订单生成与供应商评估管理">
+      <option name="closed" value="true" />
+      <created>1723284583199</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1723284583199</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -214,6 +232,7 @@
     <MESSAGE value="更改md文档" />
     <MESSAGE value="修正requisition的部分问题" />
     <MESSAGE value="恢复" />
-    <option name="LAST_COMMIT_MESSAGE" value="恢复" />
+    <MESSAGE value="修正采购订单生成与供应商评估管理" />
+    <option name="LAST_COMMIT_MESSAGE" value="修正采购订单生成与供应商评估管理" />
   </component>
 </project>

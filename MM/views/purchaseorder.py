@@ -524,11 +524,12 @@ def pomodifyinfo2(request):
         data = request.POST.get("json")
         data = eval(data)
         id = data[0]['id']
+        print('JID', id)
         itemId = data[0]['itemId']
         quantity = data[0]['quantity']
         currency = data[0]['currency']
         deliveryDate = getDate2(data[0]['deliveryDate'])
-        orderitem = OrderItem.objects.filter(id=id).update(itemId = itemId,
+        orderitem = OrderItem.objects.filter(po_id = id).update(itemId = itemId,
                                                            quantity=quantity,
                                                            currency = currency,
                                                            deliveryDate =deliveryDate)
@@ -554,7 +555,7 @@ def pomodifyinfo3(request):
         quantity = data[0]['quantity']
         currency = data[0]['currency']
         deliveryDate = getDate2(data[0]['deliveryDate'])
-        orderitem = OrderItem.objects.filter(itemId=itemId).update(quantity=quantity,
+        orderitem = OrderItem.objects.filter(po_id = id).update(quantity=quantity,
                                                            currency = currency,
                                                            deliveryDate =deliveryDate)
         if orderitem:
