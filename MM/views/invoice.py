@@ -44,10 +44,10 @@ def payment(request: HttpRequest):
 
 @login_required
 def display_invoice(request: HttpRequest):
-    get = request.GET
-    pk = getPkExact(get.get('pk'))
+    get1 = request.GET
+    pk = getPkExact(get1.get('pk'))
     invoice: Invoice = Invoice.objects.get(pk__exact=pk)
-    item: OrderItem = get_object_or_404(OrderItem, pk=invoice.pk)
+    item: OrderItem = get_object_or_404(OrderItem, pk=invoice.orderItem.id)
     item_dict = model_to_dict(item)
     materialItem: MaterialItem = get_object_or_404(MaterialItem, id__exact=item.meterialItem.id)
     material: Material = get_object_or_404(Material, id__exact=materialItem.material.id)
