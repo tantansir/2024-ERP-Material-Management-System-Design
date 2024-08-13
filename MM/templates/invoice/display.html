@@ -1,15 +1,9 @@
-{% extends 'receipt/extend.html' %}
+{% extends 'template.html' %}
 {% load static %}
 {% block extra_css %}
 
 
-<script type="text/javascript">
-    function toPrint() {
-        Print('#form', {
-            noPrint: '.noPrint'
-        });
-    }
-</script>
+
 
 {% endblock %}
 {% block main_content %}
@@ -27,7 +21,7 @@
                     </div>
                     <br><br>
                     <div id='form'>
-                        <div class="content-panel">
+                        <div class="content-panel" id="print">
                             <h4 style="text-align:center">发票收据</h4>
                             <h5 style="text-align:center">供应商：{{ context.vendor.vname }}</h5>
                                 <section id="unseen">
@@ -189,7 +183,11 @@
 
 {% block js %}
 
-
+<script type="text/javascript">
+    function toPrint() {
+        $("#print").jqprint();
+    }
+</script>
 
 
 {% endblock %}
