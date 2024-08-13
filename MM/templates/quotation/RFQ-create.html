@@ -308,6 +308,8 @@
 <script>
     var i=0
     function addvendor() {
+
+        if($("#gyscode").val()!=''&&$("#vdname1").val()!=''&&$("#city1").val()!=''&&$("#location1").val()!=''&&$("#postcode1").val()!=''){
         i++
     var vdcode= $("#gyscode").val()
     var vdname = $("#vdname1").val()
@@ -322,58 +324,72 @@
     $("#city1").val('');
     $("#location1").val('');
     $("#postcode1").val('');
-    showMessage({text: '添加成功！',type: 'success'})
-
+    showMessage({text: '添加成功！',type: 'success'})}
+else
+    showMessage({text: '信息不全或有误，请重新填写！',type: 'warning'})
 }
 
 function create(){ //提交表格，创建成功
-    var tabLen = document.getElementById("gysdiv");
-    var quantity = $("#quantity").val()
-    var deliveryDate = $("#deliveryDate").val()
-    var collNo = $("#collNo").val()
-    var deadline = $("#deadline").val()
-    var gyscode = $("#gyscode").val()
-var rid = document.getElementById("rid").innerHTML
-var iid = document.getElementById("iid").innerHTML
-var mid = document.getElementById("mid").innerHTML
-        var jsonT = "[";
-        var v = new Array() 
-        for (var i = 0; i < tabLen.rows.length; i++) {
-                jsonT += '{"vid":"' + tabLen.rows[i].cells[0].innerHTML  + '"},'
-                v[i]=tabLen.rows[i].cells[0].innerHTML
-        }
-        jsonT= jsonT.substr(0, jsonT.length - 1);
-        jsonT += "]";
-        console.log(jsonT);
-        console.log(quantity);
-        console.log(deliveryDate);
-        console.log(jsonT,quantity);
-
-        console.log(jsonT,quantity,deliveryDate,collNo)
-        console.log(jsonT,collNo,deadline,rid,iid,mid)
-        console.log(jsonT,quantity,deliveryDate,collNo,deadline,rid,iid,mid);
-        $.ajax({
-            type: 'post',
-            url: '/mm/quotation/rfqinfo',
-            data:{
-                "json":jsonT,
-                "quantity":quantity,
-                "deliveryDate":deliveryDate,
-                "collNo":collNo,
-                "deadline":deadline,
-                "id":rid,
-                "itemId":iid,
-                "meterial__id":mid
-        },
-            success: function (data) {
-                let a = JSON.parse(data)
-                var j
-  for(j=0;j<i;j++){
-    showMessage({text: '供应商'+ v[j]+'的报价申请创建成功！报价申请单编号：'+a[j] ,type: 'success',showClose: true, autoClose: false})
-  }
+        if($("#quantity").val()!=''&&$("#deliveryDate").val()!='') {
+            var tabLen = document.getElementById("gysdiv");
+            var quantity = $("#quantity").val()
+            var deliveryDate = $("#deliveryDate").val()
+            var collNo = $("#collNo").val()
+            var deadline = $("#deadline").val()
+            var gyscode = $("#gyscode").val()
+            var rid = document.getElementById("rid").innerHTML
+            var iid = document.getElementById("iid").innerHTML
+            var mid = document.getElementById("mid").innerHTML
+            var jsonT = "[";
+            var v = new Array()
+            for (var i = 0; i < tabLen.rows.length; i++) {
+                jsonT += '{"vid":"' + tabLen.rows[i].cells[0].innerHTML + '"},'
+                v[i] = tabLen.rows[i].cells[0].innerHTML
             }
-        });     
+            jsonT = jsonT.substr(0, jsonT.length - 1);
+            jsonT += "]";
+            console.log(jsonT);
+            console.log(quantity);
+            console.log(deliveryDate);
+            console.log(jsonT, quantity);
 
+            console.log(jsonT, quantity, deliveryDate, collNo)
+            console.log(jsonT, collNo, deadline, rid, iid, mid)
+            console.log(jsonT, quantity, deliveryDate, collNo, deadline, rid, iid, mid);
+            $.ajax({
+                type: 'post',
+                url: '/mm/quotation/rfqinfo',
+                data: {
+                    "json": jsonT,
+                    "quantity": quantity,
+                    "deliveryDate": deliveryDate,
+                    "collNo": collNo,
+                    "deadline": deadline,
+                    "id": rid,
+                    "itemId": iid,
+                    "meterial__id": mid
+                },
+                success: function (data) {
+                    let a = JSON.parse(data)
+                    var j
+                    for (j = 0; j < i; j++) {
+                        showMessage({
+                            text: '供应商' + v[j] + '的报价申请创建成功！报价申请单编号：' + a[j],
+                            type: 'success',
+                            showClose: true,
+                            autoClose: false
+                        })
+                    }
+                }
+            });
+        }
+        else
+            showMessage({
+                            text: '请填写数量和送货时间！',
+                            type: 'warning',
+                            showClose: true,
+                            autoClose: false
+                        })
 
 }
 </script>

@@ -292,7 +292,9 @@
     //双击行 信息进入“搜索商品条件”三个框
     $("#sptable").on("dblclick","tr",function(e){
         document.getElementById("goodcode").value=$(this).find('td').eq(0).text();
-        document.getElementById("goodname").value=$(this).find('td').eq(1).text()
+        document.getElementById("goodname").value=$(this).find('td').eq(1).text();
+        document.getElementById("factory").value=$(this).find('td').eq(4).text();
+        $("#factory").trigger("change");
         $('#myModalgood').modal('hide');
     });
 
@@ -369,12 +371,12 @@
 
 
     <script>
+        import hljs from "../../static/assets/js/highlight.min";
+
         hljs.highlightAll();
     </script>
 
-    <script>
-        const notice = new Notice();
-    </script>
+
 
 
         <script>
@@ -542,22 +544,23 @@
             //添加商品，需判断是否存在
             var i = 0;
 function addgood() {
-   // if(){
     var goodcode = document.getElementById("goodcode").value
     var factory = document.getElementById("factory").value
     var gujia = document.getElementById("gujia").value
     var danwei = document.getElementById("danwei").value
     var number = document.getElementById("number").value
     var time = document.getElementById("time").value
+   if(goodcode!=''&&factory!=''&&gujia!=''&&danwei!=''&&number!=''&&time!=''){
+
     var trStr = ''
     i+=10
     trStr = '<tr><td>' + i + '</td><td>' + goodcode  + '</td><td>' + factory + '</td><td>' + gujia + '</td><td>' + danwei + '</td><td>' + number + '</td><td>' + time + '<td><button class="btn btn-danger btn-xs" onclick="deleteTr(this)" id="shanchu"><i class="fa fa-trash-o "></i></button></td>' + '</td></tr>'
     document.getElementById("gooddiv").innerHTML += trStr;
     $(":input").val('');
     showMessage({text: '添加成功！',type: 'success'})
-  //     }
-  // else
-  //  showMessage({text: '添加失败，商品不存在。',type: 'warning'})
+      }
+  else
+   showMessage({text: '添加失败，信息有误或商品不存在！',type: 'warning'})
 
 }
 function create(){ //提交表格，创建成功
