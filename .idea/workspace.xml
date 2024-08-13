@@ -4,15 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2d172b04-ded4-4401-a492-59ea729722fa" name="更改" comment="修复了前端的一系列问题">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/mm_erp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/mm_erp.iml" afterDir="false" />
+    <list default="true" id="2d172b04-ded4-4401-a492-59ea729722fa" name="更改" comment="修复了前端的一些问题">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MM/templates/purchaserequisition/create-new.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/purchaserequisition/create-new.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MM/templates/purchaserequisition/pr-info.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/purchaserequisition/pr-info.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MM/templates/purchaserequisition/pr-modify(1).html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/purchaserequisition/pr-modify(1).html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MM/templates/purchaserequisition/pr_manage.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/purchaserequisition/pr_manage.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MM/views/purchaserequisition.py" beforeDir="false" afterPath="$PROJECT_DIR$/MM/views/purchaserequisition.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/quotation/RFQ-create.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/quotation/RFQ-create.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,7 +123,7 @@
       <workItem from="1723536208349" duration="283000" />
       <workItem from="1723536499117" duration="441000" />
       <workItem from="1723537192706" duration="7807000" />
-      <workItem from="1723557352505" duration="3507000" />
+      <workItem from="1723557352505" duration="4504000" />
     </task>
     <task id="LOCAL-00001" summary="创建django项目">
       <option name="closed" value="true" />
@@ -226,7 +220,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723548872610</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="修复了前端的一些问题">
+      <option name="closed" value="true" />
+      <created>1723563223122</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1723563223122</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -266,6 +268,7 @@
     <MESSAGE value="修正采购订单生成与供应商评估管理" />
     <MESSAGE value="修正了无法正确创建报价单的问题" />
     <MESSAGE value="修复了前端的一系列问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="修复了前端的一系列问题" />
+    <MESSAGE value="修复了前端的一些问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复了前端的一些问题" />
   </component>
 </project>

@@ -330,7 +330,8 @@ else
 }
 
 function create(){ //提交表格，创建成功
-        if($("#quantity").val()!=''&&$("#deliveryDate").val()!='') {
+        var tableBody = document.getElementById('gysdiv');
+        if($("#quantity").val()!=''&&$("#deliveryDate").val()!=''&&tableBody.children.length != 0) {
             var tabLen = document.getElementById("gysdiv");
             var quantity = $("#quantity").val()
             var deliveryDate = $("#deliveryDate").val()
@@ -383,14 +384,24 @@ function create(){ //提交表格，创建成功
                 }
             });
         }
-        else
-            showMessage({
-                            text: '请填写数量和送货时间！',
-                            type: 'warning',
-                            showClose: true,
-                            autoClose: false
-                        })
-
+        else {
+            if(tableBody.children.length == 0){
+                showMessage({
+                text: '供应商信息不得为空！',
+                type: 'warning',
+                showClose: true,
+                autoClose: false
+                })
+            }
+            if($("#quantity").val()==''||$("#deliveryDate").val()=='') {
+                showMessage({
+                    text: '请填写数量和送货时间！',
+                    type: 'warning',
+                    showClose: true,
+                    autoClose: false
+                })
+            }
+        }
 }
 </script>
  {% endblock %}
