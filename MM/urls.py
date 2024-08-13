@@ -94,6 +94,7 @@ urlpatterns = [
     path('purchaserequisition/getpqinfo/<int:pk>/', purchaserequisition.getpqinfo, name='insert_pur'),
     path('purchaserequisition/newinsertreque/', purchaserequisition.newrequeinsert, name='insert_pur'),
     path('quotation/getall', quotation.getall, name='search_pur'),
+
     path('quotation/searchqinggou', quotation.searchqinggou, name='search_pur'),
     path('quotation/searchquo', quotation.searchquo, name='search_pur'),
     path('quotation/vqcreate/<int:pk>/', purchaseorder.vqcreate, name='search_pur'),
@@ -116,6 +117,7 @@ urlpatterns = [
     path('quotation/searchqo', purchaseorder.searchqo, name='search_pur'),
     path('purchaserequisition/getmodifyinfo/<int:pk>/', purchaserequisition.getmodifyinfo, name='insert_pur'),
     path('purchaserequisition/getmodifyinfo2/', purchaserequisition.getmodifyinfo2, name='insert_pur'),
+
     path('quotation/rfqcreateinfo/<int:pk>/', quotation.rfqinfo, name='insert_pur'),
     path('quotation/rfqinfo/<int:pk>/', quotation.rfqinfo2, name='insert_pur'),
     path('purchaseorder/insert', purchaseorder.insert, name='search_pur'),

@@ -6,15 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="2d172b04-ded4-4401-a492-59ea729722fa" name="更改" comment="修正采购订单生成与供应商评估管理">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MM/templates/purchaseorder/po-create_choose.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/purchaseorder/po-create_choose.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MM/templates/purchaseorder/po-create_search.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/purchaseorder/po-create_search.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MM/templates/purchaseorder/po-create_system.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/purchaseorder/po-create_system.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MM/templates/purchaseorder/po-info.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/purchaseorder/po-info.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MM/templates/purchaseorder/po-modify.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/purchaseorder/po-modify.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MM/templates/purchaseorder/po_manage.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/purchaseorder/po_manage.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MM/templates/purchaseorder/purchase_order.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/purchaseorder/purchase_order.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MM/templates/quotation/vq-value.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/quotation/vq-value.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MM/views/purchaseorder.py" beforeDir="false" afterPath="$PROJECT_DIR$/MM/views/purchaseorder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/purchaserequisition/create-new.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/purchaserequisition/create-new.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/purchaserequisition/pr-info.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/purchaserequisition/pr-info.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/purchaserequisition/pr-modify(1).html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/purchaserequisition/pr-modify(1).html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/quotation/RFQ-create.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/quotation/RFQ-create.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/quotation/RFQ-create_info.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/quotation/RFQ-create_info.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/quotation/RFQ-create_search.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/quotation/RFQ-create_search.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/quotation/RFQ.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/quotation/RFQ.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/MM/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/views/quotation.py" beforeDir="false" afterPath="$PROJECT_DIR$/MM/views/quotation.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +52,7 @@
     &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;last_opened_file_path&quot;: &quot;F:/mm_erp&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -115,6 +116,10 @@
       <workItem from="1723289777157" duration="230000" />
       <workItem from="1723297539465" duration="4000" />
       <workItem from="1723466225177" duration="11271000" />
+      <workItem from="1723534920642" duration="988000" />
+      <workItem from="1723536208349" duration="283000" />
+      <workItem from="1723536499117" duration="441000" />
+      <workItem from="1723537192706" duration="4123000" />
     </task>
     <task id="LOCAL-00001" summary="创建django项目">
       <option name="closed" value="true" />

@@ -441,9 +441,10 @@ def rfqinfo(request: HttpRequest, pk):
         quoatations = PurchaseRequisition.objects.filter(id = pk).values()
 
         quoatations = list(quoatations)
+        print(quoatations)
 
         rq = RequisitionItem.objects.filter(pr_id=pk).values("meterial__stock__id","meterial__id",
-                                                             "itemId","meterial__sloc","meterial__stock__name")
+                                                             "itemId","meterial__sloc","meterial__stock__name","quantity","deliveryDate")
 
         rq = list(rq)
         print(rq)

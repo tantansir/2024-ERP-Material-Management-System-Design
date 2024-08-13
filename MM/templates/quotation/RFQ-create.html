@@ -4,49 +4,15 @@
 
 {% endblock %}
 
-<!-- js placed at the end of the document so the pages load faster -->
-<script src="{% static 'assets/js/jquery.js' %}"></script>
-<script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
-<script class="include" type="text/javascript" src="{% static 'assets/js/jquery.dcjqaccordion.2.7.js' %}"></script>
-<script src="{% static 'assets/js/jquery.scrollTo.min.js' %}"></script>
-<script src="{% static 'assets/js/jquery.nicescroll.js' %}" type="text/javascript"></script>
 
-<!--common script for all pages-->
-<script src="{% static 'assets/js/common-scripts.js' %}"></script>
 
-<!--script for this page-->
-
-<!-- 引入刚刚下载的 ECharts 文件 -->
-<script src="{% static 'assets/js/echarts.js' %}"></script>
-<script src="{% static 'assets/js/highlight.min.js' %}"></script>
     <script>
         hljs.highlightAll();
     </script>
 
-	<script src="{% static 'assets/js/form-component.js' %}"></script> 
-
-    <script src="{% static 'assets/js/highlight.min.js' %}"></script>
-    <script>
-        hljs.highlightAll();
-    </script>
-
-    <script src="{% static 'assets/js/notice.min.js' %}"></script>
     <script>
         const notice = new Notice();
     </script>
-
-    <script src="{% static 'assets/js/main-qr.js' %}"></script>
-   
-    <script src="{% static 'assets/dist/notice.min.js' %}"></script>
-    <script>
-        const notice = new Notice();
-    </script>
-
-    <script src="{% static 'assets/js/main.js' %}"></script>
-
-    <script src="{% static 'assets/js/the-datepicker.js' %}"></script>
-    <link href="{% static 'assets/css/purchase.css' %}" rel="stylesheet">
-
 
     {% block main_content %}
       <!-- **********************************************************************************************************************************************************
@@ -378,6 +344,13 @@ var mid = document.getElementById("mid").innerHTML
         }
         jsonT= jsonT.substr(0, jsonT.length - 1);
         jsonT += "]";
+        console.log(jsonT);
+        console.log(quantity);
+        console.log(deliveryDate);
+        console.log(jsonT,quantity);
+
+        console.log(jsonT,quantity,deliveryDate,collNo)
+        console.log(jsonT,collNo,deadline,rid,iid,mid)
         console.log(jsonT,quantity,deliveryDate,collNo,deadline,rid,iid,mid);
         $.ajax({
             type: 'post',
