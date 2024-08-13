@@ -19,6 +19,9 @@
     <link href="{% static 'assets/css/the-datepicker.css' %}" rel="stylesheet">
     <link href="{% static 'assets/css/purchase.css' %}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'assets/fonts/icon1/iconfont.css' %}">
+    <link href="{% static 'assets/css/base/jquery-ui-1.10.4.custom.css' %}" rel="stylesheet">
+
+
 
 
     <!-- JS -->
@@ -30,7 +33,7 @@
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 
     <!-- jQuery 插件 -->
-
+    <script src="{% static 'assets/js/jquery-ui-1.10.4.custom.js' %}"></script>
     <script src="{% static 'assets/js/jquery.sparkline.js' %}"></script>
     <script src="{% static 'assets/js/jquery.scrollTo.min.js' %}"></script>
     <script src="{% static 'assets/js/gritter/js/jquery.gritter.js' %}"></script>
@@ -65,7 +68,7 @@
             <div class="fa fa-bars tooltips" data-placement="right" data-original-title=""></div>
         </div>
         <!--logo start-->
-        <a href="index.html" class="logo"><b>MD集团物料管理系统</b></a>
+        <a href={% url 'MM:home' %} class="logo"><b>MD集团物料管理系统</b></a>
         <!--logo end-->
         <div class="nav notify-row" id="top_menu"></div>
         <!--  notification start -->
