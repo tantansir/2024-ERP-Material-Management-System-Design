@@ -161,7 +161,11 @@ def getpqinfo(request: HttpRequest, pk):
     if request.method == "GET":
         purchaseRequisition = PurchaseRequisition.objects.filter(id = pk).values()
         purchase_requisition = PurchaseRequisition.objects.get(id=pk)
-        reuqe = RequisitionItem.objects.filter(pr = purchase_requisition).values()
+        reuqe = RequisitionItem.objects.filter(pr_id=pk).values("itemId", "estimatedPrice", "currency",
+                                                                "deliveryDate", "quantity",
+                                                                "meterial__id", "pr_id", "status",
+                                                                "meterial__sloc", "meterial__material__mname"
+                                                                , "meterial__stock__name")
         print(purchaseRequisition)
         print(reuqe)
         for i in reuqe:
@@ -238,7 +242,7 @@ def getmodifyinfo(request: HttpRequest, pk):
                                                                 "deliveryDate", "quantity",
                                                                 "meterial__id", "pr_id", "status",
                                                                 "meterial__sloc", "meterial__material__mname"
-                                                                , "meterial__stock__id")
+                                                                , "meterial__stock__name")
         reuqe = list(reuqe)
         for i in reuqe:
             if i['status']=='0':

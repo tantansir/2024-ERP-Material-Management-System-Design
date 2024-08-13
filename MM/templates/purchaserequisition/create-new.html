@@ -564,32 +564,34 @@ function addgood() {
 
 }
 function create(){ //提交表格，创建成功
-    var tabLen = document.getElementById("gooddiv");
-    var beizhu = $("#beizhu").val();
-    var pk=sessionStorage.getItem('pk');
+    var tableBody = document.getElementById('gooddiv');
+    if(tableBody.children.length != 0) {
+        var tabLen = document.getElementById("gooddiv");
+        var beizhu = $("#beizhu").val();
+        var pk = sessionStorage.getItem('pk');
         var jsonT = "[";
         for (var i = 0; i < tabLen.rows.length; i++) {
-                jsonT += '{"itemId":"' + tabLen.rows[i].cells[0].innerHTML + '","material_id":' + tabLen.rows[i].cells[1].innerHTML + ',"plant":"' + tabLen.rows[i].cells[2].innerHTML + '","estimatedPrice":' + tabLen.rows[i].cells[3].innerHTML + ',"currency":"' + tabLen.rows[i].cells[4].innerHTML + '","quantity":' + tabLen.rows[i].cells[5].innerHTML + ',"deliveryDate":"' + tabLen.rows[i].cells[6].innerHTML + '"},'
-       //         jsonT += '{"itemId":"' + tabLen.rows[i].cells[0].innerHTML + '","material_id":' + tabLen.rows[i].cells[1].innerHTML + ',"plant":' + tabLen.rows[i].cells[2].innerHTML + ',"estimatedPrice":' + tabLen.rows[i].cells[3].innerHTML + ',"currency":"' + tabLen.rows[i].cells[4].innerHTML + '","quantity":' + tabLen.rows[i].cells[5].innerHTML + ',"deliveryDate":"' + tabLen.rows[i].cells[6].innerHTML + '"},'
+            jsonT += '{"itemId":"' + tabLen.rows[i].cells[0].innerHTML + '","material_id":' + tabLen.rows[i].cells[1].innerHTML + ',"plant":"' + tabLen.rows[i].cells[2].innerHTML + '","estimatedPrice":' + tabLen.rows[i].cells[3].innerHTML + ',"currency":"' + tabLen.rows[i].cells[4].innerHTML + '","quantity":' + tabLen.rows[i].cells[5].innerHTML + ',"deliveryDate":"' + tabLen.rows[i].cells[6].innerHTML + '"},'
+            //         jsonT += '{"itemId":"' + tabLen.rows[i].cells[0].innerHTML + '","material_id":' + tabLen.rows[i].cells[1].innerHTML + ',"plant":' + tabLen.rows[i].cells[2].innerHTML + ',"estimatedPrice":' + tabLen.rows[i].cells[3].innerHTML + ',"currency":"' + tabLen.rows[i].cells[4].innerHTML + '","quantity":' + tabLen.rows[i].cells[5].innerHTML + ',"deliveryDate":"' + tabLen.rows[i].cells[6].innerHTML + '"},'
         }
-        jsonT= jsonT.substr(0, jsonT.length - 1);
+        jsonT = jsonT.substr(0, jsonT.length - 1);
         jsonT += "]";
         console.log(jsonT);
         console.log(beizhu);
         $.ajax({
             type: 'post',
             url: '/mm/purchaserequisition/newinsertreque/',
-            data:{"json":jsonT,"beizhu":beizhu},
+            data: {"json": jsonT, "beizhu": beizhu},
             success: function (data) {
                 let a = JSON.parse(data)
-                showMessage({text: '创建成功！采购申请编号：'+a.content ,type: 'success'})
-                this.$message({
-                     message: '恭喜你，上传成功!',
-                    type: 'success'
-                });
+                showMessage({text: '创建成功！采购申请编号：' + a.content, type: 'success'})
+                document.getElementById('gooddiv').innerHTML = '';
+                document.getElementById('beizhu').value = '';
             }
-        });     
-
+        });
+    }
+    else
+        showMessage({text: '请先添加商品！', type: 'warning'})
 
 }
 

@@ -4,12 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2d172b04-ded4-4401-a492-59ea729722fa" name="更改" comment="修正了无法正确创建报价单的问题">
+    <list default="true" id="2d172b04-ded4-4401-a492-59ea729722fa" name="更改" comment="修复了前端的一系列问题">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/mm_erp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/mm_erp.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MM/templates/purchaserequisition/create-new.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/purchaserequisition/create-new.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/purchaserequisition/pr-info.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/purchaserequisition/pr-info.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MM/templates/purchaserequisition/pr-modify(1).html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/purchaserequisition/pr-modify(1).html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MM/templates/quotation/RFQ-create.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/quotation/RFQ-create.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MM/templates/quotation/RFQ-create_search.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/quotation/RFQ-create_search.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/templates/purchaserequisition/pr_manage.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/purchaserequisition/pr_manage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MM/views/purchaserequisition.py" beforeDir="false" afterPath="$PROJECT_DIR$/MM/views/purchaserequisition.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +27,17 @@
       <list>
         <option value="HTML File" />
       </list>
+    </option>
+  </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
     </option>
   </component>
   <component name="Git.Settings">
@@ -42,23 +56,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/mm_erp&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/30951/anaconda3/Scripts/conda.exe",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="ERP" type="Python.DjangoServer" factoryName="Django server">
       <module name="mm_erp" />
@@ -114,7 +128,8 @@
       <workItem from="1723534920642" duration="988000" />
       <workItem from="1723536208349" duration="283000" />
       <workItem from="1723536499117" duration="441000" />
-      <workItem from="1723537192706" duration="7392000" />
+      <workItem from="1723537192706" duration="7807000" />
+      <workItem from="1723557352505" duration="3507000" />
     </task>
     <task id="LOCAL-00001" summary="创建django项目">
       <option name="closed" value="true" />
@@ -203,7 +218,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723545818621</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="修复了前端的一系列问题">
+      <option name="closed" value="true" />
+      <created>1723548872610</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1723548872610</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -242,6 +265,7 @@
     <MESSAGE value="恢复" />
     <MESSAGE value="修正采购订单生成与供应商评估管理" />
     <MESSAGE value="修正了无法正确创建报价单的问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="修正了无法正确创建报价单的问题" />
+    <MESSAGE value="修复了前端的一系列问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复了前端的一系列问题" />
   </component>
 </project>
