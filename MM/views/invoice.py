@@ -127,7 +127,7 @@ def display_purchase_order(request: HttpRequest, pk):
 def search_orders(request):
     if request.method == "GET":
         purchaseOrders = []
-        return render(request, '../templates/receipt/orders.html', context={"purchaseOrders":purchaseOrders})
+        return render(request, '../templates/invoice/orders.html', context={"purchaseOrders":purchaseOrders})
     if request.method == "POST":
         id = request.POST.get("id"); id = getPk(id)
         ven = request.POST.get("ven"); ven = getPk(ven)
@@ -142,7 +142,7 @@ def search_orders(request):
             po__euser__uid__regex=eu, po__time__range=[start, now]
         )
         orderItems: QuerySet = orderItems.values(
-            "po__id", "itemId", "meterialItem__material__mname", "quantity", "price", "currency",
+            "po__id", "itemId", "meterialItem__material__id", "quantity", "price", "currency",
             "po__euser__uid", "po__vendor__vid", "po__time", "status", sum=F("quantity")*F("price")
         ).order_by("po__id")
         orderItems = list(orderItems)

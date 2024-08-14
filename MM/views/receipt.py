@@ -258,7 +258,7 @@ def search_orders(request):
         )
         # 对查询结果进行聚合计算和排序
         orderItems: QuerySet = orderItems.values(
-            "po__id", "itemId", "meterialItem__material__mname", "quantity", "price", "currency",
+            "po__id", "itemId", "meterialItem__material__id", "quantity", "price", "currency",
             "po__euser__uid", "po__vendor__vid", "po__time", "status", sum=F("quantity")*F("price")
         ).order_by("po__id")
         # 将查询结果转换为列表
@@ -270,7 +270,7 @@ def search_orders(request):
             if i['status']=='1':
                 i['status']="货物已送达"
             if i['status']=='2':
-                i['status']="已收到发货"
+                i['status']="已收到发票"
             if i['status']=='3':
                 i['status']="已完成支付"
         # 渲染并返回包含过滤后订单数据的页面
