@@ -39,6 +39,8 @@
                                         <th>商品条目编码</th>
                                         <th>工厂</th>
                                         <th>存储位置</th>
+                                        <th>价格</th>
+                                        <th>货币单位</th>
                                         <th>数量</th>
                                         <th>送货时间</th>
                                     </tr>
@@ -51,8 +53,10 @@
                                         <td id="mid">{{c.requisitionitem__meterial__id}}</td>
                                         <td>{{c.stockname}}</td>
                                         <td>{{c.requisitionitem__meterial__sloc}}</td>
-                                        <td><input type="text" name="quantity" class="form-control rfq-td-create" id="quantity"></td>
-                                        <td><input type="text" class="form-control rfq-td-create" name="deliveryDate" onclick="date(this)" id="deliveryDate"></td>
+                                        <td><input type="text" name="price" class="form-control rfq-td-create" id="price" value="{{c.requisitionitem__estimatedPrice}}"></td>
+                                        <td name="currency" id="currency">{{c.requisitionitem__currency}}</td>
+                                        <td><input type="text" name="quantity" class="form-control rfq-td-create" id="quantity" value="{{c.requisitionitem__quantity}}"></td>
+                                        <td><input type="text" class="form-control rfq-td-create" name="deliveryDate" value="{{c.requisitionitem__deliveryDate.day}}. {{c.requisitionitem__deliveryDate.month}}. {{c.requisitionitem__deliveryDate.year}}" onclick="date(this)" id="deliveryDate"></td>
                                     </tr>
                                 </tbody>
                                 {% endfor %}
@@ -333,6 +337,8 @@ function create(){ //提交表格，创建成功
         var tableBody = document.getElementById('gysdiv');
         if($("#quantity").val()!=''&&$("#deliveryDate").val()!=''&&tableBody.children.length != 0) {
             var tabLen = document.getElementById("gysdiv");
+            var price = $("#price").val()
+            var currency = $("#currency").val()
             var quantity = $("#quantity").val()
             var deliveryDate = $("#deliveryDate").val()
             var collNo = $("#collNo").val()
@@ -362,6 +368,8 @@ function create(){ //提交表格，创建成功
                 url: '/mm/quotation/rfqinfo',
                 data: {
                     "json": jsonT,
+                    "price": price,
+                    "currency": currency,
                     "quantity": quantity,
                     "deliveryDate": deliveryDate,
                     "collNo": collNo,

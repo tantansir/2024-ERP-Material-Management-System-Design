@@ -286,19 +286,24 @@
                 }
             })
         });
+
+            // 双击表格行填入货币
+            $("#currDiv").on("dblclick", "tr", function(e) {
+                var currency = $(this).find('td').eq(1).text();
+                document.getElementById("currency2").value = currency;
+                $('#myModalcurr').modal('hide');
+            });
+            // 显示货币选择模态框
+            function currencyf() {
+                $("#myModalcurr").modal("show");
+            }
+
         $("table").on("dblclick","tr",function(e){
             
             document.getElementById("danwei").value=$(this).find('td').eq(1).text();
             $('#myModalcurr').modal('hide')
             
         });
-        function currencyf() {
-            console.log(1);
-
-            //弹出模态框
-            
-            $("#myModalcurr").modal("show")
-        }
       
 
     </script>

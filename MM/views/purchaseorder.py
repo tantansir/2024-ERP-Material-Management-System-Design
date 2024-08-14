@@ -287,15 +287,11 @@ def vqcreate(request: HttpRequest, pk):
                                                                 "meterial__stock__name")
 
         materialitem = list(mate)
-        print(materialitem)
         vendor = list(vendor)
         quotation = list(quotation)
-        print(quotation)
-        print(materialitem)
         return render(request, '../templates/quotation/vq-create.html', locals())
     if request.method == "POST":
         pk = str(int(pk))
-        print("pk:", pk)
         price = request.POST.get("price")
         currency = request.POST.get("currency")
         validTime = request.POST.get("validTime")

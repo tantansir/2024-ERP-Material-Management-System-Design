@@ -201,7 +201,7 @@ def display_purchase_order(request: HttpRequest, pk):
             elif i['status']=='1':
                 i['status']="货物已送达"
             elif i['status']=='2':
-                i['status']="已收到发货"
+                i['status']="已收到发票"
             elif i['status']=='3':
                 i['status']="已完成支付"
         # 计算每个订单项的小计，并累加到总金额

@@ -307,7 +307,12 @@ def makebyrq(request: HttpRequest, pk,itemId):
                                                                "requisitionitem__meterial__id",
                                                                "requisitionitem__meterial__stock",
                                                                "requisitionitem__meterial__sloc",
+                                                               "requisitionitem__estimatedPrice",
+                                                               "requisitionitem__currency",
+                                                               "requisitionitem__quantity",
+                                                               "requisitionitem__deliveryDate",
                                                                )
+
         reque = list(reque)
         stoid = reque[0]['requisitionitem__meterial__stock']
         stoname = Stock.objects.filter(id = stoid).values()
@@ -353,9 +358,16 @@ def makebyrq(request: HttpRequest, pk,itemId):
 @login_required
 def rfqinfojiekou(request):
     if request.method =="POST":
-        euser = request.user
-        euserid = euser.pk
+        user = request.user
+        euser = EUser.objects.get(username=user.username)
         quantity = request.POST.get("quantity")
+        price = request.POST.get("price")
+
+        #currency = request.POST.get("currency")
+        pk = request.POST.get("id")
+        requisition_item = RequisitionItem.objects.get(id=pk)
+        currency = requisition_item.currency
+
         pk = request.POST.get("id")
         deliveryDate = request.POST.get("deliveryDate")
         deliveryDate = getDate2(deliveryDate)
@@ -370,13 +382,15 @@ def rfqinfojiekou(request):
             vid = i['vid']
             quotation = Quotation.objects.create(deadline=deadline,
                                                  quantity=quantity,
+                                                 price=price,
+                                                 currency=currency,
                                                  ri_id=pk,
                                                  vendor_id=vid,
-                                                 euser_id=euserid,
+                                                 euser=euser,
                                                  time=now_time,
                                                  collNo=collNo,
                                                  deliveryDate=deliveryDate,
-                                                 rej=0
+                                                 rej=None,
                                                  )
             quoid = quotation.id
             quolist.append(quoid)
