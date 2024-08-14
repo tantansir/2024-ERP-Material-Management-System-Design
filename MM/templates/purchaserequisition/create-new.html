@@ -279,7 +279,7 @@
                     material = dataObj[i].material
                     stock = dataObj[i].stock
                     user = dataObj[i].user
-                    out += '<tr><td>'+ material.id+ '</td><td>' + material.mname+ '</td><td>' + material.mType+ '</td><td>' + material.industrySector+ '</td><td>'+ stock.name+ '</td><td>'+ fields.sloc+ '</td><td>'+ user.username.id + '</td><tr>';
+                    out += '<tr><td>'+ material.id+ '</td><td>' + material.mname+ '</td><td>' + material.mType+ '</td><td>' + material.industrySector+ '</td><td>'+ stock.name+ '</td><td>'+ fields.sloc+ '</td><td>'+ user.id + '</td><tr>';
                 }
                 document.getElementById("goodDiv").innerHTML=out;
             },
