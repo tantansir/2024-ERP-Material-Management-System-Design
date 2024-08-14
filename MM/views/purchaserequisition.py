@@ -344,10 +344,10 @@ def modify_pr(request: HttpRequest, pk):
 
 """
 
+from django.db import transaction
 
-
-
-
+from django.db import transaction
+from django.http import JsonResponse
 
 
 @csrf_exempt
@@ -356,43 +356,38 @@ def newrequeinsert(request):
     if request.method == "GET":
         return render(request, '../templates/purchaserequisition/create-new.html', locals())
     if request.method == "POST":
-        euser = request.user
-        euserid = euser.pk
-        mid = request.POST.get("mid")
-        plant = request.POST.get("plant")
-        itemId = request.POST.get("itemId")
+        user = request.user
+        euser = EUser.objects.get(username=user.username)
         data = request.POST.get("json")
         text = request.POST.get("beizhu")
-        print(text)
-        print("type:",type(data))
         now_time = datetime.datetime.now()
-        requision = PurchaseRequisition.objects.create(time=now_time, euser_id=euserid, text=text)
-        print("success")
-        prid= requision.id
+        requision = PurchaseRequisition.objects.create(time=now_time, euser=euser, text=text)
+        prid = requision.id
         data1 = eval(data)
+        print(data1)
+
         for i in data1:
-            print(i['deliveryDate'])
             str = getDate2(i['deliveryDate'])
-            # material1 = MaterialItem.objects.get(id=i['material_id'])
-            requisitionitem = RequisitionItem.objects.create(pr_id = prid,
-                                                             meterial_id = i['material_id'],
-                                                             estimatedPrice=i['estimatedPrice'],
-                                                             currency=i['currency'],
-                                                             quantity=i['quantity'],
-                                                             status="0",
-                                                             itemId=i['itemId'],
-                                                             deliveryDate= str)
+            # 获取MaterialItem对象
+            material_item = MaterialItem.objects.get(material_id=i['material_id'], stock__name=i['plant'])
+
+            requisitionitem = RequisitionItem.objects.create(
+                pr_id=prid,
+                meterial_id=material_item.id,  # 使用MaterialItem的id
+                estimatedPrice=i['estimatedPrice'],
+                currency=i['currency'],
+                quantity=i['quantity'],
+                status="0",
+                itemId=i['itemId'],
+                deliveryDate=str
+            )
 
         content = 100000 + requision.id
-        remessages = "创建成功"
         datalist = {
-            "message":"创建成功",
+            "message": "创建成功",
             "content": content
         }
-        print("创建成功")
         return HttpResponse(json.dumps(datalist))
-
-
 
 
 @csrf_exempt
