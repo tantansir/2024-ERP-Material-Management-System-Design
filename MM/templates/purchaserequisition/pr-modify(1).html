@@ -56,8 +56,8 @@
                               </div>
                                   <thead>
                                   <tr>
-                                      <th>#&nbsp 条目编码</th>
-                                      <th>商品编码</th>
+                                      <th>#&nbsp 次序</th>
+                                      <th>商品条目编码</th>
                                       <th>商品名称</th>
                                       <th>估价</th>
                                       <th>货币单位</th>
@@ -72,9 +72,9 @@
                                   <tbody id="gooddiv">
                                       {% for c in reuqe %}
                                       <tr>
-                                          <td class="td-text"> <input type="text" class="form-control td-text-modify" value="{{c.itemId}}" ></td>
-                                          <td class="td-text"> <input type="text" class="form-control td-text-modify" value="{{c.meterial__id}}" ></td>
-                                          <td class="td-text"> <input type="text" class="form-control td-text-modify" value="{{c.meterial__material__mname}}"></td>
+                                          <td class="td-text"> <input type="text" class="form-control td-text-modify" value="{{c.itemId}}" readonly></td>
+                                          <td class="td-text"> <input type="text" class="form-control td-text-modify" value="{{c.meterial__id}}" readonly></td>
+                                          <td class="td-text"> <input type="text" class="form-control td-text-modify" value="{{c.meterial__material__mname}}" readonly></td>
                                           <td class="td-text"> <input type="text" class="form-control td-text-modify" value="{{c.estimatedPrice}}"></td>
                                           <td class="td-text"> <input type="text" class="form-control td-text-modify" value="{{c.currency}}"></td>
                                           <td class="td-text"> <input type="text" class="form-control td-text-modify" value="{{c.quantity}}"></td>

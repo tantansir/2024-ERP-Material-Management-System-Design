@@ -421,7 +421,7 @@ def searchqinggou(request):
         euserid = request.POST.get("euserid")
         mid = request.POST.get("materialid")
         quoatations = PurchaseRequisition.objects.filter(id=id,
-                                           euser_id=euserid,requisitionitem__meterial__id=mid
+                                           euser_id=euserid,requisitionitem__meterial__material__id=mid
                                              ).values()
         quoatations = list(quoatations)
         if quoatations:

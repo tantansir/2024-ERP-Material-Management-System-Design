@@ -160,7 +160,6 @@ def getpq(request):
 def getpqinfo(request: HttpRequest, pk):
     if request.method == "GET":
         purchaseRequisition = PurchaseRequisition.objects.filter(id = pk).values()
-        purchase_requisition = PurchaseRequisition.objects.get(id=pk)
         reuqe = RequisitionItem.objects.filter(pr_id=pk).values("itemId", "estimatedPrice", "currency",
                                                                 "deliveryDate", "quantity",
                                                                 "meterial__id", "pr_id", "status",
@@ -170,7 +169,7 @@ def getpqinfo(request: HttpRequest, pk):
         print(reuqe)
         for i in reuqe:
             if i['status']=='0':
-                i['status'] = "已创建采购申请"'[;'
+                i['status'] = "已创建采购申请"
             if i['status']=='1':
                 i['status'] = "已创建采购订单"
         reuqe=list(reuqe)
@@ -291,7 +290,7 @@ def getmodifyinfo(request: HttpRequest, pk):
 @csrf_exempt
 def getmodifyinfo2(request):
     if request.method == "POST":
-        print("111111111111")
+
         data = request.POST.get("rid")
         rid = eval(data)
         data1 = request.POST.get("itemId")
@@ -302,18 +301,13 @@ def getmodifyinfo2(request):
         data4 = request.POST.get("quantity")
         quantity = eval(data4)
         data5 = request.POST.get("deliveryDate")
-        print(data5)
         deliveryDate = getDate2(data5)
-        data6 = request.POST.get("meterial__id")
-        meterial_id = eval(data6)
-        print(rid)
-        print(itemId)
-        reque = RequisitionItem.objects.filter(pr_id=rid,itemId=itemId).update(
+
+        reque = RequisitionItem.objects.filter(pr_id=rid, itemId=itemId).update(
                                                       estimatedPrice=estimatedPrice,
                                                       quantity=quantity,
                                                       deliveryDate=deliveryDate,
                                                       currency=currency,
-                                                      meterial_id=meterial_id
                                                       )
         print(rid)
         return HttpResponse(json.dumps(reque))

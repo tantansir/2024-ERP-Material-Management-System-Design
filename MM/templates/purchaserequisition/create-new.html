@@ -318,7 +318,7 @@
                     </div>  
                         <thead>
                         <tr>
-                            <th>条目编码</th>
+                            <th>次序</th>
                             <th>商品编码</th>
                             <th>工厂</th>
                             <th>估价</th>
@@ -553,7 +553,7 @@ function addgood() {
    if(goodcode!=''&&factory!=''&&gujia!=''&&danwei!=''&&number!=''&&time!=''){
 
     var trStr = ''
-    i+=10
+    i+=1
     trStr = '<tr><td>' + i + '</td><td>' + goodcode  + '</td><td>' + factory + '</td><td>' + gujia + '</td><td>' + danwei + '</td><td>' + number + '</td><td>' + time + '<td><button class="btn btn-danger btn-xs" onclick="deleteTr(this)" id="shanchu"><i class="fa fa-trash-o "></i></button></td>' + '</td></tr>'
     document.getElementById("gooddiv2").innerHTML += trStr;
     $(":input").val('');
