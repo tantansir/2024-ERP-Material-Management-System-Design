@@ -26,6 +26,7 @@
 
     <!-- JS -->
     <!-- 基础库 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{% static 'assets/js/jquery-1.12.0.min.js' %}"></script>
     <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
     <script src="https://unpkg.com/vue/dist/vue.global.js"></script>
@@ -65,15 +66,40 @@
 <section id="container">
 
     <header class="header black-bg">
-        <div class="sidebar-toggle-box">
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="sidebar-toggle-box">
             <div class="fa fa-bars tooltips" data-placement="right" data-original-title=""></div>
         </div>
-        <!--logo start-->
-        <a href={% url 'MM:home' %} class="logo"><b>MD集团物料管理系统</b></a>
-        <!--logo end-->
-        <div class="nav notify-row" id="top_menu"></div>
-        <!--  notification start -->
+                <!--logo start-->
+                <a href={% url 'MM:home' %} class="logo"><b>MD集团物料管理系统</b></a>
+                <!--logo end-->
+            </div>
+            <div class="col-sm-4">
+         <!-- 当前登录用户和退出按钮 -->
+                <div class="row" style="margin: 16px 16px 16px 100px;">
 
+
+                    <ul class="nav top-menu" style="align-content: center">
+                        <li class="dropdown">
+                        <a class="dropdown-toggle" href="">
+                            <i class="fa fa-user"></i>
+                            <span id="user-id"></span> <!-- 显示用户ID -->
+                            <span id="username"></span> <!-- 显示用户名 -->
+                        </a>
+                        </li>
+                         <li>
+                            <a href="{% url 'MM:logout' %}"> <!-- 退出按钮，指向登出URL -->
+                              <i class="fa fa-sign-out"></i>
+                                退出
+                            </a>
+                         </li>
+                    </ul>
+
+                </div>
+        <!--  notification start -->
+            </div>
+    </div>
     </header>
 
     <aside>
@@ -170,7 +196,27 @@
 <script>
     hljs.highlightAll();
 </script>
+<script>
+$(document).ready(function(){
+    $.ajax({
+        url: "{% url 'MM:get_user_info' %}",  // 请求的URL
+        method: "GET",
+        success: function(response) {
+            if (response.status === 'success') {
+                const user = response.data;
+                $('#user-id').text(`ID: ${user.id}`);  // 显示用户ID
+                $('#username').text(`Name: ${user.username}`);  // 显示用户名
+            } else {
+                console.log('Error:', response.message);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.log('AJAX Error:', error);
+        }
+    });
+});
 
+</script>
 
 {% block js %}
 

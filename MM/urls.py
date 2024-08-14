@@ -39,6 +39,7 @@ urlpatterns = [
     # ajax
     ## user
     path('api/user/loadAll/', user_api.load_user, name='ajax_load_user'),
+    path('get_user_info/', user_api.get_user_info, name='get_user_info'),
     ## vendor
     path('api/vendor/update/', vendor_api.update_vendor, name='ajax_update_vendor'),
     path('api/vendor/search/', vendor_api.search_vendor, name='ajax_search_vendor'),
