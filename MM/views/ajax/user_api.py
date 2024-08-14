@@ -24,7 +24,7 @@ def get_user_info(request):
     try:
         euser = EUser.objects.get(id=user.id)
         data = {
-            'id': euser.id,  # 返回用户ID
+            'uid': euser.uid,  # 返回用户ID
             'username': euser.username,  # 返回用户名
             'email': euser.email,
             'sector': euser.sector,

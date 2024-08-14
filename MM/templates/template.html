@@ -204,7 +204,7 @@ $(document).ready(function(){
         success: function(response) {
             if (response.status === 'success') {
                 const user = response.data;
-                $('#user-id').text(`ID: ${user.id}`);  // 显示用户ID
+                $('#user-id').text(`ID: ${user.uid}`);  // 显示用户ID
                 $('#username').text(`Name: ${user.username}`);  // 显示用户名
             } else {
                 console.log('Error:', response.message);
