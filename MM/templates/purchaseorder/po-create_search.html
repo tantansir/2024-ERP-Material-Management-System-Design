@@ -17,7 +17,7 @@
                                         采购申请编码
                                     </div>
                                     <div class="col-sm-2" id="rfq-search1">
-                                        <input type="text" class="form-control" name = "id" placeholder="请输入" id="prcode">
+                                        <input type="text" class="form-control" name = "id" placeholder="请输入" id="prcode" required>
                                         <button type="button" class="btn btn-link " data-toggle="modal" data-target="#myModalpr">忘记编码？</button>
 
                                     </div>
@@ -25,14 +25,14 @@
                                         商品编码
                                     </div>
                                     <div class="col-sm-2" id="rfq-search1">
-                                        <input type="text" class="form-control" placeholder="请输入"   name="mete"  id="spcode">
+                                        <input type="text" class="form-control" placeholder="请输入"   name="mete"  id="spcode" required>
                                         <button type="button" class="btn btn-link " data-toggle="modal" data-target="#myModalgood">忘记编码？</button>
                                     </div>
                                     <div class="col-sm-1 col-sm-1 control-label" >
                                         集合码
                                     </div>
                                     <div class="col-sm-2" id="rfq-search1">
-                                        <input type="text" class="form-control"  name="collNo" placeholder="请输入">
+                                        <input type="text" class="form-control"  name="collNo" placeholder="请输入" required>
                                     </div>
 
 
@@ -204,7 +204,7 @@
                     material = dataObj[i].material
                     stock = dataObj[i].stock
                     user = dataObj[i].user
-                    out += '<tr><td>'+ material.id+ '</td><td>' + material.mname+ '</td><td>' + material.mType+ '</td><td>' + material.industrySector+ '</td><td>'+ stock.name+ '</td><td>'+ fields.sloc+ '</td><td>'+ user.username + '</td><tr>';
+                    out += '<tr><td>'+ material.id+ '</td><td>' + material.mname+ '</td><td>' + material.mType+ '</td><td>' + material.industrySector+ '</td><td>'+ stock.name+ '</td><td>'+ fields.sloc+ '</td><td>'+ user.id + '</td><tr>';
                 }
                 document.getElementById("goodDiv").innerHTML=out;
             },

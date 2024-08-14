@@ -28,11 +28,11 @@ def search_item(request: HttpRequest):
         industrySector = getRegex(post.get('industrySector'))
         stock_name = getRegex(post.get('plant'))
         sloc = getRegex(post.get('sloc'))
-        uid2 = getPk(post.get('uid2'), 'U')
+        uid = getPk(post.get('uid'), 'U')
         items = MaterialItem.objects.filter(
             material__mname__regex=mname, material__mType__regex=mType, 
             material__industrySector__regex=industrySector, stock__name__regex=stock_name,
-            sloc__regex=sloc, material__euser__id__regex=uid2
+            sloc__regex=sloc, material__euser__id__regex=uid
         )
     else:
         mid = getPkExact(mid, 'M')
