@@ -23,13 +23,3 @@ https://user:glpat-Va3mXhAb9QQCiPmn_NBH@git.tongji.edu.cn/mm_team/mm_erp.git
 
 管理员账号：test<br>
 密码：test
-
-已解决：<br>
-1、创建供应商<br>
-2、查询供应商<br>
-3、更新供应商信息<br>
-
-待解决问题：<br>
-1、register页面完善<br>
-2、供应商交易历史
-3、物料创建
