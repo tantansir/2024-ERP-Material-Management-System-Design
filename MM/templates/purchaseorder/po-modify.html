@@ -1,6 +1,10 @@
 {% extends 'template.html' %}
 {% load static %}
 
+{% block extra_css %}
+
+{% endblock %}
+
 {% block main_content %}
       <section id="main-content">
           <section class="wrapper">
@@ -195,15 +199,8 @@
       </section><!-- /MAIN CONTENT -->
 {% endblock %}
 
-{% block extra_css %}
-
-{% endblock %}
 
 {% block js %}
-    <script>
-        const notice = new Notice();
-    </script>
-
     <script>
         function date(time){
         var datepicker = new TheDatepicker.Datepicker(time);
@@ -249,11 +246,3 @@
 
 </script>
 {% endblock %}
-
-
-
-
-
-
-
-

@@ -1,6 +1,84 @@
 {% extends 'template.html' %}
 {% load static %}
 
+{% block extra_css %}
+<style>
+    #tabs-wrap { width: 700px; margin: 100px auto 0 auto; font-family: Arial, Helvetica; font-size: small; background-color: #eee;  }
+
+  #tabs {
+    overflow: hidden;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  #tabs li {
+    float: left;
+    margin: 0 -15px 0 0;
+  }
+
+  #tabs a {
+    float: left;
+    position: relative;
+    padding: 0 40px;
+    height: 0;
+    line-height: 30px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #fff;
+    border-right: 30px solid transparent;
+    border-bottom: 30px solid #3D3D3D;
+    border-bottom-color: #777;
+    opacity: .3;
+    filter: alpha(opacity=30);
+  }
+
+  #tabs a:hover,
+  #tabs a:focus {
+    border-bottom-color: #2ac7e1;
+    opacity: 1;
+    filter: alpha(opacity=100);
+  }
+
+  #tabs a:focus {
+    outline: 0;
+  }
+
+  #tabs #current {
+    z-index: 3;
+    border-bottom-color: #3d3d3d;
+    opacity: 1;
+    filter: alpha(opacity=100);
+  }
+
+  /* ----------- */
+  #content {
+      background: #fff;
+      border-top: 2px solid #3d3d3d;
+      padding: 2em;
+      /*height: 220px;*/
+  }
+
+  #content h2,
+    #content h3,
+    #content p {
+      margin: 0 0 15px 0;
+  }
+
+  /* Demo page only */
+  #about {
+      color: #999;
+      text-align: center;
+      font: 0.9em Arial, Helvetica;
+  }
+
+  #about a {
+      color: #777;
+  }
+ </style>
+{% endblock %}
+
 {% block main_content %}
       <section id="main-content">
           <section class="wrapper">
@@ -136,90 +214,9 @@
       </section><!-- /MAIN CONTENT -->
 {% endblock %}
 
-{% block extra_css %}
-<style>
-    #tabs-wrap { width: 700px; margin: 100px auto 0 auto; font-family: Arial, Helvetica; font-size: small; background-color: #eee;  }
-
-  #tabs {
-    overflow: hidden;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  #tabs li {
-    float: left;
-    margin: 0 -15px 0 0;
-  }
-
-  #tabs a {
-    float: left;
-    position: relative;
-    padding: 0 40px;
-    height: 0;
-    line-height: 30px;
-    text-transform: uppercase;
-    text-decoration: none;
-    color: #fff;
-    border-right: 30px solid transparent;
-    border-bottom: 30px solid #3D3D3D;
-    border-bottom-color: #777;
-    opacity: .3;
-    filter: alpha(opacity=30);
-  }
-
-  #tabs a:hover,
-  #tabs a:focus {
-    border-bottom-color: #2ac7e1;
-    opacity: 1;
-    filter: alpha(opacity=100);
-  }
-
-  #tabs a:focus {
-    outline: 0;
-  }
-
-  #tabs #current {
-    z-index: 3;
-    border-bottom-color: #3d3d3d;
-    opacity: 1;
-    filter: alpha(opacity=100);
-  }
-
-  /* ----------- */
-  #content {
-      background: #fff;
-      border-top: 2px solid #3d3d3d;
-      padding: 2em;
-      /*height: 220px;*/
-  }
-
-  #content h2,
-    #content h3,
-    #content p {
-      margin: 0 0 15px 0;
-  }
-
-  /* Demo page only */
-  #about {
-      color: #999;
-      text-align: center;
-      font: 0.9em Arial, Helvetica;
-  }
-
-  #about a {
-      color: #777;
-  }
- </style>
-{% endblock %}
 
 {% block js %}
     <script>
-        const notice = new Notice();
-    </script>
-
-       <script>
         function resetTabs(){
             $("#content > div").hide(); //Hide all content
             $("#tabs a").attr("id",""); //Reset id's
@@ -256,8 +253,9 @@
         })()
       </script>
 
+      <script src="http://www.jq22.com/js/jq.js"></script>
 
-    <script>
+      <script>
       //custom select box
 
       $(function(){
@@ -273,9 +271,9 @@
             }
 
 
-            var index=1
+            var index=10
             function chai(){
-                index+=1
+                index+=10
     var goodcode = document.getElementById("goodcode-po").innerText
     var goodname = document.getElementById("goodname-po").innerText
     var danwei = document.getElementById("danwei-po").innerText
@@ -341,7 +339,10 @@
 
     }
     }
+
+
+
+
+
     </script>
 {% endblock %}
-
-
