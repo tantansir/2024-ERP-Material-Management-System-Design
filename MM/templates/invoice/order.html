@@ -120,8 +120,8 @@
                                                     <h4><i class="fa fa-angle-right"></i> 商品信息</h4>
                                                     <thead>
                                                     <tr>
-                                                        <th># 条目编码</th>
-                                                        <th><i class="fa fa-question-circle"></i> 商品编码</th>
+                                                        <th># 次序</th>
+                                                        <th><i class="fa fa-question-circle"></i> 商品条目编码</th>
                                                         <th><i class="fa fa-bookmark"></i> 商品名称</th>
                                                         <th><i class=" fa fa-edit"></i> 数量</th>
                                                         <th><i class=" fa fa-edit"></i> 单价</th><!--后面加上货币-->
@@ -146,9 +146,15 @@
                                                             <td>{{ c.meterialItem__sloc }}</td>
                                                             <td>{{ c.deliveryDate }}</td>
                                                             <td>{{ c.status }}</td>
+                                                            {% if c.status == '货物已送达' %}
                                                             <td>
                                                                 <a href="{% url 'MM:load_order_item_invoice' %}?itemID={{ c.itemId }}&orderID={{ purchaseOrder.id }}">点击创建</a>
                                                             </td>
+                                                            {% elif c.status == '货物未发出' %}
+                                                            <td>请创建收据</td>
+                                                            {% else %}
+                                                            <td>已创建发票</td>
+                                                            {% endif %}
                                                         </tr>
                                                     {% endfor %}
                                                     </tbody>

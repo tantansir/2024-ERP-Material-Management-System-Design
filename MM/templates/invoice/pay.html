@@ -237,7 +237,7 @@
                         //输入2个搜索框的值
                     },
                     success: function (data) {
-                         $('#item_result12').text(data);
+                         //$('#item_result12').text(data);
                         var dataObj = eval("(" + data + ")");
                         // var content=dataObj[0].gr;
                         //console.log(dataObj.gr[0].pk);
@@ -252,7 +252,7 @@
                         }
                         //  $('#item_result').text(out);
                         document.getElementById("searchDiv2").innerHTML = out;
-                        console.log(out);
+                        //console.log(out);
                     },
                     failure: function () {
 
@@ -349,7 +349,8 @@
 
         // 点击结算按钮
         function submitpk(clicked_id) {
-            var bid = '#bid' + clicked_id[3];
+            var suffix = clicked_id.substring(3);  // 或者使用 clicked_id.slice(3)
+            var bid = '#bid' + suffix;
             // console.log($(itempk).html());
             if ($(bid).html() == '未结算') {
                 $(bid).html('正在结算');

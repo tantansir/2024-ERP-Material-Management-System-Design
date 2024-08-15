@@ -36,9 +36,7 @@
             margin-top: 10px;
         }
     </style>
-    <script>
-    const notice = new Notice();
-    </script>
+
 
 
 
@@ -182,26 +180,19 @@
                                             onclick="return tip()">提交
                                     </button>
                                 </form>
-
-
                             </section>
-                        </div><!-- /content-panel -->
+                        </div>
                     </div>
-                </div><!-- /col-md-12 -->
+                </div>
             </div>
-
         </section>
-    </section><!-- /MAIN CONTENT -->
+    </section>
 
 
 {% endblock %}
 
-
-
 {% block js %}
     <script>
-        //库存类型下拉框 此处搬了plant的
-        //就四个，上次没写
 
         //提交
         $('#material3').on('submit', function (e) {
@@ -225,17 +216,21 @@
                         //两个评分的id是startP、startP2；两个日期的id是my-input、my-input2；
                     },
                     success: function (data) {
-                        $('#item_result').text(data);
-                        var dataObj = eval("(" + data + ")");
-
-                        if (dataObj.status == 1) {
+                        //$('#item_result').text(data);
+                        //ar dataObj = eval("(" + data + ")");
+                        var dataObj = JSON.parse(data);
+                        if (dataObj.status==1) {
                             showMessage({text: dataObj.message, type: 'success'});
+                            // 在显示成功消息后，跳转到指定页面
+                        setTimeout(function() {
+                            window.location.href = "/mm/receipt/order/display/{{ context.po }}/"; // 替换为实际的跳转地址
+                        }, 2000); // 等待 2 秒钟，确保用户看到成功消息
+
                         } else {
                             showMessage({text: dataObj.message, type: 'error'});
                         }
                     },
                     failure: function () {
-
                     }
                 })
         });

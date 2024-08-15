@@ -47,13 +47,13 @@ def display_invoice(request: HttpRequest):
     get1 = request.GET
     pk = getPkExact(get1.get('pk'))
     invoice: Invoice = Invoice.objects.get(pk__exact=pk)
-    item: OrderItem = get_object_or_404(OrderItem, pk=invoice.orderItem.id)
+    item: OrderItem = invoice.orderItem
     item_dict = model_to_dict(item)
-    materialItem: MaterialItem = get_object_or_404(MaterialItem, id__exact=item.meterialItem.id)
-    material: Material = get_object_or_404(Material, id__exact=materialItem.material.id)
-    stock: Stock = get_object_or_404(Stock, id__exact=materialItem.stock.id)
-    po: PurchaseOrder = get_object_or_404(PurchaseOrder, id__exact=item.po.id)
-    vendor: Vendor = get_object_or_404(Vendor, vid__exact=po.vendor.vid)
+    materialItem: MaterialItem = item.meterialItem
+    material: Material = materialItem.material
+    stock: Stock = materialItem.stock
+    po: PurchaseOrder = item.po
+    vendor: Vendor = po.vendor
     gr: GoodReceipt = get_object_or_404(GoodReceipt, orderItem__id__exact=item.id)
     item_dict['po'] = model_to_dict(po)
     item_dict['materialItem'] = model_to_dict(materialItem)

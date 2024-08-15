@@ -75,6 +75,7 @@ def display_receipt(request: HttpRequest):
     """
     # 从请求中获取查询参数
     get = request.GET
+    grID = get.get('grID')
     orderID = get.get('orderID')
     itemID = get.get('itemID')
 
@@ -82,7 +83,7 @@ def display_receipt(request: HttpRequest):
     item: OrderItem = get_object_or_404(OrderItem, po__id__exact=orderID, itemId__exact=itemID)
 
     # 查询对应的GoodReceipt对象
-    gr = GoodReceipt.objects.get(orderItem__id__exact=item.id)
+    gr = GoodReceipt.objects.get(pk__exact=grID)
 
     # 将OrderItem对象转换为字典
     item_dict = model_to_dict(item)
@@ -138,7 +139,6 @@ def load_order_item(request: HttpRequest):
     get = request.GET
     orderID = get.get('orderID')
     itemID = get.get('itemID')
-    
     # 获取订单项信息
     item: OrderItem = get_object_or_404(OrderItem, po__id__exact=orderID, itemId__exact=itemID)
     item_dict = model_to_dict(item)

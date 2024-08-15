@@ -365,7 +365,7 @@ def poinfo(request: HttpRequest, pk):
         vendor = Vendor.objects.filter(vid = vendorid).values("vid","vname","city","address")
         vendor = list(vendor)
         orderitems  = OrderItem.objects.filter(po_id= pk).values("itemId","meterialItem__id","meterialItem__material__mname",
-                                                                 "quantity","price","meterialItem__stock__id","meterialItem__sloc",
+                                                                 "quantity","price","meterialItem__stock__id","meterialItem__stock__name","meterialItem__sloc",
                                                                  "deliveryDate","po__rfq__rej","currency","status")
         orderitems = list(orderitems)
         caigou= list(caigou)
@@ -385,12 +385,13 @@ def poinfo(request: HttpRequest, pk):
         print(xiangqing)
         sum = 0
         sumquantity =0
+        sumquantity = len(orderitems)
         for i in orderitems:
             print(i['quantity'])
             print(i['price'])
             i['sum'] = i['quantity']*i['price']
             sum+=i['sum']
-            sumquantity+=i['quantity']
+            #sumquantity+=i['quantity']
         xiangqing[0]['sum'] = sum
         xiangqing[0]['sumquantity'] = sumquantity
         print(len(xiangqing))

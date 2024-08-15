@@ -31,33 +31,17 @@ def search_invoice(request: HttpRequest):
             )
         else:
             dateInfo = date.split('. ')
-            # startDate = datetime.datetime(
-            #     year=int(dateInfo[2]), month=int(dateInfo[0]), day=int(dateInfo[1]),
-            #     hour=0,minute=0,second=0, tzinfo=pytz.UTC
-            # )
-            # endDate = datetime.datetime(
-            #     year=int(dateInfo[2]), month=int(dateInfo[0]), day=int(dateInfo[1]),
-            #     hour=23,minute=59,second=59, tzinfo=pytz.UTC
-            # )
             results: QuerySet = Invoice.objects.filter(
-                euser__uid__regex=uid, postDate__year=int(dateInfo[2]), 
+                euser__uid__regex=uid, postDate__year=int(dateInfo[2]),
                 postDate__month=int(dateInfo[0]), postDate__day=int(dateInfo[1])
             )
         results_list = json.loads(serializers.serialize('json', list(results)))
         for i, r in enumerate(results):
-            user: EUser = EUser.objects.get(pk__exact=r.euser.pk)
             orderItem: OrderItem = OrderItem.objects.get(pk__exact=r.orderItem.id)
-            po: PurchaseOrder = PurchaseOrder.objects.get(pk__exact=orderItem.po.id)
-            materialItem: MaterialItem = get_object_or_404(MaterialItem, id__exact=orderItem.meterialItem.id)
-            stock: Stock = get_object_or_404(Stock, id__exact=materialItem.stock.id)
-            material: Material = get_object_or_404(Material, id__exact=materialItem.material.id)
-            gr: GoodReceipt = GoodReceipt.objects.filter(orderItem__id__exact=orderItem.id).first()
-            # results_list[i]['user'] = model_to_dict(user)
+            gr: GoodReceipt = GoodReceipt.objects.filter(orderItem__id__exact=r.orderItem.id).first()
             results_list[i]['orderItem'] = model_to_dict(orderItem)
-            results_list[i]['po'] = model_to_dict(po)
-            results_list[i]['stock'] = model_to_dict(stock)
-            results_list[i]['material'] = model_to_dict(material)
-            results_list[i]['goodReceipt'] = model_to_dict(gr)
+            results_list[i]['material'] = r.orderItem.meterialItem.material.mname
+            results_list[i]['goodReceipt'] = gr.actualQnty
         return HttpResponse(json.dumps({'status':1, 'message':"发票检索成功！", 'gr':results_list}, default=str))
     else:
         pk = getPkExact(pk, 'GR')
@@ -68,19 +52,11 @@ def search_invoice(request: HttpRequest):
             results_list = json.loads(serializers.serialize('json', list(results)))
             for i, r in enumerate(results):
                 r: Invoice
-                user: EUser = EUser.objects.get(pk__exact=r.euser.pk)
                 orderItem: OrderItem = OrderItem.objects.get(pk__exact=r.orderItem.id)
-                po: PurchaseOrder = PurchaseOrder.objects.get(pk__exact=orderItem.po.id)
-                materialItem: MaterialItem = get_object_or_404(MaterialItem, id__exact=orderItem.meterialItem.id)
-                stock: Stock = get_object_or_404(Stock, id__exact=materialItem.stock.id)
-                material: Material = get_object_or_404(Material, id__exact=materialItem.material.id)
                 gr: GoodReceipt = GoodReceipt.objects.filter(orderItem__id__exact=orderItem.id).first()
-                results_list[i]['user'] = model_to_dict(user)
                 results_list[i]['orderItem'] = model_to_dict(orderItem)
-                results_list[i]['po'] = model_to_dict(po)
-                results_list[i]['stock'] = model_to_dict(stock)
-                results_list[i]['material'] = model_to_dict(material)
-                results_list[i]['goodReceipt'] = model_to_dict(gr)
+                results_list[i]['material'] = r.orderItem.meterialItem.material.mname
+                results_list[i]['goodReceipt'] = gr.actualQnty
             return HttpResponse(json.dumps({'status':1, 'message':"发票检索成功！", 'gr':results_list}, default=str))
 
 @login_required
@@ -183,7 +159,7 @@ def pay(request: HttpRequest):
     for id in invoiceIDList:
         id = int(id)
         invoice: Invoice = Invoice.objects.get(id__exact=id)
-        orderItem: OrderItem = OrderItem.objects.get(pk__exact=invoice.orderItem.id)
+        orderItem: OrderItem = invoice.orderItem
         orderItem.status = '3'
         orderItem.save()
         sum += invoice.sumAmount

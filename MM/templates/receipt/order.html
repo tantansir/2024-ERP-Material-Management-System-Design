@@ -150,9 +150,14 @@
                                                             <td>{{ c.meterialItem__sloc }}</td>
                                                             <td>{{ c.deliveryDate }}</td>
                                                             <td>{{ c.status }}</td>
+                                                            {% if c.status == '货物未发出' %}
                                                             <td>
                                                                 <a href="{% url 'MM:load_order_item_receipt' %}?itemID={{ c.itemId }}&orderID={{ purchaseOrder.id }}">点击创建</a>
                                                             </td>
+                                                            {% else %}
+                                                            <td>已创建收据</td>
+                                                            {% endif %}
+
                                                         </tr>
                                                     {% endfor %}
                                                     </tbody>

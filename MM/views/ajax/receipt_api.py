@@ -62,17 +62,19 @@ def search_receipt(request: HttpRequest):
         # 序列化查询结果
         results_list = json.loads(serializers.serialize('json', list(results)))
         for i, r in enumerate(results):
-            user: EUser = EUser.objects.get(pk__exact=r.euser.pk)
+            #user: EUser = EUser.objects.get(pk__exact=r.euser.pk)
+            #po: PurchaseOrder = PurchaseOrder.objects.get(pk__exact=orderItem.po.id)
+            # stock: Stock = get_object_or_404(Stock, id__exact=materialItem.stock.id)
+            # materialItem: MaterialItem = get_object_or_404(MaterialItem, id__exact=orderItem.meterialItem.id)
             orderItem: OrderItem = OrderItem.objects.get(pk__exact=r.orderItem.id)
-            po: PurchaseOrder = PurchaseOrder.objects.get(pk__exact=orderItem.po.id)
-            materialItem: MaterialItem = get_object_or_404(MaterialItem, id__exact=orderItem.meterialItem.id)
-            stock: Stock = get_object_or_404(Stock, id__exact=materialItem.stock.id)
-            material: Material = get_object_or_404(Material, id__exact=materialItem.material.id)
-            results_list[i]['user'] = model_to_dict(user)
+            #material_id = MaterialItem.objects.filter(id__exact=orderItem.meterialItem.id).values_list('material', flat=True).first()
+            #material: Material = get_object_or_404(Material, id__exact=material_id)
+            mname=orderItem.meterialItem.material.mname
+            #results_list[i]['user'] = model_to_dict(user)
+            #results_list[i]['po'] = model_to_dict(po)
+            #results_list[i]['stock'] = model_to_dict(stock)
             results_list[i]['orderItem'] = model_to_dict(orderItem)
-            results_list[i]['po'] = model_to_dict(po)
-            results_list[i]['stock'] = model_to_dict(stock)
-            results_list[i]['material'] = model_to_dict(material)
+            results_list[i]['material'] = mname
         return HttpResponse(json.dumps({'status':1, 'message':"商品收据检索成功！", 'gr':results_list}, default=str))
     else:
         # 如果提供了商品收据的ID，进行精确查询
@@ -84,17 +86,18 @@ def search_receipt(request: HttpRequest):
             results_list = json.loads(serializers.serialize('json', list(results)))
             for i, r in enumerate(results):
                 r: GoodReceipt
-                user: EUser = EUser.objects.get(pk__exact=r.euser.pk)
+                #user: EUser = EUser.objects.get(pk__exact=r.euser.pk)
                 orderItem: OrderItem = OrderItem.objects.get(pk__exact=r.orderItem.id)
-                po: PurchaseOrder = PurchaseOrder.objects.get(pk__exact=orderItem.po.id)
-                materialItem: MaterialItem = get_object_or_404(MaterialItem, id__exact=orderItem.meterialItem.id)
-                stock: Stock = get_object_or_404(Stock, id__exact=materialItem.stock.id)
-                material: Material = get_object_or_404(Material, id__exact=materialItem.material.id)
-                results_list[i]['user'] = model_to_dict(user)
+                #po: PurchaseOrder = PurchaseOrder.objects.get(pk__exact=orderItem.po.id)
+                #materialItem: MaterialItem = get_object_or_404(MaterialItem, id__exact=orderItem.meterialItem.id)
+                #stock: Stock = get_object_or_404(Stock, id__exact=materialItem.stock.id)
+                #material: Material = get_object_or_404(Material, id__exact=materialItem.material.id)
+                mname = orderItem.meterialItem.material.mname
+                # results_list[i]['po'] = model_to_dict(po)
+                # results_list[i]['stock'] = model_to_dict(stock)
+                #results_list[i]['user'] = model_to_dict(user)
                 results_list[i]['orderItem'] = model_to_dict(orderItem)
-                results_list[i]['po'] = model_to_dict(po)
-                results_list[i]['stock'] = model_to_dict(stock)
-                results_list[i]['material'] = model_to_dict(material)
+                results_list[i]['material'] = mname
             return HttpResponse(json.dumps({'status':1, 'message':"商品收据检索成功！", 'gr':results_list}, default=str))
 
 
@@ -125,7 +128,7 @@ def create_receipt(request: HttpRequest):
 
     # 获取订单项和用户信息
     orderItem: OrderItem = OrderItem.objects.get(po__id__exact=po_id, itemId=oi_itemId)
-    euser = EUser.objects.get(pk__exact=request.user.id)
+    euser = EUser.objects.get(id__exact=request.user.id)
 
     # 创建新的收据对象
     new_gr = GoodReceipt(
@@ -175,7 +178,7 @@ def create_receipt(request: HttpRequest):
         new_stockHistory.save()
     except ValidationError as e:
         error_fields = list(e.error_dict.keys())
-        return HttpResponse(json.dumps({'status':0, 'message':"表单填写错误！", 'fields':error_fields}))
+        return HttpResponse(json.dumps({'status':0, 'message':"表单填写错误！", 'fields':error_fields},default=str))
 
     # 根据收据类型更新库存数量
     if sType=='1': materialItem.blocked += actualQnty
@@ -195,7 +198,7 @@ def create_receipt(request: HttpRequest):
         new_account.full_clean()
     except ValidationError as e:
         error_fields = list(e.error_dict.keys())
-        return HttpResponse(json.dumps({'status':0, 'message':"表单填写错误！", 'fields':error_fields}))
+        return HttpResponse(json.dumps({'status':0, 'message':"表单填写错误！", 'fields':error_fields},default=str))
 
     # 保存会计记录
     new_account.save()
@@ -215,12 +218,12 @@ def create_receipt(request: HttpRequest):
         accountDetail2.full_clean()
     except ValidationError as e:
         error_fields = list(e.error_dict.keys())
-        return HttpResponse(json.dumps({'status':0, 'message':"表单填写错误！", 'fields':error_fields}))
+        return HttpResponse(json.dumps({'status':0, 'message':"表单填写错误！", 'fields':error_fields}, default=str))
 
     # 保存会计明细记录
     accountDetail1.save()
     accountDetail2.save()
 
     # 返回成功消息
-    return HttpResponse(json.dumps({'status':1, 'message':"商品收据创建成功！收据编号为"+str(new_gr.id)+"。"}))
+    return HttpResponse(json.dumps({'status':1, 'message':"商品收据创建成功！收据编号为"+str(new_gr.id)+"。"}, default=str))
 

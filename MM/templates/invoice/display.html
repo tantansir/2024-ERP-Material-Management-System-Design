@@ -9,7 +9,7 @@
 {% block main_content %}
 <section id="main-content">
     <section class="wrapper">
-        <h3><i class="fa fa-angle-right"></i> 查看发票收据</h3>
+        <h3><i class="fa fa-angle-right"></i> 查看发票</h3>
 
         <div class="row mt">
             <div class="col-lg-12">
@@ -22,7 +22,7 @@
                     <br><br>
                     <div id='form'>
                         <div class="content-panel" id="print">
-                            <h4 style="text-align:center">发票收据</h4>
+                            <h4 style="text-align:center">发票</h4>
                             <h5 style="text-align:center">供应商：{{ context.vendor.vname }}</h5>
                                 <section id="unseen">
                                     <table class="table">
@@ -30,8 +30,8 @@
                                         <tbody>
                                         <tr>
                                             <td style="text-align:right;">
-                                                <label>发票收据编号：</label>
-                                                <label>{{ context.id }}</label>
+                                                <label>发票编号：</label>
+                                                <label>{{ context.invoice.id }}</label>
                                             </td>
                                         </tr>
                                         <tr>
@@ -69,7 +69,7 @@
                                                             <td>{{ context.material.mname }}</td>
                                                             <td>{{ context.gr.actualQnty }}</td>
                                                             <td>{{ context.price }} {{ context.currency }}</td>
-                                                            <td>{{ context.invoice.sumAmount }} {{ context.invoice.currency }}</td>
+                                                            <td>{{ context.invoice.sumAmount }} {{ context.currency }}</td>
                                                             <td>{{ context.invoice.text }}</td>
 
                                                         </tr>
@@ -111,7 +111,7 @@
                                             </td>
 
                                             <td>
-                                                <label>关联条目：</label>
+                                                <label>关联次序：</label>
                                                 <label>{{ context.itemId }}</label>
                                             </td>
                                         </tr>
@@ -158,7 +158,7 @@
 
                                             <td>
                                                 <label>公司编码：</label>
-                                                <label>{{ context.vendor.id }}</label>
+                                                <label>{{ context.vendor.companyCode }}</label>
                                             </td>
 
                                             <td>
