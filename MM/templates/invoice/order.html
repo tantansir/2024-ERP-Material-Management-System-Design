@@ -1,7 +1,12 @@
 {% extends 'template.html' %}
 {% load static %}
 {% block extra_css %}
+<style>
+    .center1{
+        text-align: center;
+    }
 
+</style>
 
 
 {% endblock %}
@@ -14,8 +19,9 @@
                 <div class="col-lg-12">
                     <div class="col-lg-12">
                         <div class="content-panel">
-                            <h4><i class="fa fa-angle-right"></i> 采购订单详情</h4>
+                            <h4 style="text-align: center">采购订单详情</h4>
                             <section id="unseen">
+                                <div class="row mt" style="margin: 10px 30px 0 30px">
                                 <table class="table">
                                     <thead>
                                     <tr>
@@ -53,7 +59,6 @@
                                     </tr>
                                     </tbody>
                                 </table>
-
                                 <table class="table">
                                     <thead>
                                     <tr>
@@ -66,18 +71,16 @@
                                             <label>供应商编码：</label>
                                             <label>{{ vendor.vid }}</label>
                                         </td>
-
-                                        <td>
-                                            <label>供应商名称：</label>
-                                            <label>{{ vendor.vname }}</label>
-                                        </td>
-                                    </tr>
-                                    <tr>
                                         <td>
                                             <label>城市：</label>
                                             <label>{{ vendor.city }}</label>
                                         </td>
-
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label>供应商名称：</label>
+                                            <label>{{ vendor.vname }}</label>
+                                        </td>
                                         <td>
                                             <label>街区地址：</label>
                                             <label>{{ vendor.address }}</label>
@@ -85,11 +88,9 @@
                                     </tr>
                                     </tbody>
                                 </table>
-
                                 <table class="table">
                                     <thead>
                                     <tr>
-
                                         <th>采购方信息</th>
                                     </tr>
                                     </thead>
@@ -111,6 +112,7 @@
                                     </tr>
                                     </tbody>
                                 </table>
+                                </div>
                                 <div class="row mt">
                                     <div class="col-md-12">
                                         <div class="col-md-12">
@@ -120,40 +122,40 @@
                                                     <h4><i class="fa fa-angle-right"></i> 商品信息</h4>
                                                     <thead>
                                                     <tr>
-                                                        <th># 次序</th>
-                                                        <th><i class="fa fa-question-circle"></i> 商品条目编码</th>
-                                                        <th><i class="fa fa-bookmark"></i> 商品名称</th>
-                                                        <th><i class=" fa fa-edit"></i> 数量</th>
-                                                        <th><i class=" fa fa-edit"></i> 单价</th><!--后面加上货币-->
-                                                        <th><i class=" fa fa-edit"></i> 总价</th><!--后面加上货币-->
-                                                        <th><i class="fa fa-bookmark"></i> 工厂</th>
-                                                        <th><i class="fa fa-bookmark"></i> 存储位置</th>
-                                                        <th><i class=" fa fa-edit"></i> 送达时间</th>
-                                                        <th><i class="fa fa-bullhorn"></i> 订单状态</th>
-                                                        <th>创建</th>
+                                                        <th class="center1"># 次序</th>
+                                                        <th class="center1"><i class="fa fa-question-circle"></i> 商品条目编码</th>
+                                                        <th class="center1"><i class="fa fa-bookmark"></i> 商品名称</th>
+                                                        <th class="center1"><i class=" fa fa-edit"></i> 数量</th>
+                                                        <th class="center1"><i class=" fa fa-edit"></i> 单价</th><!--后面加上货币-->
+                                                        <th class="center1"><i class=" fa fa-edit"></i> 总价</th><!--后面加上货币-->
+                                                        <th class="center1"><i class="fa fa-bookmark"></i> 工厂</th>
+                                                        <th class="center1"><i class="fa fa-bookmark"></i> 存储位置</th>
+                                                        <th class="center1"><i class=" fa fa-edit"></i> 送达时间</th>
+                                                        <th class="center1"><i class="fa fa-bullhorn"></i> 订单状态</th>
+                                                        <th class="center1">创建</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
                                                     {% for c in orderItems %}
                                                         <tr>
-                                                            <td>{{ c.itemId }}</td>
-                                                            <td>{{ c.meterialItem__id }}</td>
-                                                            <td>{{ c.meterialItem__material__mname }}</td>
-                                                            <td>{{ c.quantity }}</td>
-                                                            <td>{{ c.price }}</td>
-                                                            <td>{{ c.sum }}</td>
-                                                            <td>{{ c.meterialItem__stock__name }}</td>
-                                                            <td>{{ c.meterialItem__sloc }}</td>
-                                                            <td>{{ c.deliveryDate }}</td>
-                                                            <td>{{ c.status }}</td>
+                                                            <td class="center1">{{ c.itemId }}</td>
+                                                            <td class="center1">{{ c.meterialItem__id }}</td>
+                                                            <td class="center1">{{ c.meterialItem__material__mname }}</td>
+                                                            <td class="center1">{{ c.quantity }}</td>
+                                                            <td class="center1">{{ c.price }}</td>
+                                                            <td class="center1">{{ c.sum }}</td>
+                                                            <td class="center1">{{ c.meterialItem__stock__name }}</td>
+                                                            <td class="center1">{{ c.meterialItem__sloc }}</td>
+                                                            <td class="center1">{{ c.deliveryDate }}</td>
+                                                            <td class="center1">{{ c.status }}</td>
                                                             {% if c.status == '货物已送达' %}
-                                                            <td>
+                                                            <td class="center1">
                                                                 <a href="{% url 'MM:load_order_item_invoice' %}?itemID={{ c.itemId }}&orderID={{ purchaseOrder.id }}">点击创建</a>
                                                             </td>
                                                             {% elif c.status == '货物未发出' %}
-                                                            <td>请创建收据</td>
+                                                            <td class="center1">请创建收据</td>
                                                             {% else %}
-                                                            <td>已创建发票</td>
+                                                            <td class="center1">已创建发票</td>
                                                             {% endif %}
                                                         </tr>
                                                     {% endfor %}
@@ -161,17 +163,16 @@
                                                 </table>
                                             </div>
                                         </div>
-
                                     </div>
-                                </div><!-- /col-md-12 -->
+                                </div>
                             </section>
-                        </div><!-- /content-panel -->
-                    </div><!-- /col-lg-4 -->
-                </div><!-- /r ow -->
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
-        <!--/wrapper -->
-    </section><!-- /MAIN CONTENT -->
+
+    </section>
 
 {% endblock %}
 

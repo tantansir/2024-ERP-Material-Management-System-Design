@@ -1,7 +1,14 @@
 {% extends 'template.html' %}
 {% load static %}
 {% block extra_css %}
-
+<style>
+    td{
+        text-align: center;
+    }
+    th{
+        text-align: center;
+    }
+</style>
 {% endblock %}
 
 {% block main_content %}
@@ -67,6 +74,55 @@
                         </form>
                     </div>
                 </div>
+            </div>
+
+            <div class="row mt">
+                    <div class="col-md-12">
+                        <div class="content-panel">
+                            <div style="margin: 20px">
+                            <table class="table table-striped table-advance table-hover">
+                                <h4><i class="fa fa-angle-right"></i> 采购订单列表</h4>
+                                <hr>
+                                <thead>
+                                <tr>
+                                    <th><i class="fa fa-bullhorn"></i> 采购订单编号</th>
+                                    <th><i class="fa fa-question-circle"></i> 次序</th>
+                                    <th><i class="fa fa-question-circle"></i> 商品编码</th>
+                                    <th><i class=" fa fa-edit"></i> 数量</th>
+                                    <th><i class=" fa fa-edit"></i> 总价</th><!--总价+货币-->
+                                    <th><i class="fa fa-question-circle"></i> 供应商编码</th>
+                                    <th><i class="fa fa-question-circle"></i> 创建者编码</th>
+                                    <th><i class=" fa fa-edit"></i> 创建时间</th>
+                                    <th><i class="fa fa-bookmark"></i> 订单状态</th>
+                                    <th> 操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for c in orderItems %}
+                                    <tr>
+                                    <td>{{ c.po__id }}</td>
+                                    <td>{{ c.itemId }}</td>
+                                    <td>{{ c.meterialItem__material__id }}</td>
+                                    <td>{{ c.quantity }}</td>
+                                    <td>{{ c.sum }} {{ c.currency }}</td>
+                                    <td>{{ c.po__vendor__vid }}</td>
+                                    <td>{{ c.po__euser__uid }}</td>
+                                    <td>{{ c.po__time }}</td>
+                                    <td>{{ c.status }}</td>
+                                    <td>
+                                    <!-- <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button> -->
+                                    <a href="/mm/invoice/order/display/{{ c.po__id }}/" onclick="return add_onclick()">
+                                        <button class="btn btn-success btn-xs"><i class="fa fa-search-plus">查看详情</i>
+                                        </button>
+                                    </a>
+                                    {% comment %} <a href="/mm/purchaseorder/modifyinfo/{{c.po__id}}">   <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-pencil"></i></button> </a>    {% endcomment %}
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                            </div>
+                        </div>
+                    </div>
             </div>
 
             <!--搜索供应商编码modal-->
@@ -383,54 +439,6 @@
             </div>
             <!--搜索商品编码modal-->
 
-            <div class="row mt">
-                <div class="col-md-12">
-                    <div class="col-md-12">
-                        <div class="content-panel">
-                            <table class="table table-striped table-advance table-hover">
-                                <h4><i class="fa fa-angle-right"></i> 采购订单列表</h4>
-                                <hr>
-                                <thead>
-                                <tr>
-                                    <th><i class="fa fa-bullhorn"></i> 采购订单编号</th>
-                                    <th><i class="fa fa-question-circle"></i> 次序</th>
-                                    <th><i class="fa fa-question-circle"></i> 商品编码</th>
-                                    <th><i class=" fa fa-edit"></i> 数量</th>
-                                    <th><i class=" fa fa-edit"></i> 总价</th><!--总价+货币-->
-                                    <th><i class="fa fa-question-circle"></i> 供应商编码</th>
-                                    <th><i class="fa fa-question-circle"></i> 创建者编码</th>
-                                    <th><i class=" fa fa-edit"></i> 创建时间</th>
-                                    <th><i class="fa fa-bookmark"></i> 订单状态</th>
-                                    <th> 操作</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for c in orderItems %}
-                                    <tr>
-                                    <td>{{ c.po__id }}</td>
-                                    <td>{{ c.itemId }}</td>
-                                    <td>{{ c.meterialItem__material__id }}</td>
-                                    <td>{{ c.quantity }}</td>
-                                    <td>{{ c.sum }} {{ c.currency }}</td>
-                                    <td>{{ c.po__vendor__vid }}</td>
-                                    <td>{{ c.po__euser__uid }}</td>
-                                    <td>{{ c.po__time }}</td>
-                                    <td>{{ c.status }}</td>
-                                    <td>
-                                    <!-- <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button> -->
-                                    <a href="/mm/invoice/order/display/{{ c.po__id }}/" onclick="return add_onclick()">
-                                        <button class="btn btn-success btn-xs"><i class="fa fa-search-plus">查看详情</i>
-                                        </button>
-                                    </a>
-                                    {% comment %} <a href="/mm/purchaseorder/modifyinfo/{{c.po__id}}">   <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-pencil"></i></button> </a>    {% endcomment %}
-                                {% endfor %}
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </section>
     </section>
 {% endblock %}

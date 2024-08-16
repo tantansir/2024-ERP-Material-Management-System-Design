@@ -160,7 +160,7 @@ def load_order_item(request: HttpRequest):
     # 渲染并返回模板
     return render(
         request=request,
-        template_name='../templates/receipt/create2.html',
+        template_name='../templates/receipt/create.html',
         context={'context': item_dict}
     )
 

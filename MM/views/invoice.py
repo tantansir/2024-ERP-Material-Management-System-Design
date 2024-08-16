@@ -85,7 +85,7 @@ def load_order_item(request: HttpRequest):
     item_dict['stock_'] = model_to_dict(stock)
     return render(
         request=request,
-        template_name='../templates/invoice/create2.html',
+        template_name='../templates/invoice/create.html',
         context={'context': item_dict}
     )
 

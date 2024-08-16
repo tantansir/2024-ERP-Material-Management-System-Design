@@ -1,7 +1,11 @@
 {% extends 'template.html' %}
 {% load static %}
 {% block extra_css %}
-
+    <style>
+    .start3{
+        text-align: center;
+    }
+    </style>
 {% endblock %}
 
 {% block main_content %}
@@ -12,13 +16,14 @@
                 <div class="col-lg-12">
                     <div class="col-lg-12">
                         <div class="content-panel">
-                            <h4><i class="fa fa-angle-right"></i> 采购订单详情</h4>
                             <section id="unseen">
+                                <div class="row mt" style="margin:10px 0px 0px 40px">
+                                <h4><i class="fa fa-angle-right"></i> 采购订单详情</h4>
+
                                 <table class="table">
                                     <thead>
                                     <tr>
                                         <th>基本信息</th>
-
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -32,9 +37,10 @@
                                             <label>{{ user_id }}</label>
                                         </td>
                                         <td>
-                                            <label>创建时间：</label>
-                                            <label>{{ purchaseOrder.time }}</label>
+                                            <label>物资条数目：</label>
+                                            <label>{{ itemNum }}</label>
                                         </td>
+
                                     </tr>
                                     <tr>
                                         <td>
@@ -46,21 +52,16 @@
                                             <label>{{ currency }}</label>
                                         </td>
                                         <td>
-                                            <label>物资条数目：</label>
-                                            <label>{{ itemNum }}</label>
+                                            <label>创建时间：</label>
+                                            <label>{{ purchaseOrder.time }}</label>
                                         </td>
-
                                     </tr>
-
-
                                     </tbody>
-
                                 </table>
 
                                 <table class="table">
                                     <thead>
                                     <tr>
-
                                         <th>供应商信息</th>
                                     </tr>
                                     </thead>
@@ -70,17 +71,18 @@
                                             <label>供应商编码：</label>
                                             <label>{{ vendor.vid }}</label>
                                         </td>
-
-                                        <td>
-                                            <label>供应商名称：</label>
-                                            <label>{{ vendor.vname }}</label>
-                                        </td>
-                                    </tr>
-                                    <tr>
                                         <td>
                                             <label>城市：</label>
                                             <label>{{ vendor.city }}</label>
                                         </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label>供应商名称：</label>
+                                            <label>{{ vendor.vname }}</label>
+                                        </td>
+
 
                                         <td>
                                             <label>街区地址：</label>
@@ -100,6 +102,11 @@
                                     <tbody>
                                     <tr>
                                         <td>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
                                             <label>采购方电话：</label>
                                             <label>{{ purchaseOrder.telephone }}</label>
                                         </td>
@@ -115,6 +122,8 @@
                                     </tr>
                                     </tbody>
                                 </table>
+
+                                </div>
                                 <div class="row mt">
                                     <div class="col-md-12">
                                         <div class="col-md-12">
@@ -124,38 +133,38 @@
                                                     <h4><i class="fa fa-angle-right"></i> 商品信息</h4>
                                                     <thead>
                                                     <tr>
-                                                        <th># 条目编码</th>
-                                                        <th><i class="fa fa-question-circle"></i> 商品编码</th>
-                                                        <th><i class="fa fa-bookmark"></i> 商品名称</th>
-                                                        <th><i class=" fa fa-edit"></i> 数量</th>
-                                                        <th><i class=" fa fa-edit"></i> 单价</th><!--后面加上货币-->
-                                                        <th><i class=" fa fa-edit"></i> 总价</th><!--后面加上货币-->
-                                                        <th><i class="fa fa-bookmark"></i> 工厂</th>
-                                                        <th><i class="fa fa-bookmark"></i> 存储位置</th>
-                                                        <th><i class=" fa fa-edit"></i> 送达时间</th>
-                                                        <th><i class="fa fa-bullhorn"></i> 订单状态</th>
-                                                        <th>创建</th>
+                                                        <th class="start3"><i class="fa fa-question-circle"></i> 条目编码</th>
+                                                        <th class="start3"><i class="fa fa-question-circle"></i> 商品编码</th>
+                                                        <th class="start3"><i class="fa fa-bookmark"></i> 商品名称</th>
+                                                        <th class="start3"><i class=" fa fa-edit"></i> 数量</th>
+                                                        <th class="start3"><i class=" fa fa-edit"></i> 单价</th><!--后面加上货币-->
+                                                        <th class="start3"><i class=" fa fa-edit"></i> 总价</th><!--后面加上货币-->
+                                                        <th class="start3"><i class="fa fa-bookmark"></i> 工厂</th>
+                                                        <th class="start3"><i class="fa fa-bookmark"></i> 存储位置</th>
+                                                        <th class="start3"><i class=" fa fa-edit"></i> 送达时间</th>
+                                                        <th class="start3"><i class="fa fa-bullhorn"></i> 订单状态</th>
+                                                        <th class="start3">创建</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
                                                     {% for c in orderItems %}
                                                         <tr>
-                                                            <td>{{ c.itemId }}</td>
-                                                            <td>{{ c.meterialItem__id }}</td>
-                                                            <td>{{ c.meterialItem__material__mname }}</td>
-                                                            <td>{{ c.quantity }}</td>
-                                                            <td>{{ c.price }}</td>
-                                                            <td>{{ c.sum }}</td>
-                                                            <td>{{ c.meterialItem__stock__name }}</td>
-                                                            <td>{{ c.meterialItem__sloc }}</td>
-                                                            <td>{{ c.deliveryDate }}</td>
-                                                            <td>{{ c.status }}</td>
+                                                            <td class="start3">{{ c.itemId }}</td>
+                                                            <td class="start3">{{ c.meterialItem__id }}</td>
+                                                            <td class="start3">{{ c.meterialItem__material__mname }}</td>
+                                                            <td class="start3">{{ c.quantity }}</td>
+                                                            <td class="start3">{{ c.price }}</td>
+                                                            <td class="start3">{{ c.sum }}</td>
+                                                            <td class="start3">{{ c.meterialItem__stock__name }}</td>
+                                                            <td class="start3">{{ c.meterialItem__sloc }}</td>
+                                                            <td class="start3">{{ c.deliveryDate }}</td>
+                                                            <td class="start3">{{ c.status }}</td>
                                                             {% if c.status == '货物未发出' %}
-                                                            <td>
+                                                            <td class="start3">
                                                                 <a href="{% url 'MM:load_order_item_receipt' %}?itemID={{ c.itemId }}&orderID={{ purchaseOrder.id }}">点击创建</a>
                                                             </td>
                                                             {% else %}
-                                                            <td>已创建收据</td>
+                                                            <td class="start3">已创建收据</td>
                                                             {% endif %}
 
                                                         </tr>
