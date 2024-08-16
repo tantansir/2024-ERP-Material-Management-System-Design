@@ -160,7 +160,7 @@ def pay(request: HttpRequest):
         id = int(id)
         invoice: Invoice = Invoice.objects.get(id__exact=id)
         orderItem: OrderItem = invoice.orderItem
-        orderItem.status = '3'
+        orderItem.status = '4'
         orderItem.save()
         sum += invoice.sumAmount
         accountDetail1 = AccountDetail(

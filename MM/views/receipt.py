@@ -202,7 +202,7 @@ def display_purchase_order(request: HttpRequest, pk):
                 i['status']="货物已送达"
             elif i['status']=='2':
                 i['status']="已收到发票"
-            elif i['status']=='3':
+            elif i['status']=='4':
                 i['status']="已完成支付"
         # 计算每个订单项的小计，并累加到总金额
         sum = 0
@@ -271,7 +271,7 @@ def search_orders(request):
                 i['status']="货物已送达"
             if i['status']=='2':
                 i['status']="已收到发票"
-            if i['status']=='3':
+            if i['status']=='4':
                 i['status']="已完成支付"
         # 渲染并返回包含过滤后订单数据的页面
         return render(request, '../templates/receipt/orders.html', {"orderItems":orderItems})

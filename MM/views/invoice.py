@@ -108,7 +108,7 @@ def display_purchase_order(request: HttpRequest, pk):
                 i['status']="货物已送达"
             if i['status']=='2':
                 i['status']="已收到发票"
-            if i['status']=='3':
+            if i['status']=='4':
                 i['status']="已完成支付"
         sum = 0
         for i in orderItems:
@@ -153,7 +153,7 @@ def search_orders(request):
                 i['status']="货物已送达"
             if i['status']=='2':
                 i['status']="已收到发票"
-            if i['status']=='3':
+            if i['status']=='4':
                 i['status']="已完成支付"
                 i['rfq__ri__status'] = "已创建采购订单"
         return render(request, '../templates/invoice/orders.html', {"orderItems":orderItems})
