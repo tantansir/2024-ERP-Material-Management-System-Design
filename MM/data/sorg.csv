@@ -1,7 +1,5 @@
-﻿Sorg,DistrChannel,Name1,Name2
-CN00,IN,中国区,Internet
-CN00,WH,中国区,Wholesale
-AF00,WH,非洲区,Wholesale
-SA00,WH,南美洲区,Wholesale
-AS00,IN,海外亚洲区,Internet
-AS00,WH,海外亚洲区,Wholesale
+﻿Sorg,Name1
+CN00,中国区
+AF00,非洲区
+SA00,南美洲区
+AS00,海外亚洲区
