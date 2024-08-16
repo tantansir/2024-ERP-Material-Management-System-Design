@@ -1,5 +1,9 @@
 {% extends 'template.html' %}
 {% load static %}
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/RFQ-info.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/RFQ.css' %}">
+{% endblock %}
 {% block main_content %}
       
       <!-- **********************************************************************************************************************************************************
@@ -8,12 +12,12 @@
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper">
-          	<h3><i class="fa fa-angle-right"></i> 添加供应商报价</h3>
+          	<h3>添加供应商报价</h3>
 		  		<div class="row mt">
                     <div class="col-lg-12">
 			  		<div class="col-lg-12">
                       <div class="content-panel">
-                      <h4><i class="fa fa-angle-right"></i> 报价申请详情</h4>
+                      <h4> 报价申请详情</h4>
                           <section id="unseen">
 
                             <table class="table">
@@ -156,7 +160,7 @@
     <div class="row mt">
         <div class="col-lg-12">
             <div class="form-panel">
-              <h4 class="mb"><i class="fa fa-angle-right"></i> 报价</h4>
+              <h4 class="mb">报价</h4>
 
                 <table class="table">
                 <thead>
