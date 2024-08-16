@@ -3,6 +3,8 @@ from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
+import re
+from django.shortcuts import redirect
 
 from ..models import EUser
 
@@ -36,6 +38,7 @@ def login(request: HttpRequest) -> HttpResponse:
                 context={'message': message}
             )
 
+
 def register(request: HttpRequest) -> HttpResponse:
     if request.method == 'GET':
         return render(
@@ -56,13 +59,31 @@ def register(request: HttpRequest) -> HttpResponse:
         answer1 = post.get('answer1')
         question2 = post.get('question2')
         answer2 = post.get('answer2')
-        
+
         message = None
-        if (username=='' or password=='' or password1=='' or email=='' or sector=='' or phone=='' or
-            question1=='' or question2=='' or answer1=='' or answer2==''):
+
+        # 检查是否有空字段
+        if (username == '' or password == '' or password1 == '' or email == '' or sector == '' or phone == '' or
+                question1 == '' or question2 == '' or answer1 == '' or answer2 == ''):
             message = "部分字段为空"
+
+        # 检查密码是否包含字母和数字
+        elif not (re.search(r'[A-Za-z]', password) and re.search(r'[0-9]', password)):
+            message = "密码必须同时包含字母和数字"
+
+        # 检查电话是否为11位数字
+        elif not re.match(r'^\d{11}$', phone):
+            message = "电话必须为11位数字"
+
+        # 检查邮箱格式是否正确
+        elif not re.match(r'^[\w\.-]+@[\w\.-]+\.\w+$', email):
+            message = "邮箱格式不正确"
+
+        # 检查两次密码是否一致
         elif password != password1:
             message = "两次输入的密码不一致"
+
+        # 检查邮箱是否已经注册
         else:
             queryset = EUser.objects.filter(email__exact=email)
             if len(queryset) > 0:
@@ -79,19 +100,17 @@ def register(request: HttpRequest) -> HttpResponse:
                 sector=sector,
                 phone=phone,
                 email=email,
-                question1=question1,question2=question2,
-                answer1=answer1,answer2=answer2,
+                question1=question1, question2=question2,
+                answer1=answer1, answer2=answer2,
             )
             euser.set_password(password)
             euser.save()
             messages.success(request=request, message="用户创建成功！")
             return HttpResponseRedirect(reverse('MM:login'))
         else:
-            return render(
-            request=request,
-            template_name='../templates/user/register.html',
-            context={"message": message}
-        )
+            messages.error(request, message)
+            return redirect('MM:register')
+
 
 @login_required
 def home(request):
