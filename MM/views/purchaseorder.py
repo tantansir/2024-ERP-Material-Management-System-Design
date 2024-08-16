@@ -377,7 +377,7 @@ def poinfo(request: HttpRequest, pk):
                 i['status']="货物已送达"
             if i['status']=='2':
                 i['status']="已收到发票"
-            if i['status']=='3':
+            if i['status']=='4':
                 i['status']="已完成支付"
 
         xiangqing = PurchaseOrder.objects.filter(id = pk).values("id","euser_id","time","orderitem__currency")
@@ -427,7 +427,7 @@ def pomodifyinfo(request: HttpRequest, pk):
                 i['status']="货物已送达"
             if i['status']=='2':
                 i['status']="已收到发票"
-            if i['status']=='3':
+            if i['status']=='4':
                 i['status']="已完成支付"
 
 
@@ -473,7 +473,7 @@ def pomodifyinfo(request: HttpRequest, pk):
                 i['status']="货物已送达"
             if i['status']=='2':
                 i['status']="已收到发票"
-            if i['status']=='3':
+            if i['status']=='4':
                 i['status']="已完成支付"
 
 
@@ -741,7 +741,7 @@ def searchpo(request):
                 i['status']="货物已送达"
             if i['status']=='2':
                 i['status']="已收到发票"
-            if i['status']=='3':
+            if i['status']=='4':
                 i['status']="已完成支付"
         vendorid = list(vendorid)
         print(vendorid)
@@ -772,7 +772,7 @@ def searchpo(request):
                 i['status'] = "货物已送达"
             if i['status'] == '2':
                 i['status'] = "已收到发票"
-            if i['status'] == '3':
+            if i['status'] == '4':
                 i['status'] = "已完成支付"
         vendorid = list(vendorid)
         return render(request, '../templates/purchaseorder/purchase_order.html', locals())
