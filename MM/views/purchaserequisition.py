@@ -376,7 +376,9 @@ def newrequeinsert(request):
                 deliveryDate=str
             )
 
-        content = 100000 + requision.id
+
+        # content = 100000 + requision.id
+        content = requision.id
         datalist = {
             "message": "创建成功",
             "content": content
