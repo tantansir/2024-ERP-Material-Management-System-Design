@@ -1,5 +1,3 @@
-
-
 /* 表单组样式 */
 .form-panel3 {
     padding: 20px;
@@ -7,7 +5,7 @@
     border: 1px solid #cfdde8;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    height: 80px;
+    height: 220px;
     align-items: center;
     align-content: center;
     align-self: center;
@@ -40,7 +38,7 @@
     border-color: #0d6efd;
     color: #fff;
     border-radius: 4px;
-    padding: 2px 4px;
+    padding: 4px 8px;
     font-weight: 600;
     transition: background-color 0.3s ease;
 }

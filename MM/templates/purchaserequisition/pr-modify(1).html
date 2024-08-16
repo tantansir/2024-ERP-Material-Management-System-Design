@@ -1,7 +1,7 @@
 {% extends 'template.html' %}
 {% load static %}
 {% block extra_css %}
-
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/pr-modify(1).css' %}">
 {% endblock %}
 {% block main_content %}
       <!-- **********************************************************************************************************************************************************
@@ -24,6 +24,7 @@
                           <div class="col-lg-10">
                               <p class="form-control-static" id="rid">{{c.id}}</p>
                           </div>
+                          <p class="blank_0">&nbsp;</p>
                       </div>
                       
                       <div class="form-group">
@@ -31,12 +32,14 @@
                           <div class="col-lg-10">
                               <p class="form-control-static">{{c.euser_id}}</p>
                           </div>
+                          <p class="blank_0">&nbsp;</p>
                       </div>
                       <div class="form-group">
                           <label class="col-sm-2 col-sm-2 control-label">创建时间</label>
                           <div class="col-lg-10">
                               <p class="form-control-static">{{c.time}}</p>
                           </div>
+                          <p class="blank_0">&nbsp;</p>
                       </div>
 
 
@@ -94,6 +97,7 @@
 
           </div><!-- /col-md-12 -->
       </div>
+      <p>&nbsp;</p>
       <div id="btn-pr-create">
           <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="savepr()" >保存采购申请</button>
       </div>

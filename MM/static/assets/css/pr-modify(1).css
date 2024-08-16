@@ -1,0 +1,124 @@
+/* 通用样式 */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f8fb;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+h3, h4 {
+    color: #004080;
+    font-weight: bold;
+}
+
+/* 页面布局和面板样式 */
+
+.form-panel {
+    background-color: #e0f3ff;
+    border: 1px solid #b3d7f5;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.content-panel {
+    background-color: #ffffff;
+    border: 1px solid #b3d7f5;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 表单元素样式 */
+.form-horizontal .control-label {
+    color: #004080;
+    font-weight: bold;
+}
+
+.form-control-static {
+    background-color: #f9f9f9;
+    border: 1px solid #b3d7f5;
+    border-radius: 4px;
+    padding: 8px 12px;
+    color: #333;
+}
+
+.blank_0 {
+    height: 40px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* 表格样式 */
+.table-hover>tbody>tr:hover {
+    background-color: #d0e7ff;
+}
+
+.table thead {
+    background-color: #004080;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.table th, .table td {
+    border: none;
+    padding: 10px;
+}
+
+.table caption {
+    text-align: left;
+    color: #004080;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.table-hover>tbody>tr>td {
+    border-bottom: 1px solid #b3d7f5;
+}
+
+.td-text {
+    padding: 8px;
+}
+
+.td-text-modify {
+    border: 1px solid #b3d7f5;
+    border-radius: 4px;
+    padding: 6px 8px;
+}
+
+/* 按钮样式 */
+.btn-primary {
+    background-color: #007bff;
+    border-color: #0056b3;
+    color: #ffffff;
+    border-radius: 4px;
+    padding: 10px 15px;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+
+.btn-link {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.btn-link:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* 自定义元素样式 */
+#table-pr-head h4 {
+    color: #004080;
+}
+
+#btn-pr-create {
+    margin-top: 20px;
+}

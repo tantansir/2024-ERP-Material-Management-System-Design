@@ -1,0 +1,109 @@
+/* 主内容区样式 */
+#main-content {
+    background-color: #f0f4f8;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* 标题样式 */
+h3 {
+    color: #000000;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+h4 {
+    color: #000000;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+/* 表单面板样式 */
+.form-panel {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #007bff;
+}
+
+/* 表单组样式 */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    color: #444444;
+    font-weight: bold;
+}
+
+.form-control-static {
+    color: #495057;
+    font-weight: 600;
+    padding: 8px;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    background-color: #e9ecef;
+    height: 35px;
+    align-content:center;
+}
+
+/* 表格样式 */
+.table {
+    width: 100%;
+    background-color: #ffffff;
+    border: 1px solid #007bff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.table th {
+    background-color: #4ca3ce;
+    color: #ffffff;
+    text-align: left;
+    padding: 12px;
+    font-size: 16px;
+}
+
+.table td {
+    padding: 12px;
+    border-top: 1px solid #e9ecef;
+    vertical-align: middle;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f1f5f9;
+}
+
+/* 按钮样式 */
+.btn-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btn-link:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* 响应式布局调整 */
+@media (max-width: 768px) {
+    .form-group {
+        display: block;
+        width: 100%;
+    }
+    .table th, .table td {
+        display: block;
+        width: 100%;
+    }
+    .table tr {
+        margin-bottom: 15px;
+    }
+}
+
+/* 图标样式 */
+.fa-angle-right {
+    color: #007bff;
+}
