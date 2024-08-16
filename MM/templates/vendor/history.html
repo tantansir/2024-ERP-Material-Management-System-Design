@@ -2,9 +2,11 @@
 {% load static %}
 {% block extra_css %}
 
-
-
-
+<style>
+    h3, h4, h5.mb {
+        color: #333;
+    }
+</style>
 
 {% endblock %}
 
@@ -178,10 +180,6 @@
 
 
                                         </div>
-
-                                        <div class="modal-footer">
-
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -195,7 +193,7 @@
                                     <div class="col-md-12">
                                         <div class="pull-right">
                                             <button type="button" class="btn btn-theme03" data-toggle="modal"
-                                                    data-target="#myModal2">修改自定义权重
+                                                    data-target="#myModal2">自定义权重
                                             </button>
                                         </div>
                                         <br><br>
@@ -215,7 +213,7 @@
 
                                                             <div class="form-group">
                                                                 <label class="col-sm-2 col-sm-2 control-label">
-                                                                    <div class="pull-right">质量</div>
+                                                                    <div class="pull-right">交货质量</div>
                                                                 </label>
                                                                 <div class="col-sm-8 control-label">
                                                                     <div id="slider1"></div>
@@ -227,7 +225,7 @@
 
                                                             <div class="form-group">
                                                                 <label class="col-sm-2 col-sm-2 control-label">
-                                                                    <div class="pull-right">数量</div>
+                                                                    <div class="pull-right">交货数量</div>
                                                                 </label>
                                                                 <div class="col-sm-8 control-label">
                                                                     <div id="slider2"></div>
@@ -251,7 +249,7 @@
 
                                                             <div class="form-group">
                                                                 <label class="col-sm-2 col-sm-2 control-label">
-                                                                    <div class="pull-right">如期交货</div>
+                                                                    <div class="pull-right">按时交货</div>
                                                                 </label>
                                                                 <div class="col-sm-8 control-label">
                                                                     <div id="slider4"></div>
@@ -263,28 +261,21 @@
 
                                                         </form>
                                                     </div>
-                                                    <div class="modal-footer">
-                                                        {% comment %} <button type="reset" class="btn btn-default" >重置</button>
-                                  <button type="button" class="btn btn-primary">保存修改</button> {% endcomment %}
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
 
 
                                         <div class="content-panel">
-                                            <!-- <div class="form-panel2"> -->
 
                                             <table class="table table-striped table-advance table-hover">
-                                                <h4><i class="fa fa-angle-right"></i> 供应商交易历史</h4>
-                                                <hr>
                                                 <thead>
                                                 <tr>
                                                     <th> 供应商编号</th>
                                                     <th> 供应商名称</th>
                                                     <th> 交易历史总额</th>
                                                     <th> 交易次数</th>
-                                                    <th> 评分</th>
+                                                    <th> 加权评分</th>
 
                                                 </tr>
                                                 </thead>

@@ -1,178 +1,182 @@
 {% extends 'template.html' %}
 {% load static %}
 {% block extra_css %}
+<style>
+    .form-panel {
+        background-color: transparent; /* 背景透明 */
+        padding: 20px;
+        border-radius: 0;
+        box-shadow: none;
+    }
 
+    .form-group label {
+        text-align: right;
+        font-weight: bold;
+        color: #333; /* 统一字体颜色 */
+    }
+
+    h3, h4, h5.mb {
+        color: #333; /* 与表单字体颜色一致 */
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .btn-theme, .btn-theme04 {
+        margin-right: 10px;
+    }
+
+    h5.mb {
+        margin-top: 30px;
+        margin-bottom: 10px;
+        font-size: 18px;
+        color: #333;
+    }
+
+    .row-custom {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .form-actions {
+        text-align: right; /* 按钮右下角对齐 */
+        padding-top: 20px;
+    }
+
+    h5.mb {
+        margin-top: 0; /* 移除顶部间距 */
+        margin-bottom: 10px;
+        font-size: 18px;
+        color: #333;
+        padding-left: 12px; /* 与标题对齐 */
+    }
+
+</style>
 {% endblock %}
 
 {% block main_content %}
 
         <section id="main-content">
-            <section class="wrapper">
-                <h3><i class="fa fa-angle-right"></i> 查看供应商信息</h3>
-                <div class="row mt">
-                    <div class="col-lg-12">
-                        <div class="form-panel">
-                            <h4 class="mb"><i class="fa fa-angle-right"></i> 供应商信息</h4>
-                            <form id="material3" class="form-horizontal style-form" method="post">
-                                {% csrf_token %}
-
-                                <fieldset>
+    <section class="wrapper">
+        <h3><i class="fa fa-angle-right"></i> 查看供应商信息</h3>
+        <div class="row mt">
+            <div class="col-lg-12">
+                <div class="form-panel" style="background-color: transparent; padding: 20px; box-shadow: none;">
+                    <form id="material3" class="form-horizontal style-form" method="post">
+                        {% csrf_token %}
+                        <fieldset>
+                            <div class="row-custom" style="display: flex; justify-content: space-between;">
+                                <div class="col-sm-6">
+                                    <h5 class='mb'><i class="fa fa-angle-right"></i> 供应商信息</h5>
                                     <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">
-                                            <div class="pull-right">供应商名称： </div>
-                                        </label>
-                                        <div class="col-sm-7">
+                                        <label class="col-sm-4 control-label">供应商名称：</label>
+                                        <div class="col-sm-8">
                                             <input class="form-control" type="text" name="vname" id="vname2" value="{{ vendor.vname }}" required disabled>
                                         </div>
                                     </div>
-                                    <h5 class='mb'><i class="fa fa-angle-right"></i>联系方式</h5>
+                                    <h5 class='mb' style="color: #333; margin-top: 0; padding-left: 12px;"><i class="fa fa-angle-right"></i> 联系方式</h5>
                                     <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">
-                                            <div class="pull-right">语言：</div>
-                                        </label>
-                                        <div class="col-sm-7">
+                                        <label class="col-sm-4 control-label">语言：</label>
+                                        <div class="col-sm-8">
                                             <select class="form-control" name="language" id='language2' required disabled>
                                                 <option value="{{ vendor.language }}" selected>{{ vendor.language }}</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">
-                                            <div class="pull-right">电话： </div>
-                                        </label>
-                                        <div class="col-sm-7">
+                                        <label class="col-sm-4 control-label">电话：</label>
+                                        <div class="col-sm-8">
                                             <input class="form-control" type="text" name="phone" id='phone2' value="{{ vendor.phone|default_if_none:'' }}" disabled>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">
-                                            <div class="pull-right">传真：</div>
-                                        </label>
-                                        <div class="col-sm-7">
+                                        <label class="col-sm-4 control-label">传真：</label>
+                                        <div class="col-sm-8">
                                             <input class="form-control" type="text" name="fax" id='fax2' value="{{ vendor.fax|default_if_none:'' }}" disabled>
                                         </div>
                                     </div>
-                                    <h5 class='mb'><i class="fa fa-angle-right"></i>所在地</h5>
+                                    <h5 class='mb' style="color: #333; margin-top: 0; padding-left: 12px;"><i class="fa fa-angle-right"></i> 所在地</h5>
                                     <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">
-                                            <div class="pull-right">国家：</div>
-                                        </label>
-                                        <div class="col-sm-7">
+                                        <label class="col-sm-4 control-label">国家：</label>
+                                        <div class="col-sm-8">
                                             <select class="form-control" name="country" id="country2" required disabled>
                                                 <option value="{{ vendor.country }}" selected>{{ vendor.country }}</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">
-                                            <div class="pull-right">所在城市：</div>
-                                        </label>
-                                        <div class="col-sm-7">
+                                        <label class="col-sm-4 control-label">所在城市：</label>
+                                        <div class="col-sm-8">
                                             <input class="form-control" type="text" name="city" id="city2" value="{{ vendor.city }}" required disabled>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">
-                                            <div class="pull-right">街区地址：</div>
-                                        </label>
-                                        <div class="col-sm-7">
+                                        <label class="col-sm-4 control-label">街区地址：</label>
+                                        <div class="col-sm-8">
                                             <input class="form-control" name="address" id="address2" type="text" value="{{ vendor.address|default_if_none:'' }}" disabled>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">
-                                            <div class="pull-right">邮政编码：</div>
-                                        </label>
-                                        <div class="col-sm-7">
+                                        <label class="col-sm-4 control-label">邮政编码：</label>
+                                        <div class="col-sm-8">
                                             <input class="form-control" name="postcode" id="postcode2" type="text" value="{{ vendor.postcode }}" required disabled>
                                         </div>
                                     </div>
-                                    <h5 class='mb'><i class="fa fa-angle-right"></i>交易</h5>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h5 class='mb' style="color: #333; margin-top: 0; padding-left: 12px;"><i class="fa fa-angle-right"></i> 交易</h5>
                                     <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">
-                                            <div class="pull-right">公司编码：</div>
-                                        </label>
-                                        <div class="col-sm-7">
+                                        <label class="col-sm-4 control-label">公司编码：</label>
+                                        <div class="col-sm-8">
                                             <select class="form-control" name="companyCode" id="company2" required disabled>
                                                 <option value="{{ vendor.companyCode }}" selected>{{ vendor.companyCode }}</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">
-                                            <div class="pull-right">采购组织：</div>
-                                        </label>
-                                        <div class="col-sm-7">
+                                        <label class="col-sm-4 control-label">采购组织：</label>
+                                        <div class="col-sm-8">
                                             <select class="form-control" name="pOrg" id="pOrg2" required disabled>
                                                 <option value="{{ vendor.pOrg }}" selected>{{ vendor.pOrg }}</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">
-                                            <div class="pull-right">支付类型：</div>
-                                        </label>
-                                        <div class="col-sm-7">
+                                        <label class="col-sm-4 control-label">支付类型：</label>
+                                        <div class="col-sm-8">
                                             <select class="form-control" name="tpType" id="tpType2" disabled>
                                                 <option value="" {% if not vendor.tpType %}selected{% endif %}>请选择支付类型</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">
-                                            <div class="pull-right">交易货币：</div>
-                                        </label>
-                                        <div class="col-sm-7">
+                                        <label class="col-sm-4 control-label">交易货币：</label>
+                                        <div class="col-sm-8">
                                             <input type="text" class="form-control po-text-modify" onclick="currencyf()" name="currency" id="currency2" value="{{ vendor.currency|default_if_none:'' }}" disabled>
-                                            <div class="col-sm-12">
-                                                <div class="modal fade" id="myModalcurr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                                <h4 class="modal-title" id="myModalLabel">货币</h4>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                *双击填入货币
-                                                                <table class="table table-bordered table-striped table-condensed">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th style="width: 100px;">序号</th>
-                                                                            <th style="width: 120px;">货币</th>
-                                                                            <th>名称</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody id="currDiv"></tbody>
-                                                                </table>
-                                                            </div>
-                                                            <div class="modal-footer"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">
-                                            <div class="pull-right">总账账户编码：</div>
-                                        </label>
-                                        <div class="col-sm-7">
+                                        <label class="col-sm-4 control-label">总账账户编码：</label>
+                                        <div class="col-sm-8">
                                             <input class="form-control" name="glAcount" id="glAcount2" type="text" value="{{ vendor.glAcount }}" required disabled>
                                         </div>
                                     </div>
-                                </fieldset>
-                                <div class="col-sm-10"></div>
-                                <button type="button" class="btn btn-primary" id="edit-btn">开始修改</button>
-                                <input type="submit" class="btn btn-theme" id="submit-btn" formmethod="post" style="display:none;">
-                                <a href="javascript:history.back()" id="back-button" class="btn btn-theme">返回上一页</a>
-                            </form>
-
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="form-actions" style="text-align: right; padding-top: 20px;">
+                            <button type="button" class="btn btn-primary" id="edit-btn">开始修改</button>
+                            <input type="submit" class="btn btn-theme" id="submit-btn" formmethod="post" style="display:none;">
+                            <a href="javascript:history.back()" id="back-button" class="btn btn-theme">返回上一页</a>
                         </div>
-                    </div>
+                    </form>
                 </div>
-            </section>
-        </section>
+            </div>
+        </div>
     </section>
+</section>
+
 
 {% endblock %}
 

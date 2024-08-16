@@ -1,7 +1,58 @@
 {% extends 'template.html' %}
 {% load static %}
 {% block extra_css %}
+<style>
+    .form-panel {
+        background-color: transparent; /* 背景透明 */
+        padding: 20px;
+        border-radius: 0;
+        box-shadow: none;
+    }
 
+    .form-group label {
+        text-align: right;
+        font-weight: bold;
+        color: #333; /* 统一字体颜色 */
+    }
+
+    h3, h4, h5.mb {
+        color: #333; /* 与表单字体颜色一致 */
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .btn-theme, .btn-theme04 {
+        margin-right: 10px;
+    }
+
+    h5.mb {
+        margin-top: 30px;
+        margin-bottom: 10px;
+        font-size: 18px;
+        color: #333;
+    }
+
+    .row-custom {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .form-actions {
+        text-align: right; /* 按钮右下角对齐 */
+        padding-top: 20px;
+    }
+
+    h5.mb {
+        margin-top: 0; /* 移除顶部间距 */
+        margin-bottom: 10px;
+        font-size: 18px;
+        color: #333;
+        padding-left: 12px; /* 与标题对齐 */
+    }
+
+</style>
 {% endblock %}
 
 {% block main_content %}
@@ -9,13 +60,14 @@
         <section id="main-content">
 
             <section class="wrapper">
-                <h3><i class="fa fa-angle-right"></i> 创建新商品</h3>
+                <h3><i class="fa fa-angle-right"></i> 创建新商品</h3><br>
 
                 <!-- BASIC FORM ELELEMNTS -->
                 <div class="col-lg-12">
-                <div class="pull-right">
-                    <button type="button" class="btn btn-theme03" data-toggle="modal" data-target="#myModal1">根据已有商品信息创建</button>
+                <div class="pull-left">
+                    <button type="button" class="btn btn-theme03" data-toggle="modal" data-target="#myModal1">导入已有商品信息</button>
                   </div><br>
+
             <div id='yuan'>
                 <div class="row mt">
                     <div class="form-panel">
@@ -26,7 +78,8 @@
                             {% csrf_token %}
                             <fieldset>
                                 <input class="form-control" type="hidden" id="pk2" >
-
+                            <div class="row-custom">
+                                <div class="col-sm-6">
                                 <div class="form-group">
                                     <label class="col-sm-2 col-sm-2 control-label">
                                       <div class="pull-right">商品名称： </div>
@@ -132,6 +185,9 @@
 
                                     </div>
                                 </div>
+                                </div>
+
+                                <div class="col-sm-6"> <!-- 交易部分单独一列 -->
                                 <div class="form-group">
                                     <label class="col-sm-2 col-sm-2 control-label">
                                       <div class="pull-right">装载组：</div>
@@ -241,7 +297,8 @@
                                         </select>
                                     </div>
                                 </div>
-
+                                </div>
+                            </div>
 
                             </fieldset>
 
@@ -267,7 +324,8 @@
                                 {% csrf_token %}
                                 <fieldset>
                                     <input class="form-control" type="hidden" id="pk3" >
-
+                            <div class="row-custom">
+                                <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">
                                           <div class="pull-right">商品名称： </div>
@@ -373,6 +431,8 @@
 
                                         </div>
                                     </div>
+                                </div>
+                                    <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">
                                           <div class="pull-right">装载组：</div>
@@ -482,7 +542,8 @@
                                             </select>
                                         </div>
                                     </div>
-
+                                    </div>
+                                </div>
 
                                 </fieldset>
 
