@@ -165,7 +165,7 @@ class OrderItem(models.Model):
     deliveryDate = models.DateField()
     price = models.IntegerField()
     currency = models.CharField(max_length=10, blank=True, null=True)
-    status = models.CharField(max_length=1, choices=[('0', 'Not Deliveried'), ('1', 'Deliveried'), ('2', 'Invoice Received'), ('3', 'Payoff Completed')], default='0')
+    status = models.CharField(max_length=1, choices=[('0', 'Not Deliveried'), ('1', 'Deliveried'), ('2', 'Invoice Received'), ('4', 'Payoff Completed')], default='0')
     qualityScore = models.IntegerField(blank=True, null=True)
     serviceScore = models.IntegerField(blank=True, null=True)
     quantityScore = models.IntegerField(blank=True, null=True)
