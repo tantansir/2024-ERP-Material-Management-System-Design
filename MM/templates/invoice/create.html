@@ -1,167 +1,177 @@
-<!DOCTYPE html>
-<html>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<head>Material Search</head>
-<body>
-<form id="material3">
-    {% csrf_token %}
-    <fieldset>
-        <table class="table">
-            <thead>
-            <tr>
-                <th>基本信息</th>
+{% extends 'template.html' %}
 
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>
-                    <label>采购订单编码：</label>
-                    <label id='pk'>1</label>
-                </td>
-                <td>
-                    <label>创建者编码：</label>
-                    <label>1112</label>
-                </td>
-                <td>
-                    <label>创建时间：</label>
-                    <label>1112</label>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label>总价：</label>
-                    <label>1112</label>
-                </td>
-                <td>
-                    <label>结算货币：</label>
-                    <label>1112</label>
-                </td>
-                <td>
-                    <label>物资条数目：</label>
-                    <label>1112</label>
-                </td>
+{% load static %}
+{% block extra_css %}
 
-            </tr>
 
-            </thead>
+{% endblock %}
+{% block main_content %}
+    <section id="main-content">
+        <section class="wrapper">
+            <h3><i class="fa fa-angle-right"></i> 创建发票收据</h3>
+            <div class="row mt">
+                <div class="col-lg-12">
+                    <div class="col-lg-12">
+                        <div class="content-panel">
+                            <h3 style="text-align: center"> 发票收据信息</h3>
+                            <section id="unseen">
+                                <form id="material3">
+                                    <div class="row" style="margin: 0 20px 0 30px">
+                                        <table class="table">
+                                            <tbody>
+                                            <tr>
+                                                <td>
+                                                    <label>采购订单编码：</label>
+                                                    <label id='po_id'>{{ context.po }}</label>
+                                                </td>
+                                                <td style="width: 350px;">
+                                                    <label>次序：</label>
+                                                    <label id='oi_id'>{{ context.itemId }}</label>
+                                                </td>
 
-        </table>
+                                            </tr>
 
-        <table class="table">
-            <thead>
-            <tr>
 
-                <th>供应商信息</th>
+                                        </table>
+                                        <table class="table">
+                                            <tbody>
+                                            <tr>
+                                                <td>
+                                                    <label>总金额：</label>
+                                                    <label><input type="text" id='sumAmount' required></label>
+                                                </td>
+                                                <td>
+                                                    <label>交易货币：</label>
+                                                    <label><input type="text" id="currency" value="{{ context.currency }}" disabled></label>
+                                                </td>
 
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>
-                    <label>供应商编码：</label>
-                    <label>1112</label>
-                </td>
+                                            </tr>
 
-                <td>
-                    <label>供应商名称：</label>
-                    <label>1112</label>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label>城市：</label>
-                    <label>1112</label>
-                </td>
+                                            <tr>
+                                                <td>
+                                                    <label>发票日期：</label>
+                                                    <label><input type="text" id="my-input" required></label>
+                                                </td>
 
-                <td>
-                    <label>街区地址：</label>
-                    <label>1112</label>
-                </td>
-            </tr>
+                                                <td>
+                                                    <label>过账日期：</label>
+                                                    <label><input type="text" id="my-input2" required></label>
+                                                </td>
+                                                <td>
+                                                    <label>财年：</label>
+                                                    <label><input type="text" id='fiscal' required></label>
+                                                </td>
+                                            </tr>
 
-            </tbody>
-        </table>
 
-        <table class="table">
-            <thead>
-            <tr>
+                                            </tbody>
+                                        </table>
+                                        <table class="table">
 
-                <th>采购方信息</th>
+                                            <tbody>
+                                            <tr>
+                                                <td>
+                                                    <label>备注：</label>
+                                                    <label><input type="text" id='Test'></label>
+                                                </td>
 
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>
-                    <label>采购方电话：</label>
-                    <label>1112</label>
-                </td>
+                                            </tr>
 
-                <td>
-                    <label>送货地址：</label>
-                    <label>1112</label>
-                </td>
-                <td>
-                    <label>传真：</label>
-                    <label>1112</label>
-                </td>
-            </tr>
 
-            </tbody>
-        </table>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-9"></div>
+                                        <button class="btn btn-danger btn-xs" type="reset">重置</button>
+                                        <div class="col-sm-2"></div>
+                                        <button class="btn btn-primary btn-xs" type="submit" formmethod="post"
+                                                onclick="return tip()">提交
+                                        </button>
+                                    </div>
+                                </form>
 
-        <table class="table table-striped table-advance table-hover">
-            <h4><i class="fa fa-angle-right"></i> 商品信息</h4>
-            <thead>
-            <tr>
-                <th># 条目编码</th>
-                <th><i class="fa fa-question-circle"></i> 商品编码</th>
-                <th><i class="fa fa-bookmark"></i> 商品名称</th>
-                <th><i class=" fa fa-edit"></i> 数量</th>
-                <th><i class=" fa fa-edit"></i> 单价</th><!--后面加上货币-->
-                <th><i class=" fa fa-edit"></i> 总价</th>
-                <th><i class=" fa fa-edit"></i> 货币</th>
-                <th><i class="fa fa-bookmark"></i> 工厂</th>
-                <th><i class="fa fa-bookmark"></i> 存储位置</th>
-                <th><i class=" fa fa-edit"></i> 送达时间</th>
-                <th><i class="fa fa-bullhorn"></i> 订单状态</th>
-                <th><i class="fa fa-bullhorn"></i> 操作</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td id='itempk0'>1</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td id='status0'>货物已送达</td>
-                <td><input type="button" id='submit0' onclick="submitpk(this.id)"></td>
-            </tr>
 
-            </tbody>
-        </table>
+                            </section>
+                        </div><!-- /content-panel -->
+                    </div>
+                </div><!-- /col-md-12 -->
+            </div><!-- /row -->
 
-    </fieldset>
+        </section>
+    </section><!-- /MAIN CONTENT -->
+{% endblock %}
 
-</form>
-<textarea id="item_result"></textarea>
-<script>
-    function submitpk(clicked_id) {
-        var itempk = 'itempk' + clicked_id[6];
-        var status = 'status' + clicked_id[6];
-        if ($("#" + status).html() == '货物未发出') {
-            //window.location.href="https://www.php.cn";
-        } else {
-            var target = "{% url 'MM:load_order_item_invoice' %}" + '?' + 'itemID=' + $("#" + itempk).html() + '&' + 'orderID=' + $("#pk").text();
-            window.location.href = target;
+
+{% block js %}
+    <script>
+
+        //提交
+        $('#material3').on('submit', function (e) {
+            e.preventDefault();
+            $.ajax(
+                {
+                    type: "POST",
+                    url: "{% url 'MM:ajax_create_invoice' %}",
+                    data: {
+                        dataType: "json",
+                        csrfmiddlewaretoken: '{{ csrf_token }}',
+                        //$("#id").html() 这样取label内的值
+                        po_id: $("#po_id").html(),
+                        oi_id: $("#oi_id").html(),// itemId
+                        sumAmount: $("#sumAmount").val(),
+                        fiscal: $("#fiscal").val(),
+                        currency: $("#currency").val(),
+                        text: $("#Test").val(),
+                        postDate: $("#my-input").val(),
+                        invoiceDate: $("#my-input2").val(),
+                        //两个评分的id是startP、startP2；两个日期的id是my-input、my-input2；
+                    },
+                    success: function (data) {
+                        $('#item_result').text(data);
+                        var dataObj = eval("(" + data + ")");
+                        if (dataObj.status == 1) {
+                            showMessage({ text: dataObj.message,type: 'success'});
+                                // 在显示成功消息后，跳转到指定页面
+                        setTimeout(function() {
+                            window.location.href = "/mm/invoice/order/display/{{ context.po }}/"; // 替换为实际的跳转地址
+                        }, 2000); // 等待 2 秒钟，确保用户看到成功消息
+                        } else {
+                            showMessage({ text: dataObj.message,type: 'error'});
+                        }
+
+                    },
+                    failure: function () {
+
+                    }
+                })
+        });
+    </script>
+
+
+    <!-- 确认提示 -->
+    <script>
+        function tip() {
+
+            if (confirm("您确认提交吗？")) {
+                return true;
+            } else {
+                return false;
+            }
         }
-    }
-</script>
-</body>
-</html>
+    </script>
+
+    <script>
+        (function () {
+            const input = document.getElementById('my-input');
+            const datepicker = new TheDatepicker.Datepicker(input);
+            datepicker.render();
+        })();
+        (function () {
+            const input = document.getElementById('my-input2');
+            const datepicker = new TheDatepicker.Datepicker(input);
+            datepicker.render();
+        })();
+    </script>
+{% endblock %}
+

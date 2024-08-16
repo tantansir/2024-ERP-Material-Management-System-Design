@@ -2,6 +2,10 @@
 {% load static %}
 
 {% block extra_css %}
+    <style>
+    th{text-align: center}
+    td{text-align: center}
+    </style>
 {% endblock %}
 
 {% block main_content %}
@@ -33,19 +37,18 @@
                             </button>
                         </form>
 
-
-                        {% comment %} style="display: none;" {% endcomment %}
                         <div id='details'>
                             <div class="row mt">
                                 <div class="col-md-12">
                                     <div class="col-md-12">
-
                                         <div class="content-panel">
-                                            <!-- <div class="form-panel2"> -->
-
-                                            <table class="table table-striped table-advance table-hover">
+                                            <div class="row" style="margin: 0 0 0 15px">
                                                 <h4><i class="fa fa-angle-right"></i> 发票列表</h4>
-                                                <hr>
+                                            </div>
+                                            <hr>
+                                            <div class="row" style="margin: 15px">
+                                                <table class="table table-striped table-advance table-hover">
+
                                                 <thead>
                                                 <tr>
                                                     <th>发票编码</th>
@@ -60,6 +63,7 @@
                                                 </thead>
                                                 <tbody id="searchDiv"></tbody>
                                             </table>
+                                            </div>
                                         </div>
                                     </div>
 

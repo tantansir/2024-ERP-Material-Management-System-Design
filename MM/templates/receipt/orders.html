@@ -1,7 +1,15 @@
 {% extends 'template.html' %}
 {% load static %}
 {% block extra_css %}
-
+    <!--居中-->
+    <style>
+    th{
+        text-align: center;
+    }
+    td{
+        text-align: center;
+    }
+    </style>
 {% endblock %}
 
 {% block main_content %}
@@ -10,14 +18,11 @@
             <h3><i class="fa fa-angle-right"></i> 创建商品收据</h3>
             <div class="row mt">
                 <div class="col-lg-12">
-
                     <div class="form-panel3">
-
                         <form class="form-horizontal style-form" method="post">
                             {% csrf_token %}
                             <div class="col-sm-9" id="rfq-search">
                                 <div id="rfq-search-row1">
-
                                     <div class="col-sm-1 col-sm-1 control-label" id="rfq-tag1">
                                         采购订单编码
                                     </div>
@@ -74,6 +79,59 @@
                 </div>
             </div>
 
+            <div class="row mt">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="content-panel">
+                            <table class="table table-striped table-advance table-hover">
+                                <h4><i class="fa fa-angle-right"></i> 采购订单列表</h4>
+                                <hr>
+                                <thead>
+                                <tr>
+                                    <th><i class="fa fa-bullhorn"></i> 采购订单编号</th>
+                                    <th><i class="fa fa-question-circle"></i> 次序</th>
+                                    <th><i class="fa fa-question-circle"></i> 商品编码</th>
+                                    <th><i class=" fa fa-edit"></i> 数量</th>
+                                    <th><i class=" fa fa-edit"></i> 总价</th><!--总价+货币-->
+                                    <th><i class="fa fa-question-circle"></i> 供应商编码</th>
+                                    <th><i class="fa fa-question-circle"></i> 创建者编码</th>
+                                    <th><i class=" fa fa-edit"></i> 创建时间</th>
+                                    <th><i class="fa fa-bookmark"></i> 订单状态</th>
+                                    <th> 操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for c in orderItems %}
+                                    <tr>
+                                    <td>{{ c.po__id }}</td>
+                                    <td>{{ c.itemId }}</td>
+                                    <td>
+                                        {{ c.meterialItem__material__id }}
+                                    </td>
+                                    <td>{{ c.quantity }}</td>
+                                    <td>{{ c.sum }} {{ c.currency }}</td>
+                                    <td>{{ c.po__vendor__vid }}
+                                    </td>
+                                    <td>{{ c.po__euser__uid }}</td>
+                                    <td>{{ c.po__time }}</td>
+                                    <td>{{ c.status }}</td>
+                                    <td>
+                                    <!-- <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button> -->
+                                    <a href="/mm/receipt/order/display/{{ c.po__id }}/">
+                                        <button class="btn btn-success btn-xs"><i class="fa fa-search-plus">查看详情</i>
+                                        </button>
+                                    </a>
+                                    {% comment %} <a href="/mm/purchaseorder/modifyinfo/{{c.po__id}}">   <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-pencil"></i></button> </a>    {% endcomment %}
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
             <!--搜索供应商编码modal-->
             <div class="modal fade" id="myModalgys" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
                  aria-hidden="true">
@@ -84,11 +142,10 @@
                             <h4 class="modal-title" id="myModalLabel">搜索供应商编号</h4>
                         </div>
                         <div class="modal-body">
-                            <!-- Hi there, I am a Modal Example for Dashgum Admin Panel. -->
-                            <!-- 搜索条件 -->
+
                             <form id="material2" class="form-horizontal style-form">
                                 <div class="form-group">
-                                    <!-- <label class="col-sm-1 col-sm-1 control-label"></label> -->
+
                                     <label class="col-sm-4 col-sm-4 control-label">
                                         <div class="pull-right">供应商名称：</div>
                                     </label>
@@ -98,7 +155,7 @@
 
                                 </div>
                                 <div class="form-group">
-                                    <!-- <label class="col-sm-1 col-sm-1 control-label"></label> -->
+
                                     <label class="col-sm-4 col-sm-4 control-label">
                                         <div class="pull-right">所在城市：</div>
                                     </label>
@@ -108,7 +165,7 @@
 
                                 </div>
                                 <div class="form-group">
-                                    <!-- <label class="col-sm-1 col-sm-1 control-label"></label> -->
+
                                     <label class="col-sm-4 col-sm-4 control-label">
                                         <div class="pull-right">创建者编号：</div>
                                     </label>
@@ -118,7 +175,7 @@
 
                                 </div>
                                 <div class="form-group">
-                                    <!-- <label class="col-sm-1 col-sm-1 control-label"></label> -->
+
                                     <label class="col-sm-4 col-sm-4 control-label">
                                         <div class="pull-right">国家：</div>
                                     </label>
@@ -129,7 +186,7 @@
 
                                 </div>
                                 <div class="form-group">
-                                    <!-- <label class="col-sm-1 col-sm-1 control-label"></label> -->
+
                                     <label class="col-sm-4 col-sm-4 control-label">
                                         <div class="pull-right">公司编码：</div>
                                     </label>
@@ -143,7 +200,7 @@
 
                             </form>
                             <table class="table table-bordered table-striped table-condensed" id="ven_search">
-                                *双击填入编号
+
                                 <thead>
                                 <!-- 搜索编号返回的属性 style="width: 100px;"-->
                                 <tr>
@@ -202,7 +259,6 @@
                 </div>
             </div>
             <!--搜索供应商编码modal-->
-
 
             <!--搜索商品编码modal-->
             <div class="modal fade" id="myModalgood" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2"
@@ -377,63 +433,6 @@
                 </div>
             </div>
             <!--搜索商品编码modal-->
-
-
-            <div class="row mt">
-                <div class="col-md-12">
-                    <div class="col-md-12">
-                        <div class="content-panel">
-                            <!-- <div class="form-panel2"> -->
-
-                            <table class="table table-striped table-advance table-hover">
-                                <h4><i class="fa fa-angle-right"></i> 采购订单列表</h4>
-                                <hr>
-                                <thead>
-                                <tr>
-                                    <th><i class="fa fa-bullhorn"></i> 采购订单编号</th>
-                                    <th><i class="fa fa-question-circle"></i> 次序</th>
-                                    <th><i class="fa fa-question-circle"></i> 商品编码</th>
-                                    <th><i class=" fa fa-edit"></i> 数量</th>
-                                    <th><i class=" fa fa-edit"></i> 总价</th><!--总价+货币-->
-                                    <th><i class="fa fa-question-circle"></i> 供应商编码</th>
-                                    <th><i class="fa fa-question-circle"></i> 创建者编码</th>
-                                    <th><i class=" fa fa-edit"></i> 创建时间</th>
-                                    <th><i class="fa fa-bookmark"></i> 订单状态</th>
-                                    <th> 操作</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for c in orderItems %}
-                                    <tr>
-                                    <td>{{ c.po__id }}</td>
-                                    <td>{{ c.itemId }}</td>
-                                    <td>
-                                        {{ c.meterialItem__material__id }}
-                                    </td>
-                                    <td>{{ c.quantity }}</td>
-                                    <td>{{ c.sum }} {{ c.currency }}</td>
-                                    <td>{{ c.po__vendor__vid }}
-                                    </td>
-                                    <td>{{ c.po__euser__uid }}</td>
-                                    <td>{{ c.po__time }}</td>
-                                    <td>{{ c.status }}</td>
-                                    <td>
-                                    <!-- <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button> -->
-                                    <a href="/mm/receipt/order/display/{{ c.po__id }}/">
-                                        <button class="btn btn-success btn-xs"><i class="fa fa-search-plus">查看详情</i>
-                                        </button>
-                                    </a>
-                                    {% comment %} <a href="/mm/purchaseorder/modifyinfo/{{c.po__id}}">   <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-pencil"></i></button> </a>    {% endcomment %}
-                                {% endfor %}
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
 
         </section>
 

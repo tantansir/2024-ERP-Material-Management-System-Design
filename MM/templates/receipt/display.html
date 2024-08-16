@@ -9,21 +9,26 @@
 {% block main_content %}
     <section id="main-content">
         <section class="wrapper">
-            <h3><i class="fa fa-angle-right"></i> 查看商品收据</h3>
-
-            <div class="row mt">
+            <div class="row " style="margin: 30px 0 0 15px">
+                <div class="col-sm-10">
+                    <h3><i class="fa fa-angle-right"></i> 查看商品收据</h3>
+                </div>
+                <div class="col-sm-2" style="margin: 15px 0 0 0">
+                    <button type="button" class="btn btn-theme03"
+                            onclick="toPrint()"><i class="fa fa-print" aria-hidden="true"></i>
+                        打印
+                    </button>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-lg-12">
                     <div class="col-lg-12">
-                        <div class="pull-right">
-                            <button type="button" class="btn btn-theme03"
-                                    onclick="toPrint()"><i class="fa fa-print" aria-hidden="true"></i>
-                                打印
-                            </button>
-                        </div>
                         <br><br>
                         <div id='form'>
                             <div class="content-panel" id="print">
-                                <h4 style="text-align:center">商品收据</h4>
+                                <div class="row">
+                                <h4 style="text-align:center">商品收据</h4></div>
+                                <div class="row" style="margin: 0 80px 0 80px">
                                 <section id="unseen">
 
                                     <table class="table">
@@ -120,13 +125,12 @@
                                         </tbody>
                                     </table>
 
-                                </section>
+                                </section></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
 
         </section>
     </section>

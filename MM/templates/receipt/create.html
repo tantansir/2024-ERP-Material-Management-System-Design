@@ -1,169 +1,373 @@
-<!DOCTYPE html>
-<html>
-<head>Material Search</head>
-<body>
-<form id="material3">
-    {% csrf_token %}
-    {% load static %}
-    <fieldset>
-        <table class="table">
-            <thead>
-            <tr>
-                <th>基本信息</th>
+{% extends 'template.html' %}
 
-            </tr>
-            </thead>
-            <thead>
-            <tr>
-                <td>
-                    <label>采购订单编码：</label>
-                    <label id='pk'>1</label>
-                </td>
-                <td>
-                    <label>创建者编码：</label>
-                    <label>1112</label>
-                </td>
-                <td>
-                    <label>创建时间：</label>
-                    <label>1112</label>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label>总价：</label>
-                    <label>1112</label>
-                </td>
-                <td>
-                    <label>结算货币：</label>
-                    <label>1112</label>
-                </td>
-                <td>
-                    <label>物资条数目：</label>
-                    <label>1112</label>
-                </td>
+{% load static %}
+{% block extra_css %}
 
-            </tr>
-
-            </thead>
-
-        </table>
-
-        <table class="table">
-            <thead>
-            <tr>
-
-                <th>供应商信息</th>
-
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>
-                    <label>供应商编码：</label>
-                    <label>1112</label>
-                </td>
-
-                <td>
-                    <label>供应商名称：</label>
-                    <label>1112</label>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label>城市：</label>
-                    <label>1112</label>
-                </td>
-
-                <td>
-                    <label>街区地址：</label>
-                    <label>1112</label>
-                </td>
-            </tr>
-
-            </tbody>
-        </table>
-
-        <table class="table">
-            <thead>
-            <tr>
-
-                <th>采购方信息</th>
-
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>
-                    <label>采购方电话：</label>
-                    <label>1112</label>
-                </td>
-
-                <td>
-                    <label>送货地址：</label>
-                    <label>1112</label>
-                </td>
-                <td>
-                    <label>传真：</label>
-                    <label>1112</label>
-                </td>
-            </tr>
-
-            </tbody>
-        </table>
-
-        <table class="table table-striped table-advance table-hover">
-            <h4><i class="fa fa-angle-right"></i> 商品信息</h4>
-            <thead>
-            <tr>
-                <th># 条目编码</th>
-                <th><i class="fa fa-question-circle"></i> 商品编码</th>
-                <th><i class="fa fa-bookmark"></i> 商品名称</th>
-                <th><i class=" fa fa-edit"></i> 数量</th>
-                <th><i class=" fa fa-edit"></i> 单价</th><!--后面加上货币-->
-                <th><i class=" fa fa-edit"></i> 总价</th>
-                <th><i class=" fa fa-edit"></i> 货币</th>
-                <th><i class="fa fa-bookmark"></i> 工厂</th>
-                <th><i class="fa fa-bookmark"></i> 存储位置</th>
-                <th><i class=" fa fa-edit"></i> 送达时间</th>
-                <th><i class="fa fa-bullhorn"></i> 订单状态</th>
-                <th><i class="fa fa-bullhorn"></i> 操作</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td id='itempk0'>1</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td id='status0'>货物发出</td>
-                <td><input type="button" id='submit0' onclick="submitpk(this.id)"></td>
-            </tr>
-
-            </tbody>
-        </table>
-
-    </fieldset>
-
-</form>
-<textarea id="item_result"></textarea>
-
-<script src="{% static 'assets/js/jquery-1.12.0.min.js' %}"></script>
-<script>
-    function submitpk(clicked_id) {
-        var itempk = 'itempk' + clicked_id[6];
-        var status = 'status' + clicked_id[6];
-        if ($("#" + status).html() == '货物未发出') {
-            //window.location.href="https://www.php.cn";
-        } else {
-            var target = "{% url 'MM:load_order_item_receipt' %}" + '?' + 'itemID=' + $("#" + itempk).html() + '&' + 'orderID=' + $("#pk").text();
-            window.location.href = target;
+    <style>
+        ul, li {
+            list-style: none;
         }
-    }
-</script>
-</body>
-</html>
+
+        .starts, .starts ul {
+            float: left;
+        }
+
+        .starts {
+            padding-left: 16px;
+            padding-top: 7px;
+        }
+
+        .starts ul li {
+            float: left;
+            color: #ddd;
+            padding-right: 3px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .starts ul li.on {
+            color: red;
+        }
+
+        .starts ul span {
+            display: inline;
+            float: left;
+            padding-left: 10px;
+            margin-top: 10px;
+        }
+    </style>
+
+{% endblock %}
+
+
+{% block main_content %}
+    <section id="main-content">
+        <section class="wrapper">
+            <h3><i class="fa fa-angle-right"></i> 创建商品收据</h3>
+            <div class="row mt">
+                <div class="col-lg-12">
+                    <div class="col-lg-12">
+                        <div class="content-panel">
+                            <div style="margin: 10px 30px 0 30px">
+                                <h3 style="text-align: center">商品收据信息</h3>
+                                <section id="unseen">
+                                    <form id="material3">
+                                        <div class="row" style="margin: 10px 30px 0 30px">
+                                            <table class="table">
+
+                                            <tbody>
+                                            <tr>
+                                                <td>
+                                                    <label>采购订单编码：</label>
+                                                    <label id='po_id'>{{ context.po }}</label>
+                                                </td>
+                                                <td style="width: 350px;">
+                                                    <label>条目编号：</label>
+                                                    <label id='oi_id'>{{ context.itemId }}</label>
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                            </tr>
+
+                                            <tbody>
+                                            <tr>
+                                                <td>
+                                                    <label>商品名称：</label>
+                                                    <label>{{ context.material_.mname }}</label>
+                                                </td>
+
+                                                <td style="width: 350px;">
+                                                    <label>库存类型：</label>
+                                                    <select name="" id="sType" required>
+                                                        <option value="1">1--冻结库存</option>
+                                                        <option value="2">2--质量检验库存</option>
+                                                        <option value="3">3--无限制使用库存</option>
+                                                        {% comment %} <option value="4">4--在途库存</option> {% endcomment %}
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label>订购订单数量：</label>
+                                                    <label id=''>{{ context.quantity }}</label>
+                                                </td>
+
+                                                <td>
+                                                    <label>实收数量：</label>
+                                                    <label><input type="text" id='actualQnty' required></label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label>收货日期：</label>
+                                                    <label><input type="text" id="my-input" required></label>
+                                                </td>
+
+                                                <td>
+                                                    <label>过账日期：</label>
+                                                    <label><input type="text" id="my-input2" required></label>
+                                                </td>
+                                            </tr>
+                                            <tr><td></td><td></td></tr>
+                                            </tbody>
+                                            <tbody><tr><td></td><td></td></tr></tbody>
+                                        </table>
+                                        </div>
+                                        <div class="row" style="margin: 10px 30px 0 30px">
+                                            <div class="row" style="margin: 0 30px 0 30px">
+                                                    <h4><label>请对本次交易进行评价：</label></h4>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-2" style="margin: 10px 0px 0 30px;text-align: end">
+                                                    <label>商品质量：</label></div>
+                                                <div class="col-sm-3">
+                                                    <div class="starts">
+                                                        <ul id="pingStar">
+                                                            <li rel="1" title="20分">★</li>
+                                                            <li rel="2" title="40分">★</li>
+                                                            <li rel="3" title="60分">★</li>
+                                                            <li rel="4" title="80分">★</li>
+                                                            <li rel="5" title="100分">★</li>
+                                                            <span id="dir"></span>
+                                                        </ul>
+                                                        <input type="hidden" value="" id="startP" required>
+                                                    </div></div>
+                                                <div class="col-sm-2" style="margin: 10px 0px 0 30px;text-align: end"">
+                                                    <label>服务态度：</label></div>
+                                                <div class="col-sm-3">
+                                                    <div class="starts">
+                                                        <ul id="pingStar2">
+                                                            <li rel="1" title="20分">★</li>
+                                                            <li rel="2" title="40分">★</li>
+                                                            <li rel="3" title="60分">★</li>
+                                                            <li rel="4" title="80分">★</li>
+                                                            <li rel="5" title="100分">★</li>
+                                                            <span id="dir2"></span>
+                                                        </ul>
+                                                        <input type="hidden" value="" id="startP2" required>
+                                                    </div></div>
+                                            </div>
+                                            <!--
+                                            <table class="table">
+
+                                            <tbody>
+                                            <tr>
+                                                <td>
+                                                    <label>请对本次交易进行评价：</label>
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label>商品质量：</label>
+
+                                                </td>
+
+                                                <td>
+                                                    <label>服务态度：</label>
+
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="starts">
+                                                        <ul id="pingStar">
+                                                            <li rel="1" title="20分">★</li>
+                                                            <li rel="2" title="40分">★</li>
+                                                            <li rel="3" title="60分">★</li>
+                                                            <li rel="4" title="80分">★</li>
+                                                            <li rel="5" title="100分">★</li>
+                                                            <span id="dir"></span>
+                                                        </ul>
+                                                        <input type="hidden" value="" id="startP" required>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="starts">
+                                                        <ul id="pingStar2">
+                                                            <li rel="1" title="20分">★</li>
+                                                            <li rel="2" title="40分">★</li>
+                                                            <li rel="3" title="60分">★</li>
+                                                            <li rel="4" title="80分">★</li>
+                                                            <li rel="5" title="100分">★</li>
+                                                            <span id="dir2"></span>
+                                                        </ul>
+                                                        <input type="hidden" value="" id="startP2" required>
+                                                    </div>
+                                                </td>
+
+
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                            -->
+                                        </div>
+                                        <div class="row" style="margin: 10px 30px 0 30px">
+                                        <div class="col-sm-10"></div>
+                                        <div class="col-sm-2">
+                                        <button class="btn btn-danger btn-xs" type="reset">重置</button>
+                                        <button class="btn btn-primary btn-xs" type="submit" formmethod="post"
+                                                onclick="return tip()">提交</button>
+                                        </div>
+                                        </div>
+                                    </form>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+
+{% endblock %}
+
+{% block js %}
+    <script>
+
+        //提交
+        $('#material3').on('submit', function (e) {
+            e.preventDefault();
+            $.ajax(
+                {
+                    type: "POST",
+                    url: "{% url 'MM:ajax_create_receipt' %}",
+                    data: {
+                        dataType: "json",
+                        csrfmiddlewaretoken: '{{ csrf_token }}',
+                        //$("#id").html() 这样取label内的值
+                        po_id: $("#po_id").html(),
+                        oi_id: $("#oi_id").html(),
+                        actualQnty: $("#actualQnty").val(),
+                        sType: $("#sType").val(),
+                        postTime: $("#my-input").val(), //过帐
+                        time: $("#my-input2").val(),// 收货
+                        qualityScore: $("#startP").val(),
+                        serviceScore: $("#startP2").val(),
+                        //两个评分的id是startP、startP2；两个日期的id是my-input、my-input2；
+                    },
+                    success: function (data) {
+                        //$('#item_result').text(data);
+                        //ar dataObj = eval("(" + data + ")");
+                        var dataObj = JSON.parse(data);
+                        if (dataObj.status==1) {
+                            showMessage({text: dataObj.message, type: 'success'});
+                            // 在显示成功消息后，跳转到指定页面
+                        setTimeout(function() {
+                            window.location.href = "/mm/receipt/order/display/{{ context.po }}/"; // 替换为实际的跳转地址
+                        }, 2000); // 等待 2 秒钟，确保用户看到成功消息
+
+                        } else {
+                            showMessage({text: dataObj.message, type: 'error'});
+                        }
+                    },
+                    failure: function () {
+                    }
+                })
+        });
+    </script>
+
+
+    <!-- 确认提示 -->
+    <script>
+        function tip() {
+            if (confirm("您确认提交吗？")) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
+
+
+
+    <script>
+        window.onload = function () {
+            var s = document.getElementById("pingStar"),
+                m = document.getElementById('dir'),
+                n = s.getElementsByTagName("li"),
+                input = document.getElementById('startP'); //保存所选值
+            clearAll = function () {
+                for (var i = 0; i < n.length; i++) {
+                    n[i].className = '';
+                }
+            }
+            for (var i = 0; i < n.length; i++) {
+                n[i].onclick = function () {
+                    var q = this.getAttribute("rel");
+                    clearAll();
+                    input.value = q;
+                    for (var i = 0; i < q; i++) {
+                        n[i].className = 'on';
+                    }
+                    m.innerHTML = this.getAttribute("title");
+                }
+                n[i].onmouseover = function () {
+                    var q = this.getAttribute("rel");
+                    clearAll();
+                    for (var i = 0; i < q; i++) {
+                        n[i].className = 'on';
+                    }
+                }
+                n[i].onmouseout = function () {
+                    clearAll();
+                    for (var i = 0; i < input.value; i++) {
+                        n[i].className = 'on';
+                    }
+                }
+            }
+
+            var s2 = document.getElementById("pingStar2"),
+                m2 = document.getElementById('dir2'),
+                n2 = s2.getElementsByTagName("li"),
+                input2 = document.getElementById('startP2'); //保存所选值
+            clearAll2 = function () {
+                for (var i = 0; i < n2.length; i++) {
+                    n2[i].className = '';
+                }
+            }
+            for (var i = 0; i < n2.length; i++) {
+                n2[i].onclick = function () {
+                    var q = this.getAttribute("rel");
+                    clearAll2();
+                    input2.value = q;
+                    for (var i = 0; i < q; i++) {
+                        n2[i].className = 'on';
+                    }
+                    m2.innerHTML = this.getAttribute("title");
+                }
+                n2[i].onmouseover = function () {
+                    var q = this.getAttribute("rel");
+                    clearAll2();
+                    for (var i = 0; i < q; i++) {
+                        n2[i].className = 'on';
+                    }
+                }
+                n2[i].onmouseout = function () {
+                    clearAll2();
+                    for (var i = 0; i < input2.value; i++) {
+                        n2[i].className = 'on';
+                    }
+                }
+            }
+        }
+
+    </script>
+    <script>
+        (function () {
+            const input = document.getElementById('my-input');
+            const datepicker = new TheDatepicker.Datepicker(input);
+            datepicker.render();
+        })();
+        (function () {
+            const input = document.getElementById('my-input2');
+            const datepicker = new TheDatepicker.Datepicker(input);
+            datepicker.render();
+        })();
+    </script>
+{% endblock %}
+
