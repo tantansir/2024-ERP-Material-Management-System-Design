@@ -159,8 +159,13 @@ def create_receipt(request: HttpRequest):
     else: score= 20
     orderItem.ontimeScore = score
 
+    quotation: Quotation = orderItem.po.rfq
+    quotation.rej = False
+    quotation.save()
     # 保存订单更新
     orderItem.save()
+
+
 
     # 获取物料项信息
     materialItem: MaterialItem = MaterialItem.objects.get(pk__exact=orderItem.meterialItem.id)
