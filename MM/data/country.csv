@@ -44,7 +44,6 @@ BT,不丹,Bhutan
 BF,布基纳法索,Burkina Faso
 BI,布隆迪,Burundi
 BV,布维岛,Bouvet Island
-KP,朝鲜,"Korea, Democratic People’s Republic of"
 GQ,赤道几内亚,Equatorial Guinea
 DK,丹麦,Denmark
 DE,德国,Germany
@@ -65,10 +64,8 @@ PH,菲律宾,Philippines
 FJ,斐济,Fiji
 FI,芬兰,Finland
 CV,佛得角,Cape Verde
-FK,福克兰群岛（马尔维纳斯）,Falkland Islands （Malvinas）
 GM,冈比亚,Gambia
 CG,刚果（布）,Congo
-CD,刚果（金）,"Congo, the democratic republic of the"
 CO,哥伦比亚,Columbia
 CR,哥斯达黎加,Costa Rica
 GD,格林纳达,Grenada
@@ -83,7 +80,6 @@ HT,海地,Haiti
 KR,韩国,"Korea,Republic of"
 NL,荷兰,Netherlands
 AN,荷属安的列斯,Netherlands Antilles
-HM,赫德岛和麦克唐纳岛,Heard Islands and McDonald Islands
 HN,洪都拉斯,Honduras
 KI,基里巴斯,Kiribati
 DJ,吉布提,Djibouti
@@ -99,7 +95,6 @@ ZW,津巴布韦,Zimbabwe
 CM,喀麦隆,Cameroon
 QA,卡塔尔,Qatar
 KY,开曼群岛,Cayman Islands
-CC,科科斯（基林）群岛,Coccs（Keeling） Islands
 KM,科摩罗,Comoros
 CI,科特迪瓦,Cote d’Ivoire
 KW,科威特,Kuwait
@@ -130,9 +125,7 @@ YT,马约特,Mayotte
 MU,毛里求斯,Mauritius
 MR,毛里塔尼亚,Mauritania
 US,美国,United States
-UM,美国本土外小岛屿,United States Minor outlying Islands
 AS,美属萨摩亚,American Samoa
-VI,美属维尔京群岛,"Virgin Islands, U.S."
 MN,蒙古,Mongolia
 MS,蒙特塞拉特,Montserrat
 BD,孟加拉国,Bangladesh
@@ -147,7 +140,6 @@ MX,墨西哥,Mexico
 NA,纳米尼亚,Namibia
 ZA,南非,South Africa
 AQ,南极洲,Antarctica
-GS,南乔治亚岛 和 南桑德韦奇岛,South Georgia and the South Sandwich Islands
 YU,南斯拉夫,Yugoslavia
 NR,瑙鲁,Nauru
 NP,尼泊尔,Nepal
@@ -178,11 +170,9 @@ KN,圣基茨和尼维斯,Saint Kitts and Nevis
 LC,圣卢西亚,Saint Lucia
 SM,圣马力诺,San Marino
 PM,圣皮埃尔和密克隆,Saint Pierre and Miquelon
-VC,圣文森特和格林纳丁斯,Saint Vincent and Grenadines
 LK,斯里兰卡,Sri Lanka
 SK,斯洛伐克,Slovakia
 SI,斯洛文尼亚,Slovenia
-SJ,斯瓦尔巴岛和扬马延岛,Svalbard and Jan Mayen
 SZ,斯威士兰,Swaziland
 SD,苏丹,Sudan
 SR,苏里南,Suriname
@@ -228,8 +218,6 @@ IT,意大利,Italy
 IN,印度,India
 ID,印度尼西亚,Indonesia
 GB,英国,United Kingdom
-VG,英属维尔京群岛,"Virgin Islands, British"
-IO,英属印度洋领地,British Indian Ocean Territory
 JO,约旦,Jordan
 VN,越南,Viet Nam
 ZM,赞比亚,Zambia
