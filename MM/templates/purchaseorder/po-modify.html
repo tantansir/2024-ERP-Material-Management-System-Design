@@ -2,7 +2,8 @@
 {% load static %}
 
 {% block extra_css %}
-
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/RFQ-info.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/RFQ.css' %}">
 {% endblock %}
 
 {% block main_content %}
@@ -125,7 +126,7 @@
 {%endfor%}
                                 </tbody>
                             </table>
-                            <button type="submit" class="btn btn-round btn-primary" id="btn-pom-save1" >保存</button>
+                            <button type="submit" class="btn-lg btn-primary" id="btn-pom-save1" style="margin-left:94.7%">保存</button>
                                                   </form>
 
 
@@ -179,7 +180,7 @@
                               <td><input type="text" class="form-control po-text-modify" onclick="date(this)" value="{{c.deliveryDate.day}}. {{c.deliveryDate.month}}. {{c.deliveryDate.year}}" id="deliveryDate"></td>
                               <td id="state">{{c.status}}</td>
                               <td>
-                                <button type="button" class="btn btn-link "  onclick="save(this)">保存</button> <!--不同状态保存成功失败的判断-->
+                                <button type="button" class="btn btn-primary " onclick="save(this)"  style="margin-left:25%">保存</button> <!--不同状态保存成功失败的判断-->
                             </td>
                           </tr>
                           {% endfor %}

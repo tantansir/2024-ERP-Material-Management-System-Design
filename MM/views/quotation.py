@@ -545,7 +545,6 @@ def pcs(request):
                                                      "ri_id","quantity","collNo","price",
                                                      "currency","rej")
         quoatations = list(quoatations)
-        print(quoatations)
         return render(request, '../templates/purchaseorder/po-create_search.html', locals())
     if request.method == "POST":
         id = request.POST.get("id")

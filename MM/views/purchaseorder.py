@@ -25,7 +25,7 @@ from .auxiliary import *
 
 
 from ..models import EUser, Material, MaterialItem, Stock,PurchaseRequisition,RequisitionItem,Quotation,Vendor,PurchaseOrder,OrderItem
-
+from django.shortcuts import redirect
 
 
 """
@@ -408,7 +408,6 @@ def poinfo(request: HttpRequest, pk):
 def pomodifyinfo(request: HttpRequest, pk):
     if request.method == "GET":
         pk = str(int(pk))
-        print("pk:", pk)
         caigou = PurchaseOrder.objects.filter(id = pk).values("telephone","fax","shippingAddress")
         vendorid =  PurchaseOrder.objects.filter(id = pk).values("vendor_id")
         vendorid = vendorid[0]['vendor_id']
@@ -418,7 +417,6 @@ def pomodifyinfo(request: HttpRequest, pk):
                                                                  "quantity","price","meterialItem__stock__id","meterialItem__sloc",
                                                                  "deliveryDate","status","currency")
         orderitems = list(orderitems)
-
 
         for i in orderitems:
             if i['status']=='0':
@@ -430,19 +428,14 @@ def pomodifyinfo(request: HttpRequest, pk):
             if i['status']=='4':
                 i['status']="已完成支付"
 
-
-
         caigou= list(caigou)
-
-
         xiangqing = PurchaseOrder.objects.filter(id = pk).values("id","euser_id","time","orderitem__currency")
         xiangqing = list(xiangqing)
-        print(xiangqing)
+
         sum = 0
         sumquantity =0
         for i in orderitems:
-            print(i['quantity'])
-            print(i['price'])
+
             i['sum'] = i['quantity']*i['price']
             sum+=i['sum']
             sumquantity+=i['quantity']
@@ -450,12 +443,11 @@ def pomodifyinfo(request: HttpRequest, pk):
         xiangqing[0]['sumquantity'] = sumquantity
         while len(xiangqing)!=1:
             xiangqing.pop()
-        print(orderitems)
-        print(xiangqing)
+
+        message = request.session.pop('message', None)
         return render(request, '../templates/purchaseorder/po-modify.html', locals())
     if request.method == "POST":
         pk = str(int(pk))
-        print("pk:", pk)
         caigou = PurchaseOrder.objects.filter(id = pk).values("telephone","fax","shippingAddress")
         vendorid =  PurchaseOrder.objects.filter(id = pk).values("vendor_id")
         vendorid = vendorid[0]['vendor_id']
@@ -476,20 +468,14 @@ def pomodifyinfo(request: HttpRequest, pk):
             if i['status']=='4':
                 i['status']="已完成支付"
 
-
-
         caigou= list(caigou)
-
-
-
         xiangqing = PurchaseOrder.objects.filter(id = pk).values("id","euser_id","time","orderitem__currency")
         xiangqing = list(xiangqing)
-        print(xiangqing)
+
         sum = 0
         sumquantity =0
         for i in orderitems:
-            print(i['quantity'])
-            print(i['price'])
+
             i['sum'] = i['quantity']*i['price']
             sum+=i['sum']
             sumquantity+=i['quantity']
@@ -497,20 +483,19 @@ def pomodifyinfo(request: HttpRequest, pk):
         xiangqing[0]['sumquantity'] = sumquantity
         while len(xiangqing) != 1:
             xiangqing.pop()
-        print(orderitems)
-        print(xiangqing)
+
         telephone = request.POST.get("telephone")
         shippingAddress = request.POST.get("shippingAddress")
         fax = request.POST.get("fax")
-        quotation1 = PurchaseOrder.objects.filter(id=pk).update( telephone=telephone,
-                                                               shippingAddress=shippingAddress, fax=fax,
+        quotation1 = PurchaseOrder.objects.filter(id=pk).update(telephone=telephone,
+                                                                shippingAddress=shippingAddress, fax=fax,
                                                                 )
         if quotation1:
-            message = "修改成功"
-            return render(request, '../templates/purchaseorder/po-modify.html', locals())
+            request.session['message'] = "修改成功"
         else:
-            message = "修改失败"
-            return render(request, '../templates/purchaseorder/po-modify.html', locals())
+            request.session['message'] = "修改失败"
+
+        return HttpResponseRedirect(request.path)  # 重定向到当前页面以防止刷新显示消息
 
 
 
@@ -884,21 +869,52 @@ def searchjiekou(request):
         return HttpResponse(json.dumps(reque, cls=ComplexEncoder))
 
 
+def getDate2(date_str):
+    if not date_str:  # 检查是否为空
+        raise ValueError("日期字符串为空")
+    dateInfo = date_str.split('/')  # 假设日期格式为 dd/mm/yyyy
+    if len(dateInfo) != 3:  # 确保分割后的列表有三个元素
+        raise ValueError("日期格式不正确")
+    return datetime(year=int(dateInfo[2]), month=int(dateInfo[1]), day=int(dateInfo[0]))
 
 
 @csrf_exempt
 def searchjiekouzhuanhua(request):
-    if request.method == "POST":
-        print("111")
+    if request.method == 'POST':
+        post = request.POST
         cname = request.POST.get("cname")
         ctime = request.POST.get("ctime")
-        ctime = getDate2(ctime)
         gcode = request.POST.get("gcode")
-        reque = RequisitionItem.objects.filter(deliveryDate=ctime,pr__euser_id=cname,
-                                               meterial_id=gcode).values("pr_id","pr__euser_id","deliveryDate",
-                                                                         "meterial__id","itemId","pr__time")
+
+        # 如果 ctime 不是空的，转换日期
+        if ctime:
+            try:
+                ctime = getDate2(ctime)
+            except ValueError:
+                return JsonResponse({'error': '日期格式不正确'})
+
+        # 基本查询集，包含所有记录
+        reque = Quotation.objects.all()
+
+        # 根据 cname 过滤
+        if cname:
+            reque = reque.filter(euser_id=cname)
+
+        # 根据 ctime 过滤
+        if ctime:
+            reque = reque.filter(time=ctime)
+
+        # 根据 gcode 过滤
+        if gcode:
+            reque = reque.filter(ri_meterial_id=gcode)
+
+        # 获取查询结果
+        reque = reque.values("id", "euser__id", "time", "ri__meterial__material__id", "ri__meterial__id")
         reque = list(reque)
-        return HttpResponse(json.dumps(reque,cls=ComplexEncoder))
+        print(reque)
+        return JsonResponse(reque, safe=False)  # 使用 safe=False 以返回列表
+
+    return JsonResponse({'error': '只接受 POST 请求'})
 
 
 @csrf_exempt

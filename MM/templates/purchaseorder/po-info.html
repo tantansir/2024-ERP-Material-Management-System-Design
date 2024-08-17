@@ -1,6 +1,9 @@
 {% extends 'template.html' %}
 {% load static %}
-
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/RFQ-info.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/RFQ.css' %}">
+{% endblock %}
 {% block main_content %}
       <section id="main-content">
           <section class="wrapper">
@@ -159,24 +162,21 @@
                                       </table>
                                   </div>
                                   </div>
-
                                     </div>
                                 </div><!-- /col-md-12 -->
-                            </div><!-- /row -->
+
                           </section>
                     </div><!-- /content-panel -->
                 </div><!-- /col-lg-4 -->
 		  	</div><!-- /r ow -->
-<div style="margin-left:89%">
-    <input type="button" onclick="re()" value="恢复"/>
-              <input type="button" onclick="aa()" value="打印"/>
             </div>
-		</section><! --/wrapper -->
+            <div style="margin-left:49%;margin-top:1%">
+                <input type="button" onclick="aa()" value="打印"/>
+            </div>
+		</section>
+      </section>
 {% endblock %}
 
-{% block extra_css %}
-
-{% endblock %}
 
 {% block js %}
    <script>
