@@ -26,9 +26,9 @@ def search_document_flow(request: HttpRequest):
         receipts = GoodReceipt.objects.all()
 
         if vendor_code:
-            orders = orders.filter(vendor__vid__icontains=vendor_code)
-            invoices = invoices.filter(orderItem__po__vendor__vid__icontains=vendor_code)
-            receipts = receipts.filter(orderItem__po__vendor__vid__icontains=vendor_code)
+            orders = orders.filter(vendor__vid__exact=vendor_code)
+            invoices = invoices.filter(orderItem__po__vendor__vid__exact=vendor_code)
+            receipts = receipts.filter(orderItem__po__vendor__vid__exact=vendor_code)
 
         if time_range == '1':  # 近半年
             start_date = datetime.now() - timedelta(days=182)
