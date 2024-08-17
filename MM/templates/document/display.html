@@ -1,0 +1,232 @@
+{% extends 'template.html' %}
+
+{% load static %}
+{% block extra_css %}
+
+{% endblock %}
+
+
+{% block main_content %}
+
+    <section id="main-content">
+        <section class="wrapper">
+            <div class="row " style="margin: 30px 0 0 15px">
+                <div class="col-sm-10">
+                    <h3><i class="fa fa-angle-right"></i> 查看文档流</h3>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="col-lg-12">
+                        <br><br>
+                        <div id='form'>
+                            <div class="content-panel" id="print">
+                                <div class="row" style="margin: 0 80px 0 80px">
+                                    <section id="unseen">
+                                        <div class="row">
+                                            <table class="table">
+                                                <thead>
+                                                <tr>
+                                                    <th><h3>基本信息</h3></th>
+
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <label>创建时间：</label>
+                                                        <label>{{ po.time }}</label>
+                                                    </td>
+                                                    <td>
+                                                        <label>创建者编码：</label>
+                                                        <label>{{ po.euser }}</label>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label>商品名称：</label>
+                                                        <label>{{ material.mname }}</label>
+                                                    </td>
+
+                                                    <td>
+                                                        <label>完整名称：</label>
+                                                        <label>{{ material.shortText }}</label>
+                                                    </td>
+                                                </tr>
+
+                                                <thead>
+                                                <tr>
+                                                    <th><h4>商品信息</h4></th>
+
+                                                </tr>
+                                                </thead>
+                                                <tr>
+                                                    <td>
+                                                        <label>应收数量：</label>
+                                                        <label>{{ orderitem.quantity }}</label>
+                                                    </td>
+
+                                                    <td>
+                                                        <label>实收数量：</label>
+
+                                                        <label>{{ goodreceipt.actualQnty }}</label>
+
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label>工厂：</label>
+                                                        <label>{{ stock.name }}</label>
+                                                    </td>
+
+                                                    <td>
+                                                        <label>存储位置：</label>
+                                                        <label>{{ materialitem.sloc }}</label>
+                                                    </td>
+                                                    <td>
+                                                        <label>库存类型：</label>
+                                                        {% for gr in goodreceipt %}
+                                                            <label>{{ gr.sType }}</label>
+                                                        {% endfor %}
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <table class="table">
+                                                <thead>
+                                                <tr>
+                                                    <th>基本信息</th>
+
+                                                </tr>
+                                                </thead>
+
+                                                <tbody>
+
+                                                <tr>
+                                                    <td>
+                                                        <label>预期送达时间：</label>
+                                                        <label>{{ orderitem.deliveryDate }}</label>
+                                                    </td>
+
+                                                    <td>
+                                                        <label>收货时间：</label>
+
+                                                        <label>{{ goodreceipt.time }}</label>
+
+                                                    </td>
+                                                    <td>
+                                                        <label>过账时间：</label>
+
+                                                        <label>{{ goodreceipt.postTime }}</label>
+
+                                                    </td>
+                                                </tr>
+
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+                                        <div class="row">
+                                            <h3>文档流</h3>
+                                            <hr>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3 col-sm-3 mb">
+                                                <a href="/mm/purchaseorder/info/{{ po.id }}">
+                                                    <div class="darkblue-panel pn" style="width:200px ;height: 200px;">
+                                                        <div class="darkblue-header"></div>
+                                                        <h1><i class="fa fa-file-o" style="font-size: 100%; "></i>
+                                                        </h1>
+                                                        <br>
+                                                        <div class="centered">
+                                                            <h4>采购订单</h4>
+                                                            <h4 style="font-size: 100%">订单编号：{{ po.id }}</h4>
+                                                        </div>
+
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            {% if goodreceipt %}
+
+                                                <div class="col-md-1 col-sm-1 mb" style="margin: 30px 0 0 0 ">
+
+                                                    <div class="" style="height: 200px; align-content: center">
+                                                        <i class="fa fa-angle-double-right"
+                                                           style="font-size: 1000%"></i>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-3 col-sm-3 mb">
+                                                    <a href="/mm/receipt/display/?grID={{ goodreceipt.id }}&&itemID={{ orderitem.itemId }}&orderID={{ po.id }}">
+                                                        <div class="darkblue-panel pn"
+                                                             style="width:200px ;height: 200px;">
+                                                            <div class="darkblue-header">
+                                                            </div>
+                                                            <h1 class="mt"><i class="fa fa-truck"></i></h1>
+                                                            <br>
+                                                            <div class="centered">
+                                                                <h4>商品收据</h4>
+                                                                <h4 style="font-size: 100%">
+                                                                    收据编号：{{ goodreceipt.id }}</h4>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+
+                                                {% if invoice %}
+
+                                                    <div class="col-md-1 col-sm-1 mb" style="margin: 30px 0 0 0 ">
+
+                                                        <div class="" style="height: 200px; align-content: center">
+
+                                                            <i class="fa fa-angle-double-right"
+                                                               style="font-size: 1000%"></i>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-md-3 col-sm-3 mb">
+                                                        <a href="/mm/invoice/display/?pk={{ invoice.id }}">
+                                                            <div class="darkblue-panel pn"
+                                                                 style="width:200px ;height: 200px;">
+                                                                <div class="darkblue-header">
+                                                                </div>
+                                                                <h1 class="mt"><i class="fa fa-edit"></i></h1>
+                                                                <br>
+                                                                <div class="centered">
+                                                                    <h4>交易发票</h4>
+                                                                    <h4 style="font-size: 100%">
+                                                                        发票编号：{{ invoice.id }}</h4>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+
+
+                                                {% endif %}
+                                            {% endif %}
+
+                                        </div>
+
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </section>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $document.ready(function () {
+            console.log(data)
+        });
+    </script>
+
+{% endblock %}
