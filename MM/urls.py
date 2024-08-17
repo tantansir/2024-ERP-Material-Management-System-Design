@@ -21,15 +21,13 @@ urlpatterns = [
     path('material/item/create/', material.create_item, name='create_item'),
     path('material/item/stock/', material.search_item_stock, name='search_item_stock'),
     # receipt
-    path('receipt/create/', receipt.create_receipt, name='create_receipt'),
     path('receipt/display/', receipt.display_receipt, name='display_receipt'),
     path('receipt/search/', receipt.search_receipt, name='search_receipt'),
-    path('receipt/create2/', receipt.load_order_item, name='load_order_item_receipt'),
+    path('receipt/create/', receipt.load_order_item, name='load_order_item_receipt'),
     path('receipt/order/display/<int:pk>/', receipt.display_purchase_order, name='display_order_receipt'),
     path('receipt/orders/search/', receipt.search_orders, name='search_orders_receipt'),
     # invoice
-    path('invoice/create/', invoice.create_invoice, name='create_invoice'),
-    path('invoice/create2/', invoice.load_order_item, name='load_order_item_invoice'),
+    path('invoice/create/', invoice.load_order_item, name='load_order_item_invoice'),
     path('invoice/search/', invoice.search_invoice, name='search_invoice'),
     path('invoice/display/', invoice.display_invoice, name='display_invoice'),
     path('invoice/payment/', invoice.payment, name='pay_invoice'),
@@ -37,6 +35,7 @@ urlpatterns = [
     path('invoice/orders/search/', invoice.search_orders, name='search_orders_invoice'),
     # document flow
     path('document/search/', document.search_document_flow, name='search_document_flow'),
+    path('document/display/<int:pk>/', document.display_document_flow, name='display_document_flow'),
 
     # ajax
     ## user
