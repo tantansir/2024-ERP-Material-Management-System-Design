@@ -49,6 +49,7 @@ def search_item(request: HttpRequest):
         items_list[i]['material'] = model_to_dict(material)
         items_list[i]['stock'] = model_to_dict(stock)
         items_list[i]['user'] = model_to_dict(user)
+        items_list[i]['itemid']=item.id
     return HttpResponse(json.dumps(items_list, default=str))
 
 

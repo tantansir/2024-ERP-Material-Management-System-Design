@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.forms.models import model_to_dict
 from django.utils import timezone
 from datetime import datetime, timedelta
+import datetime
 from django.http import JsonResponse
 
 from ..models import *
@@ -18,34 +19,27 @@ from .auxiliary import *
 @login_required
 def search_document_flow(request: HttpRequest):
     if request.method == 'POST':
-        vendor_code = request.POST.get('vendor_code')
+        materialitem_id = request.POST.get('materialitemid')
         time_range = request.POST.get('time_range')
 
-        orders = PurchaseOrder.objects.all()
-        invoices = Invoice.objects.all()
-        receipts = GoodReceipt.objects.all()
+        orderitems = OrderItem.objects.all()
 
-        if vendor_code:
-            orders = orders.filter(vendor__vid__exact=vendor_code)
-            invoices = invoices.filter(orderItem__po__vendor__vid__exact=vendor_code)
-            receipts = receipts.filter(orderItem__po__vendor__vid__exact=vendor_code)
+        if materialitem_id:
+            orderitems = orderitems.filter(meterialItem__id__exact=materialitem_id)
 
         if time_range == '1':  # 近半年
-            start_date = datetime.now() - timedelta(days=182)
+            start_date = datetime.datetime.now() - datetime.timedelta(days=182)
         elif time_range == '2':  # 近三月
-            start_date = datetime.now() - timedelta(days=91)
+            start_date = datetime.datetime.now() - datetime.timedelta(days=91)
         else:
             start_date = None
 
         if start_date:
-            orders = orders.filter(time__gte=start_date)
-            invoices = invoices.filter(invoiceDate__gte=start_date)
-            receipts = receipts.filter(time__gte=start_date)
+            orderitems = orderitems.filter(po__time__gte=start_date)
 
         data = {
-            'orders': list(orders.values('id', 'vendor__vname', 'time')),
-            'invoices': list(invoices.values('id', 'orderItem__po__vendor__vname', 'invoiceDate')),
-            'receipts': list(receipts.values('id', 'orderItem__po__vendor__vname', 'time')),
+            'orderitems': list(orderitems.values('po', 'po__euser__id', 'po__vendor__vname', 'id', 'itemId',
+                                                 'meterialItem__material__mname', 'po__time')),
         }
 
         return JsonResponse(data)
@@ -54,3 +48,38 @@ def search_document_flow(request: HttpRequest):
         request=request,
         template_name='../templates/document/search.html'
     )
+
+@login_required
+def display_document_flow(request: HttpRequest, pk):
+    if request.method != 'POST':
+        orderitem = get_object_or_404(OrderItem, pk=pk)
+        po=orderitem.po
+        materialitem = orderitem.meterialItem
+        material=materialitem.material
+        stock=materialitem.stock
+        invoice=Invoice.objects.filter(orderItem=orderitem).first()
+        goodreceipt=GoodReceipt.objects.filter(orderItem=orderitem).first()
+        invoice_dict={}
+        goodreceipt_dict={}
+        if(invoice):
+            invoice_dict = model_to_dict(invoice)
+        if(goodreceipt):
+            goodreceipt_dict = model_to_dict(goodreceipt)
+        po_dict = model_to_dict(po)
+        po_dict['time'] = po.time.strftime('%Y-%m-%d %H:%M:%S')  # Format datetime to string
+        data = {
+            'material': model_to_dict(material),
+            'stock': model_to_dict(stock),
+            'materialitem': model_to_dict(materialitem),
+            'po': po_dict,
+            'orderitem': model_to_dict(orderitem),
+            'goodreceipt': goodreceipt_dict,
+            'invoice': invoice_dict
+        }
+
+        return render(
+            request=request,
+            template_name='../templates/document/display.html',
+            context=data
+        )
+

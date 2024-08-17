@@ -54,7 +54,8 @@ def display_invoice(request: HttpRequest):
     stock: Stock = materialItem.stock
     po: PurchaseOrder = item.po
     vendor: Vendor = po.vendor
-    gr: GoodReceipt = get_object_or_404(GoodReceipt, orderItem__id__exact=item.id)
+    gr: GoodReceipt = GoodReceipt.objects.filter(orderItem__id__exact=item.id).first()
+
     item_dict['po'] = model_to_dict(po)
     item_dict['materialItem'] = model_to_dict(materialItem)
     item_dict['material'] = model_to_dict(material)
