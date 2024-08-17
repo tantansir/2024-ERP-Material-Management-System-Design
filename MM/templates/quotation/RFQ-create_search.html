@@ -1,7 +1,7 @@
 {% extends 'template.html' %}
 {% load static %}
 {% block extra_css %}
-
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/RFQ.css' %}">
 {% endblock %}
 
 {% block main_content %}
@@ -11,7 +11,7 @@
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper">
-          	<h3><i class="fa fa-angle-right"></i> 创建报价申请</h3>
+          	<h3> 创建报价申请</h3>
               <div class="row mt">
                 <div class="col-lg-12">
                     
@@ -259,38 +259,6 @@
 
                     </tbody>
                 </table>
-
-                <script>   //不需要提交表单，点击input框加载modal直接列出创建者编码
-                    $('').on('', function(e) {
-                        e.preventDefault();
-                        $.ajax(
-                        {
-                            type: 
-                            url,
-                            data:{
-                               
-                            },
-                            success: function() {
-                              var i=0 //序号
-                                for() {
-                                    i++
-                                    out += '<tr><td>'+ i + '</td><td>' + /* 创建者编码 */ +'</td><tr>';
-                                }
-                                document.getElementById("cjzDiv").innerHTML=out;
-                            },
-                            failure: function() {
-        
-                            }
-                        })
-                    });
-                    $("table").on("dblclick","tr",function(e){
-                        
-                        document.getElementById("cjzcode").value=$(this).find('td').eq(0).text();
-                        $('#myModalcjz').modal('hide')
-                        
-                    })
-                    
-                </script>
                 
                 </div>
                 <div class="modal-footer">
@@ -308,14 +276,14 @@
                         <!-- <div class="form-panel2"> -->
                         
                         <table class="table table-striped table-advance table-hover">
-                                <h4><i class="fa fa-angle-right"></i> 采购申请列表</h4>
+                                <h4> 采购申请列表</h4>
                                 <hr>
                             <thead>
                             <tr>
-                                <th><i class="fa fa-bullhorn"></i> 采购申请编码</th>
-                                <th class="hidden-phone"><i class="fa fa-question-circle"></i> 创建者编码</th>
-                                <th><i class=" fa fa-edit"></i> 创建时间</th>
-                                <th><i class="fa fa-bookmark"></i> 备注</th>
+                                <th> 采购申请编码</th>
+                                <th class="hidden-phone"> 创建者编码</th>
+                                <th> 创建时间</th>
+                                <th> 备注</th>
                                 <th> 操作</th>
                          
                             </tr>

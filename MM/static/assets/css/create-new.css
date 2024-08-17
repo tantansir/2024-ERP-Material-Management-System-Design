@@ -1,0 +1,132 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f8fc;
+    color: #333;
+}
+
+/* Main Content */
+#main-content {
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Headers */
+h3 {
+    color: #000000;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+h4 {
+    color: #000000;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* Form Panel */
+.form-panel {
+    background-color: #e9f1fc;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Labels */
+.form-horizontal .control-label {
+    color: #000000;
+    font-weight: bold;
+}
+
+/* Form Controls */
+.form-control {
+    border: 1px solid #b6d2f7;
+    border-radius: 4px;
+    padding: 10px;
+    background-color: #ffffff;
+    color: #333;
+    height: 40px;
+    align-content: center;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #2c7efc;
+    border-color: #2c7efc;
+    color: #ffffff;
+    border-radius: 4px;
+    padding: 10px 20px;
+}
+
+.btn-primary:hover {
+    background-color: #1f6ecf;
+    border-color: #1f6ecf;
+}
+
+.btn-link {
+    color: #2c7efc;
+    text-decoration: none;
+}
+
+.btn-link:hover {
+    color: #1f6ecf;
+    text-decoration: underline;
+}
+
+/* Tables */
+.table {
+    border: 1px solid #b6d2f7;
+    border-radius: 4px;
+    background-color: #ffffff;
+    margin-top: 20px;
+}
+
+.table th, .table td {
+    padding: 10px;
+    border-bottom: 1px solid #d9e7f7;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #e9f1fc;
+}
+
+/* Modals */
+.modal-content {
+    background-color: #f4f8fc;
+    border-radius: 8px;
+    padding: 20px;
+    border: none;
+}
+
+.modal-header {
+    border-bottom: 1px solid #b6d2f7;
+}
+
+.modal-title {
+    color: #2c7efc;
+    font-weight: bold;
+}
+
+.modal-footer {
+    border-top: 1px solid #b6d2f7;
+}
+
+.close {
+    color: #2c7efc;
+}
+
+/* Miscellaneous */
+#btn-pr-create .btn-block {
+    background-color: #2c7efc;
+    color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+#btn-pr-create .btn-block:hover {
+    background-color: #1f6ecf;
+}
+
