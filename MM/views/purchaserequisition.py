@@ -456,26 +456,6 @@ def createsys(request: HttpRequest, pk):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-@csrf_exempt
-
-def createmanu(request):
-    if request.method == "GET":
-        return render(request, '../templates/purchaseorder/po-create_manual.html', locals())
-
-
-
 @csrf_exempt
 @login_required
 def creamanujiekou(request):
@@ -688,18 +668,9 @@ def pomanage(request):
     return render(request, '../templates/purchaseorder/po_manage.html', locals())
 
 
-
-
-@csrf_exempt
-def poindex(request):
-    return render(request, '../templates/purchaseorder/purchase_index.html', locals())
-
-
-
 @csrf_exempt
 def prmanage(request):
     return render(request, '../templates/purchaserequisition/pr_manage.html', locals())
-
 
 
 @csrf_exempt

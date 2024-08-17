@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django import forms
 from django.views.decorators.csrf import csrf_exempt
 from django.utils import timezone
-from datetime import timedelta
+from datetime import timedelta, date
 from .auxiliary import getRegex
 
 
@@ -28,13 +28,6 @@ from ..models import EUser, Material, MaterialItem, Stock,PurchaseRequisition,Re
 from django.shortcuts import redirect
 
 
-"""
-创建时间+创建者编码+供应商编码+收货方电话+收货方传真+送货地址+参考供应商编码+参考请购单编码】
-+1条/多条采购条目（每一条包括【条目编码+数量+单价+货币+数量+送货时间+工厂+物料编码】
-"""
-
-
-
 class PurchaseorderForm(forms.Form):
     euserid = forms.CharField(label="创建者ID", max_length=128, widget=forms.TextInput(attrs={'class': 'form-control'}))
     telephone = forms.CharField(label="收货方电话", max_length=128, widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -42,7 +35,6 @@ class PurchaseorderForm(forms.Form):
     shippingAddress = forms.CharField(label="送货地址", max_length=256, widget=forms.TextInput(attrs={'class': 'form-control'}))
     vendor_id = forms.CharField(label="参考供应商编码", max_length=128, widget=forms.TextInput(attrs={'class': 'form-control'}))
     rfq__id = forms.CharField(label="参考询价单编码", max_length=128, widget=forms.TextInput(attrs={'class': 'form-control'}))
-
 
 
 class OrderForem(forms.Form):
@@ -59,152 +51,6 @@ class OrderForem(forms.Form):
                                    widget=forms.TextInput(attrs={'class': 'form-control'}))
 
 
-
-
-"""
-插入采购订单
-"""
-def insert(request):
-    if request.method == "GET":
-        Quotation_form = PurchaseorderForm()
-        return render(request, '../templates/purchaseorder/insertpurchaseorder.html', locals())
-    if request.method == "POST":
-        euser_id = request.POST.get("euserid")
-        telephone = request.POST.get("telephone")
-        shippingAddress = request.POST.get("shippingAddress")
-        fax = request.POST.get("fax")
-        vendor_id = request.POST.get("vendor_id")
-        rfq__id = request.POST.get("rfq__id")
-        requision = PurchaseOrder.objects.create(euser_id=euser_id, telephone=telephone,
-                                                 shippingAddress=shippingAddress, fax=fax,
-                                                 vendor_id=vendor_id, rfq_id=rfq__id)
-        id = requision.id
-        message = "插入成功"
-        return render(request, '../templates/purchaseorder/insertpurchaseorder.html', locals())
-    else:
-        message = "插入失败"
-        return render(request, '../templates/purchaseorder/insertpurchaseorder.html', locals())
-
-
-
-
-"""
-插入采购条目
-"""
-def insertorderForem(request):
-    if request.method == "GET":
-        Quotation_form = PurchaseorderForm()
-        return render(request, '../templates/purchaseorder/insertpurchaseorder.html', locals())
-    if request.method == "POST":
-        Quotation_form = PurchaseorderForm()
-        pid = request.POST.get("pid")
-        itemId = request.POST.get("itemId")
-        price = request.POST.get("price")
-        currency = request.POST.get("currency")
-        quantity = request.POST.get("quantity")
-        deliveryDate = request.POST.get("deliveryDate")
-        plant = request.POST.get("plant")
-        material_id = request.POST.get("material_id")
-        materialitem = MaterialItem.objects.filter(material_id = material_id,stock_id = plant).values()
-        mid = materialitem[0]['id']
-        purchaseorder = OrderItem.objects.create(itemId = itemId,price =price,quantity =quantity,deliveryDate =deliveryDate,
-                                                     meterial_id = mid,po_id =pid,
-                                                 status=1 )
-        requisitionItem = PurchaseOrder.objects.filter(id=pid).values()
-        rfqid = requisitionItem[0]['rfq_id']
-        RequisitionItem.objects.filter(id=rfqid).update(status = 1)
-        if purchaseorder:
-            pomessage = "插入成功"
-            return render(request, '../templates/purchaseorder/insertpurchaseorder.html', locals())
-        else:
-            pomessage = "插入失败"
-            return render(request, '../templates/purchaseorder/insertpurchaseorder.html', locals())
-
-
-
-"""
-筛选采购订单
-"""
-def shaixuan(request: HttpRequest):
-    if request.method == "GET":
-        Quotation_form = PurchaseorderForm()
-        return render(request, '../templates/purchaseorder/shaixuan.html', locals())
-    if request.method == "POST":
-        euser_id = request.POST.get("euserid")
-        telephone = request.POST.get("telephone")
-        shippingAddress = request.POST.get("shippingAddress")
-        fax = request.POST.get("fax")
-        vendor_id = request.POST.get("vendor_id")
-        rfq__id = request.POST.get("rfq__id")
-
-        purchaseorder = PurchaseOrder.objects.filter(euser_id=euser_id, telephone=telephone,
-                                                     shippingAddress=shippingAddress, fax=fax,
-                                                     vendor_id=vendor_id, rfq_id=rfq__id).values()
-    if len(purchaseorder) > 0:
-        a = list(purchaseorder)
-        print(purchaseorder)
-        print(a)
-        message = "查询成功"
-        return render(request, '../templates/purchaseorder/shaixuan.html', locals())
-    else:
-        message = "查询失败"
-        return render(request, '../templates/purchaseorder/shaixuan.html', locals())
-
-
-
-"""
-搜索采购订单
-"""
-def selectone(request: HttpRequest, pk):
-    if request.method == "GET":
-        pk = str(int(pk))
-        print("pk:", pk)
-        purchaseorder= PurchaseOrder.objects.filter(id = pk).values()
-        vendor_id = purchaseorder[0]['vendor_id']
-        vendor = Vendor.objects.filter(vid=vendor_id).values()
-        vendor = list(vendor)
-        purchaseorder = list(purchaseorder)
-        return render(request, '../templates/purchaseorder/getpurchaseorderbyid.html', locals())
-
-
-
-"""
-修改信息
-"""
-def modifyone(request: HttpRequest, pk):
-    if request.method == "GET":
-        pk = str(int(pk))
-        print("pk:", pk)
-        quotation = PurchaseOrder.objects.filter(id=pk).values()
-        quotation = list(quotation)
-        return render(request, '../templates/purchaseorder/modify.html', locals())
-    if request.method == "POST":
-        euser_id = request.POST.get("euserid")
-        telephone = request.POST.get("telephone")
-        shippingAddress = request.POST.get("shippingAddress")
-        fax = request.POST.get("fax")
-        vendor_id = request.POST.get("vendor_id")
-        rfq__id = request.POST.get("rfq__id")
-        quotation1 = PurchaseOrder.objects.filter(id=pk).update(euser_id=euser_id, telephone=telephone,
-                                                               shippingAddress=shippingAddress, fax=fax,
-                                                               vendor_id=vendor_id, rfq_id=rfq__id)
-        quotation = PurchaseOrder.objects.filter(id=pk).values()
-        quotation = list(quotation)
-        if quotation1:
-            message = "修改成功"
-            return render(request, '../templates/purchaseorder/modify.html', locals())
-        else:
-            message = "修改失败"
-            return render(request, '../templates/purchaseorder/modify.html', locals())
-
-
-
-"""
-重写方法
-"""
-
-
-
 class ComplexEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, datetime):
@@ -213,44 +59,6 @@ class ComplexEncoder(json.JSONEncoder):
             return obj.strftime('%Y-%m-%d')
         else:
             return json.JSONEncoder.default(self, obj)
-
-
-
-
-"""
-3.3.1  3. FUNCTION(查找询价单)
-"""
-def getquotebyid(request: HttpRequest, pk):
-    if request.method == "GET":
-        pk = str(int(pk))
-        print("pk:", pk)
-        quotation = Quotation.objects.filter(id = pk).values()
-        vendorid = quotation[0]['vendor_id']
-        riid = quotation[0]['ri_id']
-        vendor = Vendor.objects.filter(vid = vendorid).values()
-        requisitionItem = RequisitionItem.objects.filter(id = riid).values()
-        miid = requisitionItem[0]['meterial_id']
-        materialitem = MaterialItem.objects.filter(id = miid).values()
-        material_id = materialitem[0]['material_id']
-        material = Material.objects.filter(id = material_id).values()
-        mname = material[0]['mname']
-        stockid = materialitem[0]['stock_id']
-        material_info  = {'mname':mname,'material_id':material_id}
-        material_info = json.dumps(material_info)
-        stock = Stock.objects.filter(id = stockid).values()
-        stock = list(stock)
-        vendor = list(vendor)
-        quotation = list(quotation)
-        print(quotation)
-        sum = quotation[0]['quantity']*quotation[0]['price']
-        quotation_info = {'quantity':quotation[0]['quantity'],
-                          'price':quotation[0]['price'],
-                          'sum':sum,
-                          'deliveryDate':quotation[0]['deliveryDate']}
-        quotation_info = json.dumps(quotation_info, cls=ComplexEncoder)
-        return render(request, '../templates/quotation/getquotebyid.html',locals())
-
-
 
 
 """

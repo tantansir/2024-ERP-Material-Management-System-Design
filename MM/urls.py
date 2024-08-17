@@ -1,6 +1,6 @@
 from django.urls import path, include
 from django.contrib import admin
-from .views import user, test, vendor, material, receipt, invoice, purchaserequisition, purchasesearch, quotation, purchaseorder, document
+from .views import user, vendor, material, receipt, invoice, purchaserequisition, quotation, purchaseorder, document
 from .views.ajax import material_api, data_api, stock_api, vendor_api, user_api, receipt_api, invoice_api
 from django.shortcuts import redirect
 
@@ -73,45 +73,31 @@ urlpatterns = [
     path('api/data/porg/', data_api.load_porg, name='ajax_load_porg'),
     path('api/data/sorg/', data_api.load_sorg, name='ajax_load_sorg'),
     path('api/data/tptype/', data_api.load_tptype, name='ajax_load_tptype'),
-    ## Miao Zhou
+    ##
     path('purchaserequisition/insert/', purchaserequisition.insert, name='insert_pur'),
     path('purchaserequisition/insertreque/', purchaserequisition.requeinsert, name='insert_pur'),
     path('purchaserequisition/delete/', purchaserequisition.deletereque, name='display_item'),
-    path('purchaserequisition/search/', purchasesearch.search, name='search_pur'),
-    path('purchaserequisition/getdata/', purchasesearch.getdata, name='search_pur'),
-    path('purchaserequisition/query_article/', purchasesearch.query_article, name='search_pur'),
-    path('purchaserequisition/modify/<int:pk>/', purchasesearch.modify_item, name='display_item'),
-    path('purchaserequisition/modifypr/<int:pk>/', purchasesearch.modify_pr, name='display_item'),
-    path('purchaserequisition/modifygetdata/<int:pk>/', purchasesearch.modifygetdata, name='search_pur'),
-    path('quotation/insert', quotation.insert, name='search_pur'),
-    path('quotation/getmaterial', quotation.get_material, name='search_pur'),
-    path('quotation/getRequisitionItem', quotation.get_requisitionItem, name='search_pur'),
-    path('quotation/search', quotation.search, name='search_pur'),
-    path('quotation/modify/<int:pk>/', quotation.modify_item, name='search_pur'),
-    path('quotation/vendormodify/<int:pk>/', quotation.vendor_modify_item, name='search_pur'),
-    path('quotation/getquotebycol/<int:pk>/', quotation.getquotebycol, name='search_pur'),
-    path('quotation/getquotebyid/<int:pk>/', purchaseorder.getquotebyid, name='search_pur'),
-    path('quotation/review/<int:pk>/', quotation.review, name='search_pur'),
     path('purchaserequisition/getpq/', purchaserequisition.getpq, name='insert_pur'),
     path('purchaserequisition/getpqinfo/<int:pk>/', purchaserequisition.getpqinfo, name='insert_pur'),
     path('purchaserequisition/newinsertreque/', purchaserequisition.newrequeinsert, name='insert_pur'),
-    path('quotation/getall', quotation.getall, name='search_pur'),
 
+    path('quotation/getall', quotation.getall, name='search_pur'),
     path('quotation/searchqinggou', quotation.searchqinggou, name='search_pur'),
     path('quotation/searchquo', quotation.searchquo, name='search_pur'),
     path('quotation/vqcreate/<int:pk>/', purchaseorder.vqcreate, name='search_pur'),
     path('quotation/vqcreatejiekou/', purchaseorder.vqcreatejiekou, name='search_pur'),
     path('quotation/vreview/', purchaseorder.vreview, name='search_pur'),
+
     path('purchaseorder/pcs/', quotation.pcs, name='search_pur'),
     path('purchaseorder/info/<int:pk>/', purchaseorder.poinfo, name='search_pur'),
     path('purchaseorder/modifyinfo/<int:pk>/', purchaseorder.pomodifyinfo, name='search_pur'),
     path('purchaseorder/modifyinfo2/', purchaseorder.pomodifyinfo2, name='search_pur'),
     path('purchaseorder/modifyinfo3/', purchaseorder.pomodifyinfo3, name='search_pur'),
     path('purchaseorder/cresys/<int:pk>/', purchaserequisition.createsys, name='search_pur'),
-    path('purchaseorder/cremanu/', purchaserequisition.createmanu, name='search_pur'),
     path('purchaseorder/cremanujiekou/', purchaserequisition.creamanujiekou, name='search_pur'),
     path('purchaseorder/quomodify/<int:pk>/', purchaserequisition.quomodify, name='search_pur'),
     path('purchaseorder/quomodifyjiekou/', purchaserequisition.quomodifyjiekou, name='search_pur'),
+
     path('quotation/makebyrq/<int:pk>/<int:itemId>', quotation.makebyrq, name='search_pur'),
     path('quotation/rfqinfo', quotation.rfqinfojiekou, name='search_pur'),
     path('purchaseorder/searchpo', purchaseorder.searchpo, name='search_pur'),
@@ -119,22 +105,11 @@ urlpatterns = [
     path('quotation/searchqo', purchaseorder.searchqo, name='search_pur'),
     path('purchaserequisition/getmodifyinfo/<int:pk>/', purchaserequisition.getmodifyinfo, name='insert_pur'),
     path('purchaserequisition/getmodifyinfo2/', purchaserequisition.getmodifyinfo2, name='insert_pur'),
-
     path('quotation/rfqcreateinfo/<int:pk>/', quotation.rfqinfo, name='insert_pur'),
     path('quotation/rfqinfo/<int:pk>/', quotation.rfqinfo2, name='insert_pur'),
-    path('purchaseorder/insert', purchaseorder.insert, name='search_pur'),
-    path('purchaseorder/insertorderform', purchaseorder.insertorderForem, name='search_pur'),
-    path('purchaseorder/getpurchaseorderbyid/<int:pk>/', purchaseorder.selectone, name='search_pur'),
-    path('purchaseorder/modify/<int:pk>/', purchaseorder.modifyone, name='search_pur'),
-    path('purchaseorder/shaixuan', purchaseorder.shaixuan, name='shaixuan'),
     path('purchaseorder/searchjiekou', purchaseorder.searchjiekou, name='search_pur'),
     path('purchaseorder/searchjiekouzhuanhua', purchaseorder.searchjiekouzhuanhua, name='search_pur'),
     path('purchaserequisition/pomanage', purchaserequisition.pomanage, name='search_pur'),
-    path('purchaserequisition/poindex', purchaserequisition.poindex, name='search_pur'),
     path('purchaserequisition/prmanage', purchaserequisition.prmanage, name='search_pur'),
     path('purchaserequisition/quoma', purchaserequisition.quoma, name='search_pur'),
-
-
-
-
 ]
