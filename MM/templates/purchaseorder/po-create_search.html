@@ -1,6 +1,8 @@
 {% extends 'template.html' %}
 {% load static %}
-
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/RFQ_1.css' %}">
+{% endblock %}
 {% block main_content %}
      <section id="main-content">
           <section class="wrapper">
@@ -24,14 +26,14 @@
                                     <div class="col-sm-1 col-sm-1 control-label" >
                                         商品编码
                                     </div>
-                                    <div class="col-sm-2" id="rfq-search1">
+                                    <div class="col-sm-2" id="rfq-search2">
                                         <input type="text" class="form-control" placeholder="请输入"   name="mete"  id="spcode" required>
                                         <button type="button" class="btn btn-link " data-toggle="modal" data-target="#myModalgood">忘记编码？</button>
                                     </div>
                                     <div class="col-sm-1 col-sm-1 control-label" >
                                         集合码
                                     </div>
-                                    <div class="col-sm-2" id="rfq-search1">
+                                    <div class="col-sm-2" id="rfq-search3">
                                         <input type="text" class="form-control"  name="collNo" placeholder="请输入" required>
                                     </div>
 
@@ -56,7 +58,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title" id="myModalLabel">搜索商品编号</h4>
+          <h4 class="modal-title" id="myModalLabel2">搜索商品编号</h4>
         </div>
         <div class="modal-body">
           <!-- Hi there, I am a Modal Example for Dashgum Admin Panel. -->
@@ -222,18 +224,11 @@
 
 
       </script>
-        </div><div class="modal-footer"></div>
+        </div>
     </div>
       </div>
     </div>
   <!--搜索商品编码modal-->
-
-
-
-
-
-
-
 
                <!--搜索采购申请编码modal-->
       <div class="col-sm-12">
@@ -242,7 +237,7 @@
               <div class="modal-content">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                  <h4 class="modal-title" id="myModalLabel">搜索采购申请编码</h4>
+                  <h4 class="modal-title" id="myModalLabel1">搜索采购申请编码</h4>
                 </div>
                 <div class="modal-body">
                   <!-- Hi there, I am a Modal Example for Dashgum Admin Panel. -->
@@ -314,16 +309,10 @@
                                 dataType: "json"
                             },
                             success: function(data) {
-                              //  alert(data)
-                              //  $('#material_result').text(data);
-                             //   var dataObj=eval("("+data+")");
-                             let a = JSON.parse(data)
                                 var out = "";
                                 var i;
-                                //"pk": 1, "fields": {"mname": "CHLK", "mType": "HALB", "mGroup": "AS", "meaunit": "ABC", "netWeight": 1, "weightUnit": "ABC", "transGrp": "T", "loadingGrp": "L", "industrySector": "I"}
-                                for(i = 0; i < a.length; i++) {
-                                    //out += '<p '+ dataObj[i].fields.mname + '>' + '</p><br>';<a href="basic_table.html#">Company Ltd</a>
-                                    out += '<tr><td>'+ a[i].pr_id + '</td><td>' + a[i].pr__euser_id + '</td><td>' + a[i].pr__time + '</td><td>' + a[i].meterial__id+ '</td><td>' + a[i].itemId+'</td><tr>';
+                                for(i = 0; i < data.length; i++) {
+                                    out += '<tr><td>'+ data[i].id + '</td><td>' + data[i].euser__id + '</td><td>' + data[i].time + '</td><td>' + data[i].ri__meterial__material__id+ '</td><td>' + data[i].ri__meterial__id+'</td><tr>';
                                 }
                                 document.getElementById("prDiv").innerHTML=out;
                             },
@@ -332,6 +321,7 @@
                             }
                         })
                     });
+
                     $("#prtable").on("dblclick","tr",function(e){
 
                         document.getElementById("prcode").value=$(this).find('td').eq(0).text();
@@ -340,8 +330,6 @@
                     })
 
                 </script>
-                </div>
-                <div class="modal-footer">
                 </div>
               </div>
             </div>
@@ -407,9 +395,6 @@
       </section><!-- /MAIN CONTENT -->
 {% endblock %}
 
-{% block extra_css %}
-
-{% endblock %}
 
 {% block js %}
     <script>

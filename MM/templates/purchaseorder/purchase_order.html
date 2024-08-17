@@ -1,6 +1,8 @@
 {% extends 'template.html' %}
 {% load static %}
-
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/RFQ_1.css' %}">
+{% endblock %}
 {% block main_content %}
        <section id="main-content">
           <section class="wrapper">
@@ -425,7 +427,7 @@
                                 <td>{{c.status}}</td>
                                 <td>
                                     <!-- <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button> -->
-                              <a href="/mm/purchaseorder/info/{{c.po_id}}"> <button class="btn btn-success btn-xs"><i class="fa fa-search-plus"></i></button> </a>
+                              <a href="/mm/purchaseorder/info/{{c.po_id}}"> <button class="btn btn-primary btn-xs"><i class="fa fa-search-plus"></i></button> </a>
                               <a href="/mm/purchaseorder/modifyinfo/{{c.po_id}}">   <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-pencil"></i></button> </a>
 {%endfor%}
 
@@ -442,9 +444,6 @@
       </section><!-- /MAIN CONTENT -->
 {% endblock %}
 
-{% block extra_css %}
-
-{% endblock %}
 
 {% block js %}
     <script>
