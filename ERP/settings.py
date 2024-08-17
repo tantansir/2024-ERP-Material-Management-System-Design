@@ -79,7 +79,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         # 'NAME': BASE_DIR / 'db.sqlite3',
-        'NAME': 'erp_test',
+        'NAME': 'mm_erp',
         'USER': 'MMTEAM',
         'PASSWORD': 'mmteam',
         'HOST': '121.37.157.250',
