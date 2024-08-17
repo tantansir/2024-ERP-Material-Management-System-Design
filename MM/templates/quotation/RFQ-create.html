@@ -1,7 +1,7 @@
 {% extends 'template.html' %}
 {% load static %}
 {% block extra_css %}
-
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/create-new.css' %}">
 {% endblock %}
 
 
@@ -145,7 +145,7 @@
 <div class="modal fade" id="myModalgys" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header">
+        <div>
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h4 class="modal-title" id="myModalLabel">搜索供应商编号</h4>
         </div>
