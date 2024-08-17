@@ -328,15 +328,13 @@ function create(){
     var year = date.getFullYear(); 
     var month = date.getMonth() + 1;
     var day = date.getDate();
-   
 
     console.log(parseInt(dday))
-   if(parseInt(year) > parseInt(dyear) || (parseInt(year) == parseInt(dyear) && parseInt(month) > parseInt(dmonth)) ||( parseInt(year) == parseInt(dyear) && parseInt(month) == parseInt(dmonth) && parseInt(day) > parseInt(dday)))
+    if(parseInt(year) > parseInt(dyear) || (parseInt(year) == parseInt(dyear) && parseInt(month) > parseInt(dmonth)) ||( parseInt(year) == parseInt(dyear) && parseInt(month) == parseInt(dmonth) && parseInt(day) > parseInt(dday)))
     showMessage({text: '截止日期已过，无法添加报价!',type: 'warning'})
     else if(parseInt(vyear) < parseInt(dyear) || (parseInt(vyear) == parseInt(dyear) && parseInt(vmonth) < parseInt(dmonth)) ||( parseInt(vyear) == parseInt(dyear) && parseInt(vmonth) == parseInt(dmonth) && parseInt(vday) < parseInt(dday)))
     showMessage({text: '报价有效期必须在截止日期之后!',type: 'warning'})
-    else  {
-
+    else{
         var quoid=document.getElementById("quoid").innerHTML
         var price=$("#price").val()
         var danwei=$("#danwei").val()
@@ -352,14 +350,9 @@ function create(){
                 "validTime": validto
             },
             success: function (data) {
-        showMessage({text: '添加成功！',type: 'success'})  //成功
-
-
+                showMessage({text: '添加成功！',type: 'success'})  //成功
             }
-        });     
-
-
-
+        });
     } 
 }
 </script>

@@ -62,7 +62,6 @@ class ComplexEncoder(json.JSONEncoder):
 
 
 """
-3.3.2
 2. FUNCTION(查找采购订单)
 """
 def getquotebyid(request: HttpRequest, pk):
@@ -70,12 +69,6 @@ def getquotebyid(request: HttpRequest, pk):
         pk = str(int(pk))
         print("pk:", pk)
         quotation = Quotation.objects.filter(id = pk).values()
-
-
-
-
-
-
 
 
 @csrf_exempt
@@ -128,17 +121,6 @@ def vqcreate(request: HttpRequest, pk):
             return render(request, '../templates/quotation/vq-create.html', locals())
 
 
-
-
-
-
-
-
-
-
-
-
-
 @csrf_exempt
 def vqcreatejiekou(request):
     if request.method == "POST":
@@ -152,14 +134,6 @@ def vqcreatejiekou(request):
         if quotation1:
             print("修改成功")
         return HttpResponse(json.dumps(pk))
-
-
-
-
-
-
-
-
 
 
 @csrf_exempt
@@ -677,13 +651,12 @@ def searchjiekou(request):
         return HttpResponse(json.dumps(reque, cls=ComplexEncoder))
 
 
-def getDate2(date_str):
-    if not date_str:  # 检查是否为空
-        raise ValueError("日期字符串为空")
-    dateInfo = date_str.split('/')  # 假设日期格式为 dd/mm/yyyy
-    if len(dateInfo) != 3:  # 确保分割后的列表有三个元素
-        raise ValueError("日期格式不正确")
-    return datetime(year=int(dateInfo[2]), month=int(dateInfo[1]), day=int(dateInfo[0]))
+def getDate2(string):
+    dateInfo = string.split('. ')
+    string = datetime.date(
+        year=int(dateInfo[2]), month=int(dateInfo[1]), day=int(dateInfo[0])
+    )
+    return string
 
 
 @csrf_exempt
