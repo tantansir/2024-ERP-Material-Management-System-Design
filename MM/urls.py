@@ -1,6 +1,6 @@
 from django.urls import path, include
 from django.contrib import admin
-from .views import user, test, vendor, material, receipt, invoice, purchaserequisition, purchasesearch, quotation, purchaseorder
+from .views import user, test, vendor, material, receipt, invoice, purchaserequisition, purchasesearch, quotation, purchaseorder, document
 from .views.ajax import material_api, data_api, stock_api, vendor_api, user_api, receipt_api, invoice_api
 from django.shortcuts import redirect
 
@@ -35,6 +35,8 @@ urlpatterns = [
     path('invoice/payment/', invoice.payment, name='pay_invoice'),
     path('invoice/order/display/<int:pk>/', invoice.display_purchase_order, name='display_order_invoice'),
     path('invoice/orders/search/', invoice.search_orders, name='search_orders_invoice'),
+    # document flow
+    path('document/search/', document.search_document_flow, name='search_document_flow'),
 
     # ajax
     ## user
