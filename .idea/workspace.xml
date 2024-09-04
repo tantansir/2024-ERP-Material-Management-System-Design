@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2d172b04-ded4-4401-a492-59ea729722fa" name="更改" comment="修正采购订单生成与供应商评估管理">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MM/templates/purchaserequisition/purchase_request.html" beforeDir="false" afterPath="$PROJECT_DIR$/MM/templates/purchaserequisition/purchase_request.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MM/views/purchaserequisition.py" beforeDir="false" afterPath="$PROJECT_DIR$/MM/views/purchaserequisition.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

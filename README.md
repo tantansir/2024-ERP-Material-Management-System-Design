@@ -19,7 +19,7 @@ https://user:glpat-Va3mXhAb9QQCiPmn_NBH@git.tongji.edu.cn/mm_team/mm_erp.git
 
 测试账号：admin@tongji.edu.cn
 <br>
-密码：Admin
+密码：1a
 
 管理员账号：test<br>
 密码：test
